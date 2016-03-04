@@ -22,3 +22,6 @@ build/
 _yardoc
 doc/
 .idea/
+
+# So that windows build deps don't get populated across the repository
+Gemfile.lock

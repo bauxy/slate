@@ -20,11 +20,59 @@ Healthcare providers can sign up and route their patients through the service au
 
 We have usagse examples in raw HTTP and Python. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right. As you can see, when using Python, we recommend the use of the excellent [Requests](http://docs.python-requests.org/en/master/) package.
 
+## Fundamentals of usage
+> Get a list of API endpoints
+
+```http
+GET /api/{version}/
+```
+
+```python
+import requests
+r = requests.get(API_ROOT)
+r.json()
+```
+
+The API provides a number of endpoints, the list of which may be retrieved by querying the API root: These endpoints have standardized behavior: in general, the following operations are supported.
+
+> List of items to which the authenticated user has access:
+
+```
+GET /api/{version}/{endpoint}/
+```
+
+> Given appropriate data, create a new item:
+
+```
+POST /api/{version}/{endpoint}/
+```
+
+> Given appropriate data, replace the item with the given id:
+
+```
+PUT /api/{version}/{endpoint}/{id}/ -> given appropriate JSON data, replace the item with the given id
+```
+
+> Given appropriate partial JSON data, update the specified item
+
+```
+PATCH /api/{version}/{endpoint}/{id}/
+```
+
+> Remove the specified item
+
+```
+DELETE /api/{version}/{endpoint}/{id}/ -> remove the item with the given id.
+```
+
+Naturally, users may only modify or delete resources which they own.
+
 # Authentication
 <aside class="warning">
 TODO: How exactly do we authenticate, anyway? API key, login/token, basic, something else?
 </aside>
 
+# Overview
 # Kittens
 ## Get All Kittens
 

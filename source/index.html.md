@@ -67,6 +67,12 @@ DELETE /api/{version}/{endpoint}/{id}/ -> remove the item with the given id.
 
 Naturally, users may only modify or delete resources which they own.
 
+## Expert Assistance
+Sometimes one may desire to just delegate all responsibility away. We support that! Specifically, one may input only minimal information into our database and have us take care of everything else, so long as an image of the original bill is in our database. In that case, our team of experts will go over the image and handle all the data processing. Be aware that as this requires human intervention, it will slow processing somewhat. If the image quality is poor or not all necessary information is present on the bill, we may not be able to continue processing the claim. Whether or not the process is successful, additional costs will be incurred.
+
+## Notes on Incomplete Data
+Best practice for users who wish to minimize cost is to provide enough data to create a bill whenever possible, instead of providing only minimal data.
+
 # Authentication
 <aside class="warning">
 TODO: How exactly do we authenticate, anyway? API key, login/token, basic, something else?

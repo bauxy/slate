@@ -20,6 +20,7 @@ Healthcare providers can sign up and route their patients through the service au
 
 We have usagse examples in raw HTTP and Python. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right. As you can see, when using Python, we recommend the use of the excellent [Requests](http://docs.python-requests.org/en/master/) package.
 
+# Overview
 ## Fundamentals of usage
 > Get a list of API endpoints
 
@@ -65,7 +66,7 @@ PATCH /api/{version}/{endpoint}/{id}/
 DELETE /api/{version}/{endpoint}/{id}/ -> remove the item with the given id.
 ```
 
-Naturally, users may only modify or delete resources which they own.
+Naturally, users may only read, modify or delete resources which they own.
 
 ## Expert Assistance
 Sometimes one may desire to just delegate all responsibility away. We support that! Specifically, one may input only minimal information into our database and have us take care of everything else, so long as an image of the original bill is in our database. In that case, our team of experts will go over the image and handle all the data processing. Be aware that as this requires human intervention, it will slow processing somewhat. If the image quality is poor or not all necessary information is present on the bill, we may not be able to continue processing the claim. Whether or not the process is successful, additional costs will be incurred.
@@ -78,16 +79,34 @@ Best practice for users who wish to minimize cost is to provide enough data to c
 TODO: How exactly do we authenticate, anyway? API key, login/token, basic, something else?
 </aside>
 
-# Overview
+# Users
+`users/` endpoint: login accounts to our system.
+
+Users can be individuals who have signed up with us, in which case they are tied to a single Patient account. Alternately, they may be healthcare providers, who manage a number of Patient accounts.
+<aside class="warning">
+TODO: is users/ even exposed to the outside world yet? What’s the interface?
+</aside>
+
+# Insurance Companies
+`insurance_companies/` endpoint.
+
+## Read-only
+We develop custom processes to ensure maximal claim acceptance rates at every supported insurance company. However, this means that we cannot allow outside users to add companies. If you represent an insurance company and would like us to add support, please reach out to us at [info@bauxy.com](mailto:info@bauxy.com)!
+
+## Data Description
+Complete company data, as returned by the API:
+
+```json
+{
+    "name" : "...",
+    "is_vision" : true | false,
+    "is_medical" : true | false,
+    "is_dental" : true | false
+}
+```
+
 # Kittens
 ## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
 
 ```python
 import kittn

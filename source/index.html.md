@@ -99,7 +99,6 @@ every user must fall into one of those two classes.
 ## Read-only
 We develop custom processes to ensure maximal claim acceptance rates at every supported insurance company. However, this means that we cannot allow outside users to add companies. If you represent an insurance company and would like us to add support, please reach out to us at [info@bauxy.com](mailto:info@bauxy.com)!
 
-## Data description
 > Complete company data, as returned by the API:
 
 ```json
@@ -114,7 +113,6 @@ We develop custom processes to ensure maximal claim acceptance rates at every su
 # Patients
 `patients/` endpoint.
 
-## Data description
 > Minimum data required to create a patient:
 
 ```json
@@ -180,8 +178,6 @@ TODO: Let's use a standard library like Requests, or generate our own official B
 
 # Healthcare Providers
 `providers/` endpoint: describes healthcare providers in our system.
-
-## Data description
 <aside class="warning">
 TODO: are we still using the flow in which providers POST to providers/ to add their user accounts?
 </aside>
@@ -226,7 +222,6 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 # Bills
 `bills/` endpoint: describes a bill from a healthcare provider to an insurance company based on services rendered to a patient.
 
-## Data description
 > Minimum data required to create a bill:
 
 ```json
@@ -273,7 +268,6 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 # Items
 `items/` endpoint: describes particular line items from a bill.
 
-## Data description
 > Minimum data required to create an item:
 
 ```json
@@ -314,7 +308,6 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 # Addresses
 `adddresses/` endpoint: describes physical addresses
 
-## Data description
 > Minimum data required to create an address:
 
 ```json

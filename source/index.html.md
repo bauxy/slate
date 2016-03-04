@@ -131,10 +131,10 @@ We develop custom processes to ensure maximal claim acceptance rates at every su
     "last_name" : "...",
     "email" : "must.be@unique.and.valid",
     "phone_number" : "..." | null,
-    "address" : URL of an Address object | null,
+    "address" : "URL of an Address object | null",
     "gender" : "M" | "F" | null,
     "is_member" : true | false | null,
-    "relation_to_member" : URL of a Patient object | null,
+    "relation_to_member" : "URL of a Patient object | null",
     "relationship_type" : "Self" | "Spouse" | "Child" | "Other",
     "dob" : ISO-8601 datetime (date of birth) | null,
     "updated_at" : ISO-8601 datetime | null,
@@ -151,9 +151,9 @@ We develop custom processes to ensure maximal claim acceptance rates at every su
     "last_name" : "...",
     "email" : "must.be@unique.and.valid",
     "phone_number" : "...",
-    "address" : URL of an Address object,
+    "address" : "URL of an Address object",
     "is_member" : true | false,
-    "relation_to_member" : URL of a Patient object if not "is_member",
+    "relation_to_member" : "URL of a Patient object if not "is_member"",
     "relationship_type" : "Self" | "Spouse" | "Child" | "Other",
     "dob" : ISO-8601 datetime (date of birth)
 }
@@ -186,7 +186,7 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 
 ```json
 {
-    "user" : URL of a User login account,
+    "user" : "URL of a User login account",
     "email" : "must.be@unique.and.valid",
 }
 ```
@@ -195,11 +195,11 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 
 ```json
 {
-    "user" : URL of a User login account,
+    "user" : "URL of a User login account",
     "name" : "..." | null,
     "email" : "must.be@unique.and.valid",
     "phone_number" : "+999999999" | null,
-    "address" : URL of an Address | null,
+    "address" : "URL of an Address | null",
     "tax_id" : "...",
     "created_at" : ISO-8601 datetime,
     "updated_at" : ISO-8601 datetime,
@@ -211,11 +211,11 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 
 ```json
 {
-    "user" : URL of a User login account,
+    "user" : "URL of a User login account",
     "name" : "...",
     "email" : "must.be@unique.and.valid",
     "phone_number" : "+999999999",
-    "address" : URL of an Address,
+    "address" : "URL of an Address",
 }
 ```
 
@@ -226,8 +226,8 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 
 ```json
 {
-    "patient" : URL of a patient object,
-    "insurance": URL of an insurance company object
+    "patient" : "URL of a patient object",
+    "insurance": "URL of an insurance company object"
 }
 ```
 
@@ -235,9 +235,9 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 
 ```json
 {
-    "patient" : URL of a patient object,
-    "insurance": URL of an insurance company object,
-    "provider": URL of a healthcare provider object | null,
+    "patient" : "URL of a patient object",
+    "insurance": "URL of an insurance company object",
+    "provider": "URL of a healthcare provider object | null",
     "purchase_date": ISO-8601 datetime | null,
     "transaction_no": "..." | null,
     "total_discount": number | null,
@@ -247,9 +247,9 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
     "created_at" : ISO-8601 datetime,
     "updated_at" : ISO-8601 datetime,
     "deleted_at" : ISO-8601 datetime | null,
-    "generated_bill_image": URL | null,
+    "generated_bill_image": "URL | null",
     "is_bill_generated" : true | false,
-    "original_bill_image" : URL | null,
+    "original_bill_image" : "URL | null",
     "items" : [URL of an item object, ...]
 }
 ```
@@ -258,9 +258,9 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 
 ```json
 {
-    "patient" : URL of a patient object,
-    "insurance": URL of an insurance company object,
-    "provider": URL of a healthcare provider object,
+    "patient" : "URL of a patient object",
+    "insurance": "URL of an insurance company object",
+    "provider": "URL of a healthcare provider object",
     "purchase_date": ISO-8601 datetime
 }
 ```
@@ -272,7 +272,7 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 
 ```json
 {
-    "bill" : URL for the bill to which this Item is attached,
+    "bill" : "URL for the bill to which this Item is attached",
 }
 ```
 
@@ -280,7 +280,7 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 
 ```json
 {
-    "bill" : URL for the bill to which this Item is attached,
+    "bill" : "URL for the bill to which this Item is attached",
     "item_type" : "coating" | "frame" | "exam" | "lens_contact" | "lens_single" | "lens_bifocal" | "lens_trifocal" | "lens_progressive" | null
     "quantity" : number | null,
     "name" : "..." | null,
@@ -297,7 +297,7 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 
 ```json
 {
-    "bill" : URL for the bill to which this Item is attached,
+    "bill" : "URL for the bill to which this Item is attached",
     "item_type" : "coating" | "frame" | "exam" | "lens_contact" | "lens_single" | "lens_bifocal" | "lens_trifocal" | "lens_progressive" | null
     "quantity" : number | null,
     "name" : "..." | null,

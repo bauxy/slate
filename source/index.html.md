@@ -1,65 +1,31 @@
 ---
-title: API Reference
-
+title: Bauxy API Reference
 language_tabs:
-  - shell
-  - ruby
-  - python
-
+  - http: HTTP
+  - python: Python
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>
-
+  - "<a href='#'>Sign Up for a Developer Key</a>"
+  - "<a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>"
 includes:
   - errors
-
 search: true
 ---
 
 # Introduction
+Welcome to the Bauxy API!
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+The Bauxy API 1.5 is a RESTful service helping patients get reimbursed for out-of-network insurance claims with minimal overhead.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+Healthcare providers can sign up and route their patients through the service automatically, making it easy for patients to receive their claim even if the provider isn't in the patient's insurance network.
 
-This example API documentation page was created with [Slate](https://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+We have usagse examples in raw HTTP and Python. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right. As you can see, when using Python, we recommend the use of the excellent [Requests](http://docs.python-requests.org/en/master/) package.
 
 # Authentication
-
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+<aside class="warning">
+TODO: How exactly do we authenticate, anyway? API key, login/token, basic, something else?
 </aside>
 
 # Kittens
-
 ## Get All Kittens
 
 ```ruby
@@ -105,15 +71,14 @@ curl "http://example.com/api/kittens"
 This endpoint retrieves all kittens.
 
 ### HTTP Request
-
 `GET http://example.com/api/kittens`
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Parameter    | Default | Description
+------------ | ------- | --------------------------------------------------------------------------------
+include_cats | false   | If set to true, the result will also include cats.
+available    | true    | If set to false, the result will include kittens that have already been adopted.
 
 <aside class="success">
 Remember — a happy kitten is an authenticated kitten!
@@ -153,16 +118,13 @@ curl "http://example.com/api/kittens/2"
 ```
 
 This endpoint retrieves a specific kitten.
-
 <aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
 
 ### HTTP Request
-
 `GET http://example.com/kittens/<ID>`
 
 ### URL Parameters
 
 Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
+--------- | --------------------------------
+ID        | The ID of the kitten to retrieve

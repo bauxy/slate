@@ -136,9 +136,9 @@ We develop custom processes to ensure maximal claim acceptance rates at every su
     "is_member" : true | false | null,
     "relation_to_member" : "URL of a Patient object | null",
     "relationship_type" : "Self" | "Spouse" | "Child" | "Other",
-    "dob" : ISO-8601 datetime (date of birth) | null,
-    "updated_at" : ISO-8601 datetime | null,
-    "deleted_at" : ISO-8601 datetime | null,
+    "dob" : "ISO-8601 datetime (date of birth) | null",
+    "updated_at" : "ISO-8601 datetime | null",
+    "deleted_at" : "ISO-8601 datetime | null",
     "eligibility" : "..." | null
 }
 ```
@@ -155,7 +155,7 @@ We develop custom processes to ensure maximal claim acceptance rates at every su
     "is_member" : true | false,
     "relation_to_member" : "URL of a Patient object if not "is_member"",
     "relationship_type" : "Self" | "Spouse" | "Child" | "Other",
-    "dob" : ISO-8601 datetime (date of birth)
+    "dob" : "ISO-8601 datetime (date of birth)"
 }
 ```
 
@@ -201,9 +201,9 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
     "phone_number" : "+999999999" | null,
     "address" : "URL of an Address | null",
     "tax_id" : "...",
-    "created_at" : ISO-8601 datetime,
-    "updated_at" : ISO-8601 datetime,
-    "deleted_at" : ISO-8601 datetime,
+    "created_at" : "ISO-8601 datetime",
+    "updated_at" : "ISO-8601 datetime",
+    "deleted_at" : "ISO-8601 datetime",
 }
 ```
 
@@ -238,15 +238,15 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
     "patient" : "URL of a patient object",
     "insurance": "URL of an insurance company object",
     "provider": "URL of a healthcare provider object | null",
-    "purchase_date": ISO-8601 datetime | null,
+    "purchase_date": "ISO-8601 datetime | null",
     "transaction_no": "..." | null,
     "total_discount": number | null,
     "total_discount_type": "Percent" | "Value" | null,
     "shipping_cost": number | null,
     "payment_method" : "CASH" | "CREDIT" | null,
-    "created_at" : ISO-8601 datetime,
-    "updated_at" : ISO-8601 datetime,
-    "deleted_at" : ISO-8601 datetime | null,
+    "created_at" : "ISO-8601 datetime",
+    "updated_at" : "ISO-8601 datetime",
+    "deleted_at" : "ISO-8601 datetime | null",
     "generated_bill_image": "URL | null",
     "is_bill_generated" : true | false,
     "original_bill_image" : "URL | null",
@@ -261,7 +261,7 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
     "patient" : "URL of a patient object",
     "insurance": "URL of an insurance company object",
     "provider": "URL of a healthcare provider object",
-    "purchase_date": ISO-8601 datetime
+    "purchase_date": "ISO-8601 datetime"
 }
 ```
 
@@ -287,9 +287,9 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
     "cost" : number | null,
     "discount" : number | null,
     "discount_type" : "Percent" | "Value" | null,
-    "created_at" : ISO-8601 datetime,
-    "updated_at" : ISO-8601 datetime,
-    "deleted_at" : ISO-8601 datetime,
+    "created_at" : "ISO-8601 datetime",
+    "updated_at" : "ISO-8601 datetime",
+    "deleted_at" : "ISO-8601 datetime",
 }
 ```
 

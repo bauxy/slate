@@ -93,8 +93,8 @@ TODO: is users/ even exposed to the outside world yet? What’s the interface?
 ## Read-only
 We develop custom processes to ensure maximal claim acceptance rates at every supported insurance company. However, this means that we cannot allow outside users to add companies. If you represent an insurance company and would like us to add support, please reach out to us at [info@bauxy.com](mailto:info@bauxy.com)!
 
-## Data Description
-Complete company data, as returned by the API:
+## Data description
+> Complete company data, as returned by the API:
 
 ```json
 {
@@ -102,6 +102,56 @@ Complete company data, as returned by the API:
     "is_vision" : true | false,
     "is_medical" : true | false,
     "is_dental" : true | false
+}
+```
+
+# Patients
+`patients/` endpoint.
+
+## Data description
+> Minimum data required to create a patient:
+
+```json
+{
+    "first_name" : "...",
+    "last_name" : "...",
+    "email" : "must.be@unique.and.valid"
+}
+```
+
+> Complete patient data, as returned by the API:
+
+```json
+{
+    "first_name" : "...",
+    "last_name" : "...",
+    "email" : "must.be@unique.and.valid",
+    "phone_number" : "..." | null,
+    "address" : URL of an Address object | null,
+    "gender" : "M" | "F" | null,
+    "is_member" : true | false | null,
+    "relation_to_member" : URL of a Patient object | null,
+    "relationship_type" : "Self" | "Spouse" | "Child" | "Other",
+    "dob" : ISO-8601 datetime (date of birth) | null,
+    "updated_at" : ISO-8601 datetime | null,
+    "deleted_at" : ISO-8601 datetime | null,
+    "eligibility" : "..." | null
+}
+```
+
+> In order to create a claim or invoice, more patient data is required than is required to create a patient. Specifically, the following fields may not be null in that case:
+
+```json
+{
+    "first_name" : "...",
+    "last_name" : "...",
+    "email" : "must.be@unique.and.valid",
+    "phone_number" : "...",
+    "address" : URL of an Address object,
+    "is_member" : true | false,
+    "relation_to_member" : URL of a Patient object if not "is_member",
+    "relationship_type" : "Self" | "Spouse" | "Child" | "Other",
+    "dob" : ISO-8601 datetime (date of birth)
 }
 ```
 

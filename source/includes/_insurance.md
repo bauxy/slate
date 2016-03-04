@@ -1,6 +1,4 @@
 # Insurance Companies
-`insurance_companies/` endpoint.
-
 > Complete company data, as returned by the API:
 
 ```json

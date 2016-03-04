@@ -1,6 +1,4 @@
 # Patients
-`patients/` endpoint.
-
 > Minimum data required to create a patient:
 
 ```json

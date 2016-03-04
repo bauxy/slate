@@ -1,9 +1,4 @@
 # Healthcare Providers
-`providers/` endpoint: describes healthcare providers in our system.
-<aside class="warning">
-TODO: are we still using the flow in which providers POST to providers/ to add their user accounts?
-</aside>
-
 > Minimum data required to create a provider:
 
 ```json
@@ -40,3 +35,7 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
     "address" : "URL of an Address",
 }
 ```
+
+<aside class="warning">
+TODO: are we still using the flow in which providers POST to providers/ to add their user accounts?
+</aside>

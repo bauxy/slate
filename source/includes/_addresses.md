@@ -1,6 +1,4 @@
 # Addresses
-`adddresses/` endpoint: describes physical addresses
-
 > Minimum data required to create an address:
 
 ```json

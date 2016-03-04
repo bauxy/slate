@@ -1,6 +1,4 @@
 # Items
-`items/` endpoint: describes particular line items from a bill.
-
 > Minimum data required to create an item:
 
 ```json

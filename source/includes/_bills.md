@@ -1,6 +1,4 @@
 # Bills
-`bills/` endpoint: describes a bill from a healthcare provider to an insurance company based on services rendered to a patient.
-
 > Minimum data required to create a bill:
 
 ```json

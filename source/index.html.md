@@ -51,7 +51,7 @@ POST /api/{version}/{endpoint}/
 > Given appropriate data, replace the item with the given id:
 
 ```
-PUT /api/{version}/{endpoint}/{id}/ -> given appropriate JSON data, replace the item with the given id
+PUT /api/{version}/{endpoint}/{id}/
 ```
 
 > Given appropriate partial JSON data, update the specified item
@@ -63,7 +63,7 @@ PATCH /api/{version}/{endpoint}/{id}/
 > Remove the specified item
 
 ```
-DELETE /api/{version}/{endpoint}/{id}/ -> remove the item with the given id.
+DELETE /api/{version}/{endpoint}/{id}/
 ```
 
 Naturally, users may only read, modify or delete resources which they own.

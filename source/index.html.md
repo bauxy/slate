@@ -155,6 +155,23 @@ We develop custom processes to ensure maximal claim acceptance rates at every su
 }
 ```
 
+## Notes
+Anybody may create a patient, including unauthenticated users. This is so that individuals my sign up as patients if they like.
+
+## Patient Creation Example
+<aside class="warning">
+TODO: Let's use a standard library like Requests, or generate our own official Bauxy API library, but not a generic-sounding and undocumented library `util`.
+</aside>
+
+```python
+>>> import util
+>>> firstname = 'Mike'
+>>> lastname = 'Tyson'
+>>> email = 'mike.tyson@gmail.com'
+>>> util.post_status('/api/v1.5/patients/', {'firstname': firstname, 'lastname': lastname, 'email': email})
+201
+```
+
 # Kittens
 ## Get All Kittens
 

@@ -311,6 +311,33 @@ TODO: are we still using the flow in which providers POST to providers/ to add t
 }
 ```
 
+# Addresses
+`adddresses/` endpoint: describes physical addresses
+
+## Data description
+> Minimum data required to create an address:
+
+```json
+{
+    "line1" : "...",
+    "city"  : "...",
+    "zipcode" : "...",
+    "state" : "...",
+}
+```
+
+> Complete bill data, as returned by the API:
+
+```json
+{
+    "line1" : "...",
+    "line2" : "...",
+    "city"  : "...",
+    "zipcode" : "...",
+    "state" : "...",
+}
+```
+
 # Kittens
 ## Get All Kittens
 

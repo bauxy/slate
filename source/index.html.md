@@ -153,7 +153,7 @@ We develop custom processes to ensure maximal claim acceptance rates at every su
     "phone_number" : "...",
     "address" : "URL of an Address object",
     "is_member" : true | false,
-    "relation_to_member" : "URL of a Patient object if not "is_member"",
+    "relation_to_member" : "URL of a Patient object if not 'is_member'",
     "relationship_type" : "Self" | "Spouse" | "Child" | "Other",
     "dob" : "ISO-8601 datetime (date of birth)"
 }

@@ -108,6 +108,52 @@ Content-Type: application/json
 }
 ```
 
+```python
+response = requests.options(API_ROOT)
+printj(response.json())
+```
+
+```http
+OPTIONS /api/v1.5/ HTTP/1.1
+Host: api-staging.bauxy.com
+Content-Length: 0
+User-Agent: python-requests/2.9.1
+Connection: keep-alive
+Accept: */*
+Accept-Encoding: gzip, deflate
+
+
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Accept, Cookie
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 13:22:44 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+```
+
+```json
+{
+    "description": "",
+    "name": "Api Root",
+    "parses": [
+        "application/json",
+        "application/x-www-form-urlencoded",
+        "multipart/form-data"
+    ],
+    "renders": [
+        "application/json",
+        "text/html"
+    ]
+}
+```
+
 `OPTIONS` method is available to all users at all endpoints, so is omitted from the table. All other omitted methods are unimplemented or forbidden.
 
 Table entries indicate whether or not access is permitted to the given user, as follows:

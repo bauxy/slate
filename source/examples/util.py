@@ -10,6 +10,6 @@ def printj(json_object):
     print json.dumps(json_object, sort_keys=True, indent=4, separators=(',', ': '))
 
 # This particular username and password doesn't work, for obvious reasons; use your own.
-user = ('username', 'password')
+user = ('peter', '1qaz')
 
 dump = partial(dump.dump_response, request_prefix='', response_prefix='')

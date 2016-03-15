@@ -131,52 +131,90 @@ Anybody may create a patient, including unauthenticated users. This is so that i
 </aside>
 
 ## Checking Patient Eligibility
-`GET /api/v1.5/patients/{id}/eligibility`
+> GET eligibility for patient 72
 
-> curl -d "127.0.0.1/api/v1.5/patients/72/eligibility/?insurer=vsp&username=jeremy.bluvol@gmail.com&password=Iwonttellyou&refresh=False"
+```python
+data = {
+    'insurer'  : 'vsp',
+    'username' : 'jeremy.bluvol@gmail.com', # username for insurance, not Bauxy
+    'password' : 'Iwonttellyou', #likewise, password for insurance, not Bauxy
+    'refresh'  : False
+}
+response = requests.get(API_ROOT + 'patients/72/eligibility/', auth=user, data=data)
+printj(response.json())
+```
+
+```http
+GET /api/v1.5/patients/72/eligibility/ HTTP/1.1
+Host: api-staging.bauxy.com
+Content-Length: 82
+Accept-Encoding: gzip, deflate
+Accept: */*
+User-Agent: python-requests/2.9.1
+Connection: keep-alive
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic cGV0ZXI6MXFheg==
+
+username=jeremy.bluvol%40gmail.com&password=Iwonttellyou&refresh=False&insurer=vsp
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Accept
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 14:30:25 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+```
 
 ```json
 {
     "Contact Lens Exam": {
-        "EligibleAsOfDate": "2016-03-01",
-        "Eligible": true,
         "Copay": "$0",
         "Coverage": "$105.00",
+        "Eligible": true,
+        "EligibleAsOfDate": "2016-03-01",
+        "PlanRefreshDate": "2017-03-01"
+    },
+    "Exam": {
+        "Copay": "$15.00",
+        "Coverage": "$45.00",
+        "Eligible": true,
+        "EligibleAsOfDate": "2016-03-01",
         "PlanRefreshDate": "2017-03-01"
     },
     "Frame": {
-        "EligibleAsOfDate": "2016-03-01",
-        "Eligible": true,
         "Copay": "$25.00",
         "Coverage": "$70.00",
-        "PlanRefreshDate": "2017-03-01"
-    },
-    "Prescription Lenses": {
-        "Single Vision": " $30.00",
-        "EligibleAsOfDate": "2016-03-01",
-        "Bifocal": " $50.00",
-        "Progressive": " $50.00",
         "Eligible": true,
-        "Copay": "$25.00",
-        "Trifocal": " $65.00",
-        "Coverage:": "*** Depends on lenses",
+        "EligibleAsOfDate": "2016-03-01",
         "PlanRefreshDate": "2017-03-01"
     },
     "MemberDependent": {
-        "username": "Jeremy Bluvol",
-        "email": "jeremy.bluvol@gmail.com"
+        "email": "jeremy.bluvol@gmail.com",
+        "username": "Jeremy Bluvol"
     },
-    "Exam": {
-        "EligibleAsOfDate": "2016-03-01",
+    "Prescription Lenses": {
+        "Bifocal": " $50.00",
+        "Copay": "$25.00",
+        "Coverage:": "*** Depends on lenses",
         "Eligible": true,
-        "Copay": "$15.00",
-        "Coverage": "$45.00",
-        "PlanRefreshDate": "2017-03-01"
+        "EligibleAsOfDate": "2016-03-01",
+        "PlanRefreshDate": "2017-03-01",
+        "Progressive": " $50.00",
+        "Single Vision": " $30.00",
+        "Trifocal": " $65.00"
     }
 }
 ```
 
-We can contact VSP or Eyemed on behalf of the user to fetch their eligibility information. Either username/password needs to be passed as parameters or the rest of the data - firstname, lastname, memberID, date of birth and ssn.
+`GET /api/v1.5/patients/{id}/eligibility`
+
+We can contact VSP or Eyemed on behalf of the user to fetch their eligibility information. This requires one of two parameter sets: either `{insurer, refresh, username, password}` or  `{insurer, refresh, firstname, lastname, memberID, birthday_day, birthday_month, birthday_year, ssn}`.
 
 URL Parameter name | Value                                                                                                                                                           | Required
 ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------
@@ -189,7 +227,7 @@ birthday_year      | 4-digit year                                               
 ssn                | social security number                                                                                                                                          | False
 username           | insurer login                                                                                                                                                   | False
 password           | insurer password                                                                                                                                                | False
-refersh            | `True` or `False`. If `True`, it will force checking plan eligibility from the insurance provider's website. There is a limit of 1 ``refresh`` request per day. | False
+refresh            | `True` or `False`. If `True`, it will force checking plan eligibility from the insurance provider's website. There is a limit of 1 ``refresh`` request per day. | False
 insurer            | `vsp`, `eyemed`                                                                                                                                                 | True
 
 Gives back a `JSON` string of user's plan eligibility, like an example on the right from `VSP`.

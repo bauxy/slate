@@ -4,10 +4,8 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Bauxy API Reference</title>
 
-    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
-    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
     <style>
       .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
@@ -88,10 +86,12 @@
   color: #90a959;
 }
     </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;http&quot;,&quot;python&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,9 +101,8 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="http">HTTP</a>
+              <a href="#" data-language-name="python">Python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -112,7 +111,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='#'>Sign Up for a Provider Key</a></li>
             <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -121,167 +120,703 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the Bauxy API!</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>The Bauxy API 1.5 is a RESTful service helping patients get reimbursed for out-of-network insurance claims with minimal overhead.</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
+<p>Healthcare providers can sign up and route their patients through the service automatically, making it easy for patients to receive their claim even if the provider isn&rsquo;t in the patient&rsquo;s insurance network.</p>
 
-<h1 id="authentication">Authentication</h1>
+<p>We have usagse examples in raw HTTP and Python. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right. As you can see, when using Python, we recommend the use of the excellent <a href="http://docs.python-requests.org/en/master/">Requests</a> package.</p>
 
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id="overview">Overview</h2>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>The API provides a number of endpoints, the list of which may be retrieved by querying the API root::</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+<p><code class="prettyprint">GET /api/{version}/</code></p>
 
-<blockquote>
-<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
-</blockquote>
+<p>These endpoints have standardized behavior: in general, the following operations are supported on each::</p>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p><code class="prettyprint">GET /api/{version}/{endpoint}/</code> -&gt; list of items the authenticated user may access`</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
+<p><code class="prettyprint">POST /api/{version}/{endpoint}/</code> -&gt; given appropriate JSON data, create a new item`</p>
 
-<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
+<p><code class="prettyprint">PUT /api/{version}/{endpoint}/{id}/</code> -&gt; given appropriate JSON data, replace the item with the given id</p>
 
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
+<p><code class="prettyprint">PATCH /api/{version}/{endpoint}/{id}/</code> -&gt; given partial JSON data, update the item with the given id</p>
 
-<h1 id="kittens">Kittens</h1>
+<p><code class="prettyprint">DELETE /api/{version}/{endpoint}/{id}/</code> -&gt; remove the item with the given id.</p>
 
-<h2 id="get-all-kittens">Get All Kittens</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p>Naturally, users may only modify or delete resources which they own.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<h2 id="public-api">Public API</h2>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+<p><code class="prettyprint">OPTIONS</code> method is available to all users at all endpoints, so is omitted from the table. All other omitted methods are unimplemented or forbidden.</p>
 
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
+<p>Tables entries indicate whether or not access is permitted to the given user, as follows:
+- <code class="prettyprint">none</code>: no access is permitted to the given user.
+- <code class="prettyprint">read</code>: user may read from this endpoint; <code class="prettyprint">GET</code>, <code class="prettyprint">HEAD</code>.
+- <code class="prettyprint">filter read</code>: this user is permitted access to the specified endpoint with the specified method, provided that the resource at that endpoint applies to the user.
+- <code class="prettyprint">write</code>: user may write to this endpoint; <code class="prettyprint">POST</code> for list endpoints, or <code class="prettyprint">PUT</code> / <code class="prettyprint">PATCH</code> / <code class="prettyprint">DELETE</code> for detail endpoints. <code class="prettyprint">write</code> on a detail endpoint implies filtering such that the resource at that endpoint applies to the user.</p>
 
-<p>This endpoint retrieves all kittens.</p>
+<p>Superusers, designated by Bauxy as staff members, have unrestricted access to all endpoints.</p>
 
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
-
-<h3 id="query-parameters">Query Parameters</h3>
+<p>All API endpoints live under the API prefix, currently <code class="prettyprint">/api/v1.5/</code>. This prefix is omitted from the table for brevity but required for API use.</p>
 
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
+<th>endpoint</th>
+<th>Unauthenticated</th>
+<th>Authenticated</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td><code class="prettyprint">/</code></td>
+<td>read</td>
+<td>read</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td><code class="prettyprint">users/</code></td>
+<td>none</td>
+<td>filter read</td>
+</tr>
+<tr>
+<td><code class="prettyprint">users/:id/</code></td>
+<td>none</td>
+<td>filter read write</td>
+</tr>
+<tr>
+<td><code class="prettyprint">patients/</code></td>
+<td>write</td>
+<td>filter read write</td>
+</tr>
+<tr>
+<td><code class="prettyprint">patients/:id/</code></td>
+<td>none</td>
+<td>filter read write</td>
+</tr>
+<tr>
+<td><code class="prettyprint">bills/</code></td>
+<td>none</td>
+<td>filter read write</td>
+</tr>
+<tr>
+<td><code class="prettyprint">bills/:id/</code></td>
+<td>none</td>
+<td>filter read write</td>
+</tr>
+<tr>
+<td><code class="prettyprint">items/</code></td>
+<td>none</td>
+<td>filter read write</td>
+</tr>
+<tr>
+<td><code class="prettyprint">items/:id/</code></td>
+<td>none</td>
+<td>filter read write</td>
+</tr>
+<tr>
+<td><code class="prettyprint">providers/</code></td>
+<td>read write</td>
+<td>read</td>
+</tr>
+<tr>
+<td><code class="prettyprint">providers/:id/</code></td>
+<td>read</td>
+<td>read write</td>
+</tr>
+<tr>
+<td><code class="prettyprint">insurance_companies/</code></td>
+<td>read</td>
+<td>read</td>
+</tr>
+<tr>
+<td><code class="prettyprint">insurance_companies/:id/</code></td>
+<td>read</td>
+<td>read</td>
+</tr>
+<tr>
+<td><code class="prettyprint">addresses/</code></td>
+<td>none</td>
+<td>filter read write</td>
+</tr>
+<tr>
+<td><code class="prettyprint">addresses/:id/</code></td>
+<td>none</td>
+<td>filter read write</td>
+</tr>
+<tr>
+<td><code class="prettyprint">planinfo/</code></td>
+<td>none</td>
+<td>filter read</td>
+</tr>
+<tr>
+<td><code class="prettyprint">planinfo/:id/</code></td>
+<td>none</td>
+<td>filter read</td>
 </tr>
 </tbody></table>
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<h2 id="private-api">Private API</h2>
+
+<p>The private API is restricted to superusers, all of whom have unrestricted read and write access to all its endpoints.</p>
+
+<p>The private API prefix is <code class="prettyprint">/api/internal/v1.5/</code>. As above, this prefix is omitted from this chart for brevity but required for API use.</p>
+
+          <h1 id="users">Users</h1>
+
+<p><code class="prettyprint">/api/v1.5/users/</code> endpoint: login accounts to our system.</p>
+
+<p>Users can be individuals who have signed up with us, in which case they are tied to a single Patient account. Alternately, they may be healthcare providers, who manage a number of Patient accounts.</p>
+
+<aside class="notice">
+Note that one creates a user by <code>POST</code>ing to <code>patients/</code> or
+<code>providers/</code>; <code>POST users/</code> is forbidden. This is because
+every user must fall into one of those two classes.
 </aside>
 
-<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
-<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+          <h1 id="insurance-companies">Insurance Companies</h1>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<p>Available commands:</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre>
-<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre>
+<p><code class="prettyprint">POST /api/v1.5/insurance_companies/</code> - for admins only</p>
 
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
+<p><code class="prettyprint">GET /api/v1.5/insurance_companies/{id}/</code></p>
+
+<p><code class="prettyprint">GET /api/v1.5/insurance_companies/</code></p>
+
+<p>Complete company data, as returned by the API:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_vision"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true | false"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_medical"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true | false"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_dental"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true | false"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Description</th>
+<th>JSON Parameter name</th>
+<th>Value</th>
+<th>Required</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>name</td>
+<td>Insurance company name</td>
+<td>True</td>
+</tr>
+<tr>
+<td>is_vision</td>
+<td>Boolean</td>
+<td>False</td>
+</tr>
+<tr>
+<td>is_medical</td>
+<td>Boolean</td>
+<td>False</td>
+</tr>
+<tr>
+<td>is_dental</td>
+<td>Boolean</td>
+<td>False</td>
 </tr>
 </tbody></table>
 
+<p>We develop custom processes to ensure maximal claim acceptance rates at every supported insurance company. However, this means that we cannot allow outside users to add companies. If you represent an insurance company and would like us to add support, please reach out to us at <a href="mailto:info@bauxy.com">info@bauxy.com</a>!</p>
+
+          <h1 id="patients">Patients</h1>
+
+<p><code class="prettyprint">POST /api/v1.5/patients/</code></p>
+
+<p><code class="prettyprint">GET|PUT|PATCH|POST /api/v1.5/patients/{id}/</code></p>
+
+<p>Complete patient data, as returned by the API:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"must.be@unique.and.valid"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone_number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"... | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of an Address object | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"M | F | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_member"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true | false | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"relation_to_member"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of a Patient object | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"relationship_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Self | Spouse | Child | Other"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dob"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime (date of birth) | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deleted_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"eligibility"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"... | null"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th>JSON Parameter name</th>
+<th>Value</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>first_name</td>
+<td>String</td>
+<td>True</td>
+</tr>
+<tr>
+<td>last_name</td>
+<td>String</td>
+<td>True</td>
+</tr>
+<tr>
+<td>email</td>
+<td>Email</td>
+<td>True</td>
+</tr>
+<tr>
+<td>phone_number</td>
+<td>+99999999999 format</td>
+<td>False</td>
+</tr>
+<tr>
+<td>address</td>
+<td>url of address object</td>
+<td>False</td>
+</tr>
+<tr>
+<td>gender</td>
+<td><code class="prettyprint">M</code>, <code class="prettyprint">F</code></td>
+<td>False</td>
+</tr>
+<tr>
+<td>is_member</td>
+<td>Boolean</td>
+<td>False</td>
+</tr>
+<tr>
+<td>relation_to_member</td>
+<td>url of patient member</td>
+<td>False</td>
+</tr>
+<tr>
+<td>relationship_type</td>
+<td><code class="prettyprint">Self</code>, <code class="prettyprint">Spouse</code>, <code class="prettyprint">Child</code>, <code class="prettyprint">Other</code></td>
+<td>False</td>
+</tr>
+<tr>
+<td>dob</td>
+<td>ISO-8601 datetime (date of birth)</td>
+<td>False</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+Anybody may create a patient, including unauthenticated users. This is so that individuals my sign up as patients if they like.
+</aside>
+
+<h2 id="checking-patient-eligibility">Checking Patient Eligibility</h2>
+
+<p><code class="prettyprint">GET /api/v1.5/patients/{id}/eligibility</code></p>
+
+<blockquote>
+<p>curl -d &ldquo;127.0.0.1/api/v1.5/patients/72/eligibility/?insurer=vsp&amp;username=jeremy.bluvol@gmail.com&amp;password=Iwonttellyou&amp;refresh=False&rdquo;</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"Contact Lens Exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"EligibleAsOfDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Copay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$0"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Coverage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$105.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"PlanRefreshDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-01"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"Frame"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"EligibleAsOfDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Copay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$25.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Coverage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$70.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"PlanRefreshDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-01"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"Prescription Lenses"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"Single Vision"</span><span class="p">:</span><span class="w"> </span><span class="s2">" $30.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"EligibleAsOfDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Bifocal"</span><span class="p">:</span><span class="w"> </span><span class="s2">" $50.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Progressive"</span><span class="p">:</span><span class="w"> </span><span class="s2">" $50.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Copay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$25.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Trifocal"</span><span class="p">:</span><span class="w"> </span><span class="s2">" $65.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Coverage:"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*** Depends on lenses"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"PlanRefreshDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-01"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"MemberDependent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jeremy Bluvol"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jeremy.bluvol@gmail.com"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"Exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"EligibleAsOfDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Copay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$15.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Coverage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$45.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"PlanRefreshDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-01"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>We can contact VSP or Eyemed on behalf of the user to fetch their eligibility information. Either username/password needs to be passed as parameters or the rest of the data - firstname, lastname, memberID, date of birth and ssn.</p>
+
+<table><thead>
+<tr>
+<th>URL Parameter name</th>
+<th>Value</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>firstname</td>
+<td>First name</td>
+<td>False</td>
+</tr>
+<tr>
+<td>lastname</td>
+<td>Last name</td>
+<td>False</td>
+</tr>
+<tr>
+<td>memberID</td>
+<td>memberID</td>
+<td>False</td>
+</tr>
+<tr>
+<td>birthday_day</td>
+<td>[1-31]</td>
+<td>False</td>
+</tr>
+<tr>
+<td>birthday_month</td>
+<td>[1-12]</td>
+<td>False</td>
+</tr>
+<tr>
+<td>birthday_year</td>
+<td>4-digit year</td>
+<td>False</td>
+</tr>
+<tr>
+<td>ssn</td>
+<td>social security number</td>
+<td>False</td>
+</tr>
+<tr>
+<td>username</td>
+<td>insurer login</td>
+<td>False</td>
+</tr>
+<tr>
+<td>password</td>
+<td>insurer password</td>
+<td>False</td>
+</tr>
+<tr>
+<td>refersh</td>
+<td><code class="prettyprint">True</code> or <code class="prettyprint">False</code>. If <code class="prettyprint">True</code>, it will force checking plan eligibility from the insurance provider&rsquo;s website. There is a limit of 1 <code class="prettyprint">refresh</code> request per day.</td>
+<td>False</td>
+</tr>
+<tr>
+<td>insurer</td>
+<td><code class="prettyprint">vsp</code>, <code class="prettyprint">eyemed</code></td>
+<td>True</td>
+</tr>
+</tbody></table>
+
+<p>Gives back a <code class="prettyprint">JSON</code> string of user&rsquo;s plan eligibility, like an example on the right from <code class="prettyprint">VSP</code>.</p>
+
+          <h1 id="healthcare-providers">Healthcare Providers</h1>
+
+<p>Available commands:</p>
+
+<p><code class="prettyprint">POST /api/v1.5/providers/</code></p>
+
+<p><code class="prettyprint">GET|PUT|PATCH|POST /api/v1.5/providers/{id}/</code></p>
+
+<p>Complete provider data, as returned by the API:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"user"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of a User login account"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"... | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"must.be@unique.and.valid"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone_number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"+999999999 | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of an Address | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"tax_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deleted_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th>JSON Parameter name</th>
+<th>Value</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user</td>
+<td>url of user login account</td>
+<td>False</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String - e.g., Mike Tyson</td>
+<td>True</td>
+</tr>
+<tr>
+<td>email</td>
+<td>unique email address</td>
+<td>True</td>
+</tr>
+<tr>
+<td>phone_number</td>
+<td>+999999999</td>
+<td>False</td>
+</tr>
+<tr>
+<td>address</td>
+<td>url of address object</td>
+<td>False</td>
+</tr>
+<tr>
+<td>tax_id</td>
+<td>String</td>
+<td>True</td>
+</tr>
+</tbody></table>
+
+          <h1 id="bills">Bills</h1>
+
+<p>Available commands:</p>
+
+<p><code class="prettyprint">POST /api/v1.5/bills/</code></p>
+
+<p><code class="prettyprint">GET /api/v1.5/bills/{id}/</code></p>
+
+<p><code class="prettyprint">POST /api/v1.5/bills/{id}/</code></p>
+
+<p><code class="prettyprint">PATCH /api/v1.5/bills/{id}/</code></p>
+
+<p>Request parameters, specified in the <code class="prettyprint">POST</code> body of an HTTP request</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"patient"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of a patient object"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of an insurance company object"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of a healthcare provider object | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transaction_no"</span><span class="p">:</span><span class="w"> </span><span class="s2">"... | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_discount_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Percent | Value | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_method"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"CASH | CREDIT | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deleted_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"generated_bill_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_bill_generated"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true | false"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"original_bill_image"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"[URL of an item object, ...]"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th>JSON parameter names</th>
+<th>Value</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>patient</td>
+<td>url of patient object</td>
+<td>True</td>
+</tr>
+<tr>
+<td>insurance</td>
+<td>url of insurance company</td>
+<td>True</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>url of provider object</td>
+<td>True</td>
+</tr>
+<tr>
+<td>purchase_date</td>
+<td>ISO-8601 datetime</td>
+<td>False</td>
+</tr>
+<tr>
+<td>transaction_no</td>
+<td>int</td>
+<td>False</td>
+</tr>
+<tr>
+<td>total_discount</td>
+<td>Float</td>
+<td>False</td>
+</tr>
+<tr>
+<td>total_discount_type</td>
+<td><code class="prettyprint">Percent</code> or <code class="prettyprint">Value</code></td>
+<td>False</td>
+</tr>
+<tr>
+<td>shipping_cost</td>
+<td>Float</td>
+<td>False</td>
+</tr>
+<tr>
+<td>payment_method</td>
+<td><code class="prettyprint">CASH</code> or <code class="prettyprint">CREDIT</code></td>
+<td>False</td>
+</tr>
+<tr>
+<td>generated_bill_image</td>
+<td>url to a bill image</td>
+<td>False</td>
+</tr>
+<tr>
+<td>is_bill_generated</td>
+<td>Boolean</td>
+<td>False</td>
+</tr>
+<tr>
+<td>original_bill_image</td>
+<td>File (as in multi-part form data)</td>
+<td>True</td>
+</tr>
+</tbody></table>
+
+<p>In order to create a bill, <code class="prettyprint">original_bill_image</code> needs to be sent to the server. Once processed, the server will reply with a <code class="prettyprint">url</code> pointing to the bill image on Amazon S3.</p>
+
+<aside class="warning">
+Sometimes one may desire to just delegate all responsibility away. We support that! Specifically, one may input only minimal information into our database and have us take care of everything else, so long as an image of the original bill is in our database. In that case, our team of experts will go over the image and handle all the data processing. Be aware that as this requires human intervention, it will slow processing somewhat. If the image quality is poor or not all necessary information is present on the bill, we may not be able to continue processing the claim. Whether or not the process is successful, additional costs will be incurred.
+</aside>
+
+<aside class="notice">
+Best practice for users who wish to minimize cost is to provide enough data to create a bill whenever possible, instead of providing only minimal data.
+</aside>
+
+          <h1 id="items">Items</h1>
+
+<p>Available commands:</p>
+
+<p><code class="prettyprint">POST /api/v1.5/items/</code></p>
+
+<p><code class="prettyprint">GET|PUT|PATCH|POST /api/v1.5/items/{id}/</code></p>
+
+<p>Complete item data, as returned by the API:</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"bill"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL for the bill to which this Item is attached"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"item_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"coating | frame | exam | lens_contact | lens_single | lens_bifocal | lens_trifocal | lens_progressive | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"number | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"... | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cost"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"number | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"discount"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"number | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"discount_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Percent | Value | null"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"deleted_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<table><thead>
+<tr>
+<th>JSON Parameter name</th>
+<th>Value</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bill</td>
+<td>bill id url</td>
+<td>True</td>
+</tr>
+<tr>
+<td>item_type</td>
+<td><code class="prettyprint">coating</code>, <code class="prettyprint">frame</code>, <code class="prettyprint">exam</code>, <code class="prettyprint">lens_contact</code>, <code class="prettyprint">lens_single</code>, <code class="prettyprint">lens_bifocal</code>, <code class="prettyprint">lens_trifocal</code>, <code class="prettyprint">lens_progressive</code></td>
+<td>True</td>
+</tr>
+<tr>
+<td>quantity</td>
+<td>Integer</td>
+<td>True</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>True</td>
+</tr>
+<tr>
+<td>cost</td>
+<td>Float</td>
+<td>True</td>
+</tr>
+<tr>
+<td>discount</td>
+<td>Float</td>
+<td>False</td>
+</tr>
+<tr>
+<td>discount_type</td>
+<td><code class="prettyprint">Percent</code>, <code class="prettyprint">Value</code></td>
+<td>False</td>
+</tr>
+</tbody></table>
+
+          <h1 id="addresses">Addresses</h1>
+
+<p>Available commands:</p>
+
+<p><code class="prettyprint">POST /api/v1.5/addresses/</code></p>
+
+<p><code class="prettyprint">GET|PUT|PATCH /api/v1.5/addresses/{id}/</code></p>
+
+<p>Minimum data required to create an address:</p>
+
+<table><thead>
+<tr>
+<th>JSON Parameter name</th>
+<th>Value</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>line1</td>
+<td>Address</td>
+<td>True</td>
+</tr>
+<tr>
+<td>line2</td>
+<td>Address</td>
+<td>False</td>
+</tr>
+<tr>
+<td>zipcode</td>
+<td>zip  code</td>
+<td>True</td>
+</tr>
+<tr>
+<td>state</td>
+<td>2-letter state code name</td>
+<td>True</td>
+</tr>
+</tbody></table>
+
+<p>The <code class="prettyprint">POST</code> command will accept <code class="prettyprint">JSON</code> body in the request, like in the example on the right.</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"line1"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"city"</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zipcode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
           <h1 id="errors">Errors</h1>
 
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>The Bauxy API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -299,31 +834,23 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
+<td>Forbidden &ndash; Administrators only</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found &ndash; The specified kitten could not be found</td>
+<td>Not Found &ndash; The specified page could not be found</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
+<td>Method Not Allowed &ndash; Invalid method</td>
 </tr>
 <tr>
 <td>406</td>
 <td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
 </tr>
 <tr>
-<td>410</td>
-<td>Gone &ndash; The kitten requested has been removed from our servers</td>
-</tr>
-<tr>
-<td>418</td>
-<td>I&rsquo;m a teapot</td>
-</tr>
-<tr>
 <td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
+<td>Too Many Requests &ndash; Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
@@ -331,16 +858,15 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 <tr>
 <td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintenance. Please try again later.</td>
 </tr>
 </tbody></table>
 
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="http">HTTP</a>
+                <a href="#" data-language-name="python">Python</a>
           </div>
       </div>
     </div>

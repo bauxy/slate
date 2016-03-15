@@ -1,8 +1,8 @@
 ---
 title: Bauxy API Reference
 language_tabs:
-  - http: HTTP
   - python: Python
+  - http: HTTP
 toc_footers:
   - "<a href='#'>Sign Up for a Provider Key</a>"
   - "<a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>"
@@ -19,6 +19,22 @@ search: true
 ---
 
 # Introduction
+> We'll be setting up a number of examples to follow, all of which follow similar patterns. For brevity, please assume that all code samples are prefixed as follows:
+
+```python
+import json
+import requests
+
+API_ROOT = 'http://api-staging.bauxy.com/api/v1.5/'
+
+def printj(json_object):
+    "Pretty-print a json object"
+    print json.dumps(json_object, sort_keys=True, indent=4, separators=(',', ': '))
+
+# This particular username and password doesn't work, for obvious reasons; use your own.
+user = ('username', 'password')
+```
+
 Welcome to the Bauxy API!
 
 The Bauxy API 1.5 is a RESTful service helping patients get reimbursed for out-of-network insurance claims with minimal overhead.
@@ -28,15 +44,15 @@ Healthcare providers can sign up and route their patients through the service au
 We have usage examples in raw HTTP and Python. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right. As you can see, when using Python, we recommend the use of the excellent [Requests](http://docs.python-requests.org/en/master/) package.
 
 ## Overview
-The API provides a number of endpoints, the list of which may be retrieved by querying the API root::
+The API provides a number of endpoints, the list of which may be retrieved by querying the API root:
 
   `GET /api/{version}/`
 
-These endpoints have standardized behavior: in general, the following operations are supported on each::
+These endpoints have standardized behavior: in general, the following operations are supported on each:
 
-  `GET /api/{version}/{endpoint}/` -> list of items the authenticated user may access`
+  `GET /api/{version}/{endpoint}/` -> list of items the authenticated user may access
 
-  `POST /api/{version}/{endpoint}/` -> given appropriate JSON data, create a new item`
+  `POST /api/{version}/{endpoint}/` -> given appropriate JSON data, create a new item
 
   `PUT /api/{version}/{endpoint}/{id}/` -> given appropriate JSON data, replace the item with the given id
 
@@ -49,13 +65,13 @@ Naturally, users may only modify or delete resources which they own.
 ## Public API
 `OPTIONS` method is available to all users at all endpoints, so is omitted from the table. All other omitted methods are unimplemented or forbidden.
 
-Tables entries indicate whether or not access is permitted to the given user, as follows:
+Table entries indicate whether or not access is permitted to the given user, as follows:
 - `none`: no access is permitted to the given user.
 - `read`: user may read from this endpoint; `GET`, `HEAD`.
 - `filter read`: this user is permitted access to the specified endpoint with the specified method, provided that the resource at that endpoint applies to the user.
 - `write`: user may write to this endpoint; `POST` for list endpoints, or `PUT` / `PATCH` / `DELETE` for detail endpoints. `write` on a detail endpoint implies filtering such that the resource at that endpoint applies to the user.
 
-Superusers, designated by Bauxy as staff members, have unrestricted access to all endpoints.
+Bauxy staff members have unrestricted access to all endpoints.
 
 All API endpoints live under the API prefix, currently `/api/v1.5/`. This prefix is omitted from the table for brevity but required for API use.
 

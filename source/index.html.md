@@ -63,6 +63,51 @@ These endpoints have standardized behavior: in general, the following operations
 Naturally, users may only modify or delete resources which they own.
 
 ## Public API
+> List API endpoints
+
+```python
+response = requests.get(API_ROOT)
+actions = response.json()
+printj(actions)
+```
+
+```http
+GET /api/v1.5/ HTTP/1.1
+Host: api-staging.bauxy.com
+Connection: keep-alive
+Accept-Encoding: gzip, deflate
+Accept: */*
+User-Agent: python-requests/2.9.1
+
+
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Accept, Cookie
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 13:08:53 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+```
+
+```json
+{
+    "addresses": "http://api-staging.bauxy.com/api/v1.5/addresses/",
+    "bills": "http://api-staging.bauxy.com/api/v1.5/bills/",
+    "insurance_companies": "http://api-staging.bauxy.com/api/v1.5/insurance_companies/",
+    "items": "http://api-staging.bauxy.com/api/v1.5/items/",
+    "patients": "http://api-staging.bauxy.com/api/v1.5/patients/",
+    "planinfo": "http://api-staging.bauxy.com/api/v1.5/planinfo/",
+    "providers": "http://api-staging.bauxy.com/api/v1.5/providers/",
+    "users": "http://api-staging.bauxy.com/api/v1.5/users/"
+}
+```
+
 `OPTIONS` method is available to all users at all endpoints, so is omitted from the table. All other omitted methods are unimplemented or forbidden.
 
 Table entries indicate whether or not access is permitted to the given user, as follows:

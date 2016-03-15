@@ -1,5 +1,7 @@
 import json
 import requests
+from requests_toolbelt.utils import dump
+from functools import partial
 
 API_ROOT = 'http://api-staging.bauxy.com/api/v1.5/'
 
@@ -9,3 +11,5 @@ def printj(json_object):
 
 # This particular username and password doesn't work, for obvious reasons; use your own.
 user = ('username', 'password')
+
+dump = partial(dump.dump_response, request_prefix='', response_prefix='')

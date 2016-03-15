@@ -33,19 +33,22 @@ Content-Type: application/json
 
 ```json
 {
-    "final_cost": 0,
+    "final_cost": 384.0,
     "generated_bill_image": null,
     "id": 10,
     "insurance": "http://api-staging.bauxy.com/api/v1.5/insurance_companies/1/",
     "is_bill_generated": false,
-    "items": [],
+    "items": [
+        "http://api-staging.bauxy.com/api/v1.5/items/8/",
+        "http://api-staging.bauxy.com/api/v1.5/items/7/"
+    ],
     "original_bill_image": "https://bauxy-aptible-bucket-test.s3.amazonaws.com/bauxy-aptible-bucket-test/test_image.jpg",
     "patient": "http://api-staging.bauxy.com/api/v1.5/patients/5/",
     "payment_method": null,
     "provider": null,
     "purchase_date": null,
     "shipping_cost": null,
-    "total_cost": 0,
+    "total_cost": 384.0,
     "total_discount": null,
     "total_discount_type": null,
     "transaction_no": null,

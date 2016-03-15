@@ -25,11 +25,9 @@ The Bauxy API 1.5 is a RESTful service helping patients get reimbursed for out-o
 
 Healthcare providers can sign up and route their patients through the service automatically, making it easy for patients to receive their claim even if the provider isn't in the patient's insurance network.
 
-We have usagse examples in raw HTTP and Python. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right. As you can see, when using Python, we recommend the use of the excellent [Requests](http://docs.python-requests.org/en/master/) package.
-
+We have usage examples in raw HTTP and Python. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right. As you can see, when using Python, we recommend the use of the excellent [Requests](http://docs.python-requests.org/en/master/) package.
 
 ## Overview
-
 The API provides a number of endpoints, the list of which may be retrieved by querying the API root::
 
   `GET /api/{version}/`

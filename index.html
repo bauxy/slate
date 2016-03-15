@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;http&quot;,&quot;python&quot;]">
+  <body class="index" data-languages="[&quot;python&quot;,&quot;http&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,8 +101,8 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="http">HTTP</a>
               <a href="#" data-language-name="python">Python</a>
+              <a href="#" data-language-name="http">HTTP</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -120,25 +120,41 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
+<blockquote>
+<p>We&rsquo;ll be setting up a number of examples to follow, all of which follow similar patterns. For brevity, please assume that all code samples are prefixed as follows:</p>
+</blockquote>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">API_ROOT</span> <span class="o">=</span> <span class="s">'http://api-staging.bauxy.com/api/v1.5/'</span>
+
+<span class="k">def</span> <span class="nf">printj</span><span class="p">(</span><span class="n">json_object</span><span class="p">):</span>
+    <span class="s">"Pretty-print a json object"</span>
+    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json_object</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s">','</span><span class="p">,</span> <span class="s">': '</span><span class="p">))</span>
+
+<span class="c"># This particular username and password doesn't work, for obvious reasons; use your own.</span>
+<span class="n">user</span> <span class="o">=</span> <span class="p">(</span><span class="s">'username'</span><span class="p">,</span> <span class="s">'password'</span><span class="p">)</span>
+</code></pre>
+
 <p>Welcome to the Bauxy API!</p>
 
 <p>The Bauxy API 1.5 is a RESTful service helping patients get reimbursed for out-of-network insurance claims with minimal overhead.</p>
 
 <p>Healthcare providers can sign up and route their patients through the service automatically, making it easy for patients to receive their claim even if the provider isn&rsquo;t in the patient&rsquo;s insurance network.</p>
 
-<p>We have usagse examples in raw HTTP and Python. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right. As you can see, when using Python, we recommend the use of the excellent <a href="http://docs.python-requests.org/en/master/">Requests</a> package.</p>
+<p>We have usage examples in raw HTTP and Python. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right. As you can see, when using Python, we recommend the use of the excellent <a href="http://docs.python-requests.org/en/master/">Requests</a> package.</p>
 
 <h2 id="overview">Overview</h2>
 
-<p>The API provides a number of endpoints, the list of which may be retrieved by querying the API root::</p>
+<p>The API provides a number of endpoints, the list of which may be retrieved by querying the API root:</p>
 
 <p><code class="prettyprint">GET /api/{version}/</code></p>
 
-<p>These endpoints have standardized behavior: in general, the following operations are supported on each::</p>
+<p>These endpoints have standardized behavior: in general, the following operations are supported on each:</p>
 
-<p><code class="prettyprint">GET /api/{version}/{endpoint}/</code> -&gt; list of items the authenticated user may access`</p>
+<p><code class="prettyprint">GET /api/{version}/{endpoint}/</code> -&gt; list of items the authenticated user may access</p>
 
-<p><code class="prettyprint">POST /api/{version}/{endpoint}/</code> -&gt; given appropriate JSON data, create a new item`</p>
+<p><code class="prettyprint">POST /api/{version}/{endpoint}/</code> -&gt; given appropriate JSON data, create a new item</p>
 
 <p><code class="prettyprint">PUT /api/{version}/{endpoint}/{id}/</code> -&gt; given appropriate JSON data, replace the item with the given id</p>
 
@@ -150,15 +166,96 @@
 
 <h2 id="public-api">Public API</h2>
 
+<blockquote>
+<p>List API endpoints</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">API_ROOT</span><span class="p">)</span>
+<span class="n">actions</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">printj</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1.5/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api-staging.bauxy.com</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">keep-alive</span>
+<span class="na">Accept-Encoding</span><span class="p">:</span> <span class="s">gzip, deflate</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">python-requests/2.9.1</span>
+
+
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Accept, Cookie
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 13:08:53 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"addresses"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/addresses/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bills"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"insurance_companies"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"patients"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"planinfo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/planinfo/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"providers"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/providers/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"users"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/users/"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="n">API_ROOT</span><span class="p">)</span>
+<span class="n">printj</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">OPTIONS</span> <span class="nn">/api/v1.5/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api-staging.bauxy.com</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">0</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">python-requests/2.9.1</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">keep-alive</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+<span class="na">Accept-Encoding</span><span class="p">:</span> <span class="s">gzip, deflate</span>
+
+
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Accept, Cookie
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 13:22:44 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Api Root"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"parses"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"application/json"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"application/x-www-form-urlencoded"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"multipart/form-data"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"renders"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"application/json"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"text/html"</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <p><code class="prettyprint">OPTIONS</code> method is available to all users at all endpoints, so is omitted from the table. All other omitted methods are unimplemented or forbidden.</p>
 
-<p>Tables entries indicate whether or not access is permitted to the given user, as follows:
+<p>Table entries indicate whether or not access is permitted to the given user, as follows:
 - <code class="prettyprint">none</code>: no access is permitted to the given user.
 - <code class="prettyprint">read</code>: user may read from this endpoint; <code class="prettyprint">GET</code>, <code class="prettyprint">HEAD</code>.
 - <code class="prettyprint">filter read</code>: this user is permitted access to the specified endpoint with the specified method, provided that the resource at that endpoint applies to the user.
 - <code class="prettyprint">write</code>: user may write to this endpoint; <code class="prettyprint">POST</code> for list endpoints, or <code class="prettyprint">PUT</code> / <code class="prettyprint">PATCH</code> / <code class="prettyprint">DELETE</code> for detail endpoints. <code class="prettyprint">write</code> on a detail endpoint implies filtering such that the resource at that endpoint applies to the user.</p>
 
-<p>Superusers, designated by Bauxy as staff members, have unrestricted access to all endpoints.</p>
+<p>Bauxy staff members have unrestricted access to all endpoints.</p>
 
 <p>All API endpoints live under the API prefix, currently <code class="prettyprint">/api/v1.5/</code>. This prefix is omitted from the table for brevity but required for API use.</p>
 
@@ -276,6 +373,36 @@ every user must fall into one of those two classes.
 
           <h1 id="insurance-companies">Insurance Companies</h1>
 
+<blockquote>
+<p>Get the insurance company with id 1</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">API_ROOT</span> <span class="o">+</span> <span class="s">'insurance_companies/1/'</span><span class="p">)</span>
+<span class="n">company</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">printj</span><span class="p">(</span><span class="n">company</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1.5/insurance_companies/1/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api-staging.bauxy.com</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">keep-alive</span>
+<span class="na">Accept-Encoding</span><span class="p">:</span> <span class="s">gzip, deflate</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">python-requests/2.9.1</span>
+
+
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Accept, Cookie
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 12:55:11 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+</code></pre>
+
 <p>Available commands:</p>
 
 <p><code class="prettyprint">POST /api/v1.5/insurance_companies/</code> - for admins only</p>
@@ -286,10 +413,12 @@ every user must fall into one of those two classes.
 
 <p>Complete company data, as returned by the API:</p>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"is_vision"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true | false"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"is_medical"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true | false"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"is_dental"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true | false"</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_dental"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_medical"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_vision"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"VSP"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/1/"</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
@@ -326,27 +455,111 @@ every user must fall into one of those two classes.
 
           <h1 id="patients">Patients</h1>
 
+<blockquote>
+<p>GET a patient</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">API_ROOT</span> <span class="o">+</span> <span class="s">'patients/8/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+<span class="n">patient</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">printj</span><span class="p">(</span><span class="n">patient</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1.5/patients/8/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api-staging.bauxy.com</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">keep-alive</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+<span class="na">Accept-Encoding</span><span class="p">:</span> <span class="s">gzip, deflate</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6cGFzc3dvcmQ=</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">python-requests/2.9.1</span>
+
+
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Accept
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 13:29:51 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/addresses/2/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dob"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1974-11-15"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gleb@bauxy.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gleb"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="s2">"M"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_member"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Rybkin"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"relation_to_member"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/5/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"relationship_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Self"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-02-12T22:33:42.105308Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/8/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>POST a minimal patient</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">patient</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'first_name'</span> <span class="p">:</span> <span class="s">'Adam'</span><span class="p">,</span>
+    <span class="s">'last_name'</span>  <span class="p">:</span> <span class="s">'Baker'</span><span class="p">,</span>
+    <span class="s">'email'</span>      <span class="p">:</span> <span class="s">'ab@c.de'</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">API_ROOT</span> <span class="o">+</span> <span class="s">'patients/'</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">patient</span><span class="p">)</span>
+<span class="n">printj</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1.5/patients/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api-staging.bauxy.com</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">47</span>
+<span class="na">Accept-Encoding</span><span class="p">:</span> <span class="s">gzip, deflate</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">python-requests/2.9.1</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">keep-alive</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+
+first_name=Adam&amp;last_name=Baker&amp;email=ab%40c.de
+HTTP/1.1 201 Created
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Transfer-Encoding: chunked
+Vary: Accept
+Server: nginx/1.9.2
+Connection: keep-alive
+Location: http://api-staging.bauxy.com/api/v1.5/patients/87/
+Allow: GET, POST, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 13:37:35 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"dob"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ab@c.de"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Adam"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"gender"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">87</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_member"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Baker"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"relation_to_member"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"relationship_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Self"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-15T13:37:35.805489Z"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/87/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <p><code class="prettyprint">POST /api/v1.5/patients/</code></p>
 
 <p><code class="prettyprint">GET|PUT|PATCH|POST /api/v1.5/patients/{id}/</code></p>
 
 <p>Complete patient data, as returned by the API:</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"first_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"last_name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"must.be@unique.and.valid"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"phone_number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"... | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of an Address object | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"gender"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"M | F | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"is_member"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true | false | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"relation_to_member"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of a Patient object | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"relationship_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Self | Spouse | Child | Other"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"dob"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime (date of birth) | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"deleted_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"eligibility"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"... | null"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <table><thead>
 <tr>
@@ -413,52 +626,86 @@ Anybody may create a patient, including unauthenticated users. This is so that i
 
 <h2 id="checking-patient-eligibility">Checking Patient Eligibility</h2>
 
-<p><code class="prettyprint">GET /api/v1.5/patients/{id}/eligibility</code></p>
-
 <blockquote>
-<p>curl -d &ldquo;127.0.0.1/api/v1.5/patients/72/eligibility/?insurer=vsp&amp;username=jeremy.bluvol@gmail.com&amp;password=Iwonttellyou&amp;refresh=False&rdquo;</p>
+<p>GET eligibility for patient 72</p>
 </blockquote>
+<pre class="highlight python"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'insurer'</span>  <span class="p">:</span> <span class="s">'vsp'</span><span class="p">,</span>
+    <span class="s">'username'</span> <span class="p">:</span> <span class="s">'jeremy.bluvol@gmail.com'</span><span class="p">,</span> <span class="c"># username for insurance, not Bauxy</span>
+    <span class="s">'password'</span> <span class="p">:</span> <span class="s">'Iwonttellyou'</span><span class="p">,</span> <span class="c">#likewise, password for insurance, not Bauxy</span>
+    <span class="s">'refresh'</span>  <span class="p">:</span> <span class="bp">False</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">API_ROOT</span> <span class="o">+</span> <span class="s">'patients/72/eligibility/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">printj</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1.5/patients/72/eligibility/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api-staging.bauxy.com</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">82</span>
+<span class="na">Accept-Encoding</span><span class="p">:</span> <span class="s">gzip, deflate</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">python-requests/2.9.1</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">keep-alive</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6cGFzc3dvcmQ=</span>
+
+username=jeremy.bluvol%40gmail.com&amp;password=Iwonttellyou&amp;refresh=False&amp;insurer=vsp
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Accept
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 14:30:25 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+</code></pre>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"Contact Lens Exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"EligibleAsOfDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"Copay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$0"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"Coverage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$105.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"EligibleAsOfDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"PlanRefreshDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-01"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"Exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"Copay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$15.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Coverage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$45.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"EligibleAsOfDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"PlanRefreshDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-01"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"Frame"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"EligibleAsOfDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"Copay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$25.00"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"Coverage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$70.00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"PlanRefreshDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-01"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"Prescription Lenses"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"Single Vision"</span><span class="p">:</span><span class="w"> </span><span class="s2">" $30.00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"EligibleAsOfDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Bifocal"</span><span class="p">:</span><span class="w"> </span><span class="s2">" $50.00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Progressive"</span><span class="p">:</span><span class="w"> </span><span class="s2">" $50.00"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"Eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Copay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$25.00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Trifocal"</span><span class="p">:</span><span class="w"> </span><span class="s2">" $65.00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Coverage:"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*** Depends on lenses"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"EligibleAsOfDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"PlanRefreshDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-01"</span><span class="w">
     </span><span class="p">},</span><span class="w">
     </span><span class="nt">"MemberDependent"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jeremy Bluvol"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jeremy.bluvol@gmail.com"</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jeremy.bluvol@gmail.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jeremy Bluvol"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"Exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"EligibleAsOfDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"Prescription Lenses"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"Bifocal"</span><span class="p">:</span><span class="w"> </span><span class="s2">" $50.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Copay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$25.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Coverage:"</span><span class="p">:</span><span class="w"> </span><span class="s2">"*** Depends on lenses"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"Eligible"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Copay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$15.00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"Coverage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$45.00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"PlanRefreshDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-01"</span><span class="w">
+        </span><span class="nt">"EligibleAsOfDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-03-01"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"PlanRefreshDate"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2017-03-01"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Progressive"</span><span class="p">:</span><span class="w"> </span><span class="s2">" $50.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Single Vision"</span><span class="p">:</span><span class="w"> </span><span class="s2">" $30.00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"Trifocal"</span><span class="p">:</span><span class="w"> </span><span class="s2">" $65.00"</span><span class="w">
     </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>We can contact VSP or Eyemed on behalf of the user to fetch their eligibility information. Either username/password needs to be passed as parameters or the rest of the data - firstname, lastname, memberID, date of birth and ssn.</p>
+<p><code class="prettyprint">GET /api/v1.5/patients/{id}/eligibility</code></p>
+
+<p>We can contact VSP or Eyemed on behalf of the user to fetch their eligibility information. This requires one of two parameter sets: either <code class="prettyprint">{insurer, refresh, username, password}</code> or  <code class="prettyprint">{insurer, refresh, firstname, lastname, memberID, birthday_day, birthday_month, birthday_year, ssn}</code>.</p>
 
 <table><thead>
 <tr>
@@ -513,7 +760,7 @@ Anybody may create a patient, including unauthenticated users. This is so that i
 <td>False</td>
 </tr>
 <tr>
-<td>refersh</td>
+<td>refresh</td>
 <td><code class="prettyprint">True</code> or <code class="prettyprint">False</code>. If <code class="prettyprint">True</code>, it will force checking plan eligibility from the insurance provider&rsquo;s website. There is a limit of 1 <code class="prettyprint">refresh</code> request per day.</td>
 <td>False</td>
 </tr>
@@ -528,25 +775,63 @@ Anybody may create a patient, including unauthenticated users. This is so that i
 
           <h1 id="healthcare-providers">Healthcare Providers</h1>
 
+<blockquote>
+<p>GET a provider:</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">API_ROOT</span> <span class="o">+</span> <span class="s">'providers/3/'</span><span class="p">)</span>
+<span class="n">printj</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1.5/providers/3/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api-staging.bauxy.com</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">keep-alive</span>
+<span class="na">Accept-Encoding</span><span class="p">:</span> <span class="s">gzip, deflate</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">python-requests/2.9.1</span>
+
+
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Accept, Cookie
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 14:46:45 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"line1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"995 Market St"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"line2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/addresses/2/"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94103"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gleb+jins@bauxy.com"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JINS"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0987654321"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/providers/3/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gleb@bauxy.com"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"is_staff"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/users/1/"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bauxyadmin"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <p>Available commands:</p>
 
 <p><code class="prettyprint">POST /api/v1.5/providers/</code></p>
 
 <p><code class="prettyprint">GET|PUT|PATCH|POST /api/v1.5/providers/{id}/</code></p>
-
-<p>Complete provider data, as returned by the API:</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"user"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of a User login account"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"... | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"must.be@unique.and.valid"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"phone_number"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"+999999999 | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"address"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of an Address | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"tax_id"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"deleted_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <table><thead>
 <tr>
@@ -589,6 +874,115 @@ Anybody may create a patient, including unauthenticated users. This is so that i
 
           <h1 id="bills">Bills</h1>
 
+<blockquote>
+<p>GET a bill</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">API_ROOT</span> <span class="o">+</span> <span class="s">'bills/10/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+<span class="n">printj</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1.5/bills/10/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api-staging.bauxy.com</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">keep-alive</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+<span class="na">Accept-Encoding</span><span class="p">:</span> <span class="s">gzip, deflate</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6cGFzc3dvcmQ=</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">python-requests/2.9.1</span>
+
+
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Accept, Cookie
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 14:58:56 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"final_cost"</span><span class="p">:</span><span class="w"> </span><span class="mf">384.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"generated_bill_image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/1/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_bill_generated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/8/"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/7/"</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"original_bill_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://bauxy-aptible-bucket-test.s3.amazonaws.com/bauxy-aptible-bucket-test/test_image.jpg"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"patient"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/5/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_cost"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_cost"</span><span class="p">:</span><span class="w"> </span><span class="mf">384.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_discount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_discount_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transaction_no"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/10/"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<blockquote>
+<p>POST a bill</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'patient'</span>   <span class="p">:</span> <span class="s">"http://api-staging.bauxy.com/api/v1.5/patients/87/"</span><span class="p">,</span>
+    <span class="s">'insurance'</span> <span class="p">:</span> <span class="s">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/1/"</span><span class="p">,</span>
+    <span class="s">'provider'</span>  <span class="p">:</span> <span class="s">"http://api-staging.bauxy.com/api/v1.5/providers/3/"</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">API_ROOT</span> <span class="o">+</span> <span class="s">'bills/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+<span class="n">printj</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1.5/bills/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api-staging.bauxy.com</span>
+<span class="na">Content-Length</span><span class="p">:</span> <span class="s">237</span>
+<span class="na">Accept-Encoding</span><span class="p">:</span> <span class="s">gzip, deflate</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">python-requests/2.9.1</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">keep-alive</span>
+<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6cGFzc3dvcmQ=</span>
+
+patient=http%3A%2F%2Fapi-staging.bauxy.com%2Fapi%2Fv1.5%2Fpatients%2F87%2F&amp;insurance=http%3A%2F%2Fapi-staging.bauxy.com%2Fapi%2Fv1.5%2Finsurance_companies%2F1%2F&amp;provider=http%3A%2F%2Fapi-staging.bauxy.com%2Fapi%2Fv1.5%2Fproviders%2F3%2F
+HTTP/1.1 201 Created
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Transfer-Encoding: chunked
+Vary: Accept, Cookie
+Server: nginx/1.9.2
+Connection: keep-alive
+Location: http://api-staging.bauxy.com/api/v1.5/bills/13/
+Allow: GET, POST, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 15:06:05 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"final_cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"generated_bill_image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/1/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"is_bill_generated"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="nt">"original_bill_image"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"patient"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/87/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/providers/3/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"shipping_cost"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_cost"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_discount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"total_discount_type"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"transaction_no"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/13/"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <p>Available commands:</p>
 
 <p><code class="prettyprint">POST /api/v1.5/bills/</code></p>
@@ -600,25 +994,6 @@ Anybody may create a patient, including unauthenticated users. This is so that i
 <p><code class="prettyprint">PATCH /api/v1.5/bills/{id}/</code></p>
 
 <p>Request parameters, specified in the <code class="prettyprint">POST</code> body of an HTTP request</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"patient"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of a patient object"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"insurance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of an insurance company object"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"provider"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL of a healthcare provider object | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"purchase_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"transaction_no"</span><span class="p">:</span><span class="w"> </span><span class="s2">"... | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_discount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"total_discount_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Percent | Value | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"shipping_cost"</span><span class="p">:</span><span class="w"> </span><span class="s2">"number | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payment_method"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"CASH | CREDIT | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"deleted_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"generated_bill_image"</span><span class="p">:</span><span class="w"> </span><span class="s2">"URL | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"is_bill_generated"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"true | false"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"original_bill_image"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"items"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"[URL of an item object, ...]"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <table><thead>
 <tr>
@@ -685,14 +1060,12 @@ Anybody may create a patient, including unauthenticated users. This is so that i
 <tr>
 <td>original_bill_image</td>
 <td>File (as in multi-part form data)</td>
-<td>True</td>
+<td>False</td>
 </tr>
 </tbody></table>
 
-<p>In order to create a bill, <code class="prettyprint">original_bill_image</code> needs to be sent to the server. Once processed, the server will reply with a <code class="prettyprint">url</code> pointing to the bill image on Amazon S3.</p>
-
 <aside class="warning">
-Sometimes one may desire to just delegate all responsibility away. We support that! Specifically, one may input only minimal information into our database and have us take care of everything else, so long as an image of the original bill is in our database. In that case, our team of experts will go over the image and handle all the data processing. Be aware that as this requires human intervention, it will slow processing somewhat. If the image quality is poor or not all necessary information is present on the bill, we may not be able to continue processing the claim. Whether or not the process is successful, additional costs will be incurred.
+Sometimes one may desire to just delegate all responsibility away. We support that! Specifically, one may input only minimal information into our database and have us take care of everything else, so long as an image of the original bill is in our database. In that case, our team of experts will go over the image and handle all the data processing. Be aware that as this requires human intervention, it will slow processing somewhat. <br /><br />If the image quality is poor or not all necessary information is present on the bill, we may not be able to continue processing the claim. Whether or not the process is successful, additional costs will be incurred.
 </aside>
 
 <aside class="notice">
@@ -701,6 +1074,49 @@ Best practice for users who wish to minimize cost is to provide enough data to c
 
           <h1 id="items">Items</h1>
 
+<blockquote>
+<p>GET an item</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">API_ROOT</span> <span class="o">+</span> <span class="s">'items/8/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+<span class="n">printj</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1.5/items/8/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api-staging.bauxy.com</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">keep-alive</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+<span class="na">Accept-Encoding</span><span class="p">:</span> <span class="s">gzip, deflate</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6cGFzc3dvcmQ=</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">python-requests/2.9.1</span>
+
+
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Accept, Cookie
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 15:30:53 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"bill"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/10/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cost"</span><span class="p">:</span><span class="w"> </span><span class="mf">320.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"discount"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"discount_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Percent"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"final_cost"</span><span class="p">:</span><span class="w"> </span><span class="mf">304.0</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"item_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"lens_contact"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CatEye green cosmetic shaping lenses"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/8/"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <p>Available commands:</p>
 
 <p><code class="prettyprint">POST /api/v1.5/items/</code></p>
@@ -708,19 +1124,6 @@ Best practice for users who wish to minimize cost is to provide enough data to c
 <p><code class="prettyprint">GET|PUT|PATCH|POST /api/v1.5/items/{id}/</code></p>
 
 <p>Complete item data, as returned by the API:</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"bill"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"URL for the bill to which this Item is attached"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"item_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"coating | frame | exam | lens_contact | lens_single | lens_bifocal | lens_trifocal | lens_progressive | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"quantity"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"number | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"... | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"cost"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"number | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"discount"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"number | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"discount_type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Percent | Value | null"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"deleted_at"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"ISO-8601 datetime"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
 <table><thead>
 <tr>
@@ -768,6 +1171,45 @@ Best practice for users who wish to minimize cost is to provide enough data to c
 
           <h1 id="addresses">Addresses</h1>
 
+<blockquote>
+<p>GET an address</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">API_ROOT</span> <span class="o">+</span> <span class="s">'addresses/2/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">user</span><span class="p">)</span>
+<span class="n">printj</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
+</code></pre>
+<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1.5/addresses/2/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="p">:</span> <span class="s">api-staging.bauxy.com</span>
+<span class="na">Connection</span><span class="p">:</span> <span class="s">keep-alive</span>
+<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
+<span class="na">Accept-Encoding</span><span class="p">:</span> <span class="s">gzip, deflate</span>
+<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6cGFzc3dvcmQ=</span>
+<span class="na">User-Agent</span><span class="p">:</span> <span class="s">python-requests/2.9.1</span>
+
+
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Accept, Cookie
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
+Date: Tue, 15 Mar 2016 15:34:58 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"San Francisco"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"line1"</span><span class="p">:</span><span class="w"> </span><span class="s2">"995 Market St"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"line2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://api-staging.bauxy.com/api/v1.5/addresses/2/"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"zipcode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"94103"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
 <p>Available commands:</p>
 
 <p><code class="prettyprint">POST /api/v1.5/addresses/</code></p>
@@ -804,15 +1246,6 @@ Best practice for users who wish to minimize cost is to provide enough data to c
 <td>True</td>
 </tr>
 </tbody></table>
-
-<p>The <code class="prettyprint">POST</code> command will accept <code class="prettyprint">JSON</code> body in the request, like in the example on the right.</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="nt">"line1"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"city"</span><span class="w">  </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"zipcode"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"state"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
 
           <h1 id="errors">Errors</h1>
 
@@ -865,8 +1298,8 @@ Best practice for users who wish to minimize cost is to provide enough data to c
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="http">HTTP</a>
                 <a href="#" data-language-name="python">Python</a>
+                <a href="#" data-language-name="http">HTTP</a>
           </div>
       </div>
     </div>

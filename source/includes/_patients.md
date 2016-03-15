@@ -13,7 +13,7 @@ Host: api-staging.bauxy.com
 Connection: keep-alive
 Accept: */*
 Accept-Encoding: gzip, deflate
-Authorization: Basic cGV0ZXI6MXFheg==
+Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 User-Agent: python-requests/2.9.1
 
 
@@ -153,7 +153,7 @@ Accept: */*
 User-Agent: python-requests/2.9.1
 Connection: keep-alive
 Content-Type: application/x-www-form-urlencoded
-Authorization: Basic cGV0ZXI6MXFheg==
+Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 
 username=jeremy.bluvol%40gmail.com&password=Iwonttellyou&refresh=False&insurer=vsp
 HTTP/1.1 200 OK

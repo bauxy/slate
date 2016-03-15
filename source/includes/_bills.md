@@ -12,7 +12,7 @@ Host: api-staging.bauxy.com
 Connection: keep-alive
 Accept: */*
 Accept-Encoding: gzip, deflate
-Authorization: Basic cGV0ZXI6MXFheg==
+Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 User-Agent: python-requests/2.9.1
 
 
@@ -77,7 +77,7 @@ Accept: */*
 User-Agent: python-requests/2.9.1
 Connection: keep-alive
 Content-Type: application/x-www-form-urlencoded
-Authorization: Basic cGV0ZXI6MXFheg==
+Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
 
 patient=http%3A%2F%2Fapi-staging.bauxy.com%2Fapi%2Fv1.5%2Fpatients%2F87%2F&insurance=http%3A%2F%2Fapi-staging.bauxy.com%2Fapi%2Fv1.5%2Finsurance_companies%2F1%2F&provider=http%3A%2F%2Fapi-staging.bauxy.com%2Fapi%2Fv1.5%2Fproviders%2F3%2F
 HTTP/1.1 201 Created

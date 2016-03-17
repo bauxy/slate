@@ -627,45 +627,7 @@ Content-Type: application/json
 Anybody may create a patient, including unauthenticated users. This is so that individuals my sign up as patients if they like.
 </aside>
 
-<h2 id="checking-patient-eligibility">Checking Patient Eligibility</h2>
-
-<blockquote>
-<p>GET eligibility for patient 72</p>
-</blockquote>
-<pre class="highlight python"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s">'insurer'</span>  <span class="p">:</span> <span class="s">'vsp'</span><span class="p">,</span>
-    <span class="s">'username'</span> <span class="p">:</span> <span class="s">'jeremy.bluvol@gmail.com'</span><span class="p">,</span> <span class="c"># username for insurance, not Bauxy</span>
-    <span class="s">'password'</span> <span class="p">:</span> <span class="s">'Iwonttellyou'</span><span class="p">,</span> <span class="c">#likewise, password for insurance, not Bauxy</span>
-    <span class="s">'refresh'</span>  <span class="p">:</span> <span class="bp">False</span>
-<span class="p">}</span>
-<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">API_ROOT</span> <span class="o">+</span> <span class="s">'patients/72/eligibility/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">user</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
-<span class="n">printj</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
-</code></pre>
-<pre class="highlight http"><code><span class="nf">GET</span> <span class="nn">/api/v1.5/patients/72/eligibility/</span> <span class="k">HTTP</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">api-staging.bauxy.com</span>
-<span class="na">Content-Length</span><span class="p">:</span> <span class="s">82</span>
-<span class="na">Accept-Encoding</span><span class="p">:</span> <span class="s">gzip, deflate</span>
-<span class="na">Accept</span><span class="p">:</span> <span class="s">*/*</span>
-<span class="na">User-Agent</span><span class="p">:</span> <span class="s">python-requests/2.9.1</span>
-<span class="na">Connection</span><span class="p">:</span> <span class="s">keep-alive</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/x-www-form-urlencoded</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic dXNlcm5hbWU6cGFzc3dvcmQ=</span>
-
-username=jeremy.bluvol%40gmail.com&amp;password=Iwonttellyou&amp;refresh=False&amp;insurer=vsp
-HTTP/1.1 200 OK
-x-xss-protection: 1; mode=block
-x-content-type-options: nosniff
-Content-Encoding: gzip
-Transfer-Encoding: chunked
-Vary: Accept-Encoding
-Vary: Accept
-Server: nginx/1.9.2
-Connection: keep-alive
-Allow: GET, HEAD, OPTIONS
-Date: Tue, 15 Mar 2016 14:30:25 GMT
-X-Frame-Options: DENY
-Content-Type: application/json
-</code></pre>
+          <h1 id="checking-patient-eligibility">Checking Patient Eligibility</h1>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
     </span><span class="nt">"Contact Lens Exam"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"Copay"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$0"</span><span class="p">,</span><span class="w">
@@ -706,9 +668,11 @@ Content-Type: application/json
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p><code class="prettyprint">GET /api/v1.5/patients/{id}/eligibility</code></p>
+<p><code class="prettyprint">GET /api/v1.5/planinfo/eyemed/</code></p>
 
-<p>We can contact VSP or Eyemed on behalf of the user to fetch their eligibility information. This requires one of two parameter sets: either <code class="prettyprint">{insurer, refresh, username, password}</code> or  <code class="prettyprint">{insurer, refresh, firstname, lastname, memberID, birthday_day, birthday_month, birthday_year, ssn}</code>.</p>
+<p><code class="prettyprint">GET /api/v1.5/planinfo/vsp/</code></p>
+
+<p>We can contact VSP or Eyemed on behalf of the user to fetch their eligibility information. This requires one of two parameter sets: either <code class="prettyprint">{refresh, username, password}</code> or  <code class="prettyprint">{refresh, firstname, lastname, memberID, birthday_day, birthday_month, birthday_year, ssn}</code>.</p>
 
 <table><thead>
 <tr>
@@ -766,11 +730,6 @@ Content-Type: application/json
 <td>refresh</td>
 <td><code class="prettyprint">True</code> or <code class="prettyprint">False</code>. If <code class="prettyprint">True</code>, it will force checking plan eligibility from the insurance provider&rsquo;s website. There is a limit of 1 <code class="prettyprint">refresh</code> request per day.</td>
 <td>False</td>
-</tr>
-<tr>
-<td>insurer</td>
-<td><code class="prettyprint">vsp</code>, <code class="prettyprint">eyemed</code></td>
-<td>True</td>
 </tr>
 </tbody></table>
 

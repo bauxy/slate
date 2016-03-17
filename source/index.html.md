@@ -10,6 +10,7 @@ includes:
   - users
   - insurance
   - patients
+  - planinfo
   - providers
   - bills
   - items

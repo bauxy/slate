@@ -60,6 +60,5 @@ ssn                | social security number                                     
 username           | insurer login                                                                                                                                                   | False
 password           | insurer password                                                                                                                                                | False
 refresh            | `True` or `False`. If `True`, it will force checking plan eligibility from the insurance provider's website. There is a limit of 1 ``refresh`` request per day. | False
-insurer            | `vsp`, `eyemed`                                                                                                                                                 | True
 
 Gives back a `JSON` string of user's plan eligibility, like an example on the right from `VSP`.

@@ -252,11 +252,15 @@ Content-Type: application/json
 
 <p><code class="prettyprint">OPTIONS</code> method is available to all users at all endpoints, so is omitted from the table. All other omitted methods are unimplemented or forbidden.</p>
 
-<p>Table entries indicate whether or not access is permitted to the given user, as follows:
-- <code class="prettyprint">none</code>: no access is permitted to the given user.
-- <code class="prettyprint">read</code>: user may read from this endpoint; <code class="prettyprint">GET</code>, <code class="prettyprint">HEAD</code>.
-- <code class="prettyprint">filter read</code>: this user is permitted access to the specified endpoint with the specified method, provided that the resource at that endpoint applies to the user.
-- <code class="prettyprint">write</code>: user may write to this endpoint; <code class="prettyprint">POST</code> for list endpoints, or <code class="prettyprint">PUT</code> / <code class="prettyprint">PATCH</code> / <code class="prettyprint">DELETE</code> for detail endpoints. <code class="prettyprint">write</code> on a detail endpoint implies filtering such that the resource at that endpoint applies to the user.</p>
+<p>Table entries indicate whether or not access is permitted to the given user, as follows:</p>
+
+<p><code class="prettyprint">none</code> -&gt; no access is permitted to the given user.</p>
+
+<p><code class="prettyprint">read</code> -&gt; user may read from this endpoint; <code class="prettyprint">GET</code>, <code class="prettyprint">HEAD</code>.</p>
+
+<p><code class="prettyprint">filter read</code> -&gt; this user is permitted access to the specified endpoint with the specified method, provided that the resource at that endpoint applies to the user.</p>
+
+<p><code class="prettyprint">write</code> -&gt; user may write to this endpoint; <code class="prettyprint">POST</code> for list endpoints, or <code class="prettyprint">PUT</code> / <code class="prettyprint">PATCH</code> / <code class="prettyprint">DELETE</code> for detail endpoints. <code class="prettyprint">write</code> on a detail endpoint implies filtering such that the resource at that endpoint applies to the user.</p>
 
 <p>Bauxy staff members have unrestricted access to all endpoints.</p>
 

@@ -38,3 +38,40 @@ configure :build do
   # activate :asset_hash
   # activate :gzip
 end
+
+helpers do
+  def docstring(path, method)
+    file = File.open(path)
+    contents = file.read
+
+    # Get Docstring
+    docstring_regex = /def #{method}\([^\)]*\):\s*"""([\s\S]*?)"""/
+    match = contents.match(docstring_regex)
+    return '' unless match
+    docstring = match[1]
+
+    # Clean Docstring
+    # Close to https://www.python.org/dev/peps/pep-0257/#handling-docstring-indentation
+    lines = docstring.gsub(/\t/,"    ").lines().map{|a| a.rstrip}
+    indent = lines
+      .reject {|a| a.match(/^\s*$/)}
+      .map {|a| a.length - a.lstrip.length}
+      .min
+    lines.map! do |a|
+      amount = [indent, a.match(/^( *)/)[1].length].min
+      a[amount..-1]
+    end
+    cleaned_docstring = lines.join("\n")
+
+    # Expand shell commands
+    cleaned_docstring.gsub(/^ *\$ .+$/) do |match|
+      cmd = match.match(/\$ (.+)$/)[1]
+      if build?
+        output = `#{cmd}`
+        "```sh\n$ #{cmd}\n\n#{output}\n```"
+      else
+        "```sh\n$ #{cmd}\n\n<Output from the above command will go here on build>\n```"
+      end
+    end
+  end
+end

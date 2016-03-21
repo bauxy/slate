@@ -1,3 +1,6 @@
+require 'digest'
+require 'base64'
+
 # Markdown
 set :markdown_engine, :redcarpet
 set :markdown,
@@ -40,7 +43,7 @@ configure :build do
 end
 
 helpers do
-  def docstring(path, method)
+  def docstring(path, method, rebuild_cache=true)
     file = File.open(path)
     contents = file.read
 
@@ -67,8 +70,21 @@ helpers do
     cleaned_docstring.gsub(/^ *\$ .+$/) do |match|
       cmd = match.match(/\$ (.+)$/)[1]
       if build?
-        output = `#{cmd}`
-        "```sh\n$ #{cmd}\n\n#{output}\n```"
+        cmd_hash = Digest::SHA256.hexdigest(cmd)[0..20] 
+        b64_path = Base64.encode64(path)
+        cache_name = "#{b64_path}-#{method}-#{cmd_hash}"
+        cache_filepath = "./source/cache/#{cache_name}.md"
+
+        if rebuild_cache?
+          output = `#{cmd}`
+          md_output = "```sh\n$ #{cmd}\n\n#{output}\n```"
+          # save to cache and return
+          File.write(cache_filepath, md_output)
+          md_output
+        else
+          # read cache
+          File.read(cache_filepath)
+        end
       else
         "```sh\n$ #{cmd}\n\n<Output from the above command will go here on build>\n```"
       end

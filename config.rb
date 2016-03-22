@@ -71,8 +71,8 @@ helpers do
       cmd = match.match(/\$ (.+)$/)[1]
       if build?
         cmd_hash = Digest::SHA256.hexdigest(cmd + index.to_s)[0..20]
-        b64_path = Base64.encode64(path)
-        cache_name = "#{b64_path}-#{method}-#{cmd_hash}"
+        sanitized_path = path.gsub(/\W/, "")
+        cache_name = "#{sanitized_path}-#{method}-#{cmd_hash}"
         cache_filepath = "./cache/#{cache_name}.md"
 
         if ENV['USE_CACHE'] and File.exist? cache_filepath

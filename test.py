@@ -15,7 +15,9 @@ def hello_world(test, abc, asdk):
 
 def hello_other_world(test, abc, asdk):
     """
-    Testing def
+    Testing def meow
+
+    $ date
 
     ```
     meow123
@@ -31,6 +33,7 @@ def hello_other_world(test, abc, asdk):
     $ curl -h
 
     > foobar
+
 
     $ echo "meow"
     """

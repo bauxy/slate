@@ -75,7 +75,7 @@ helpers do
         cache_name = "#{b64_path}-#{method}-#{cmd_hash}"
         cache_filepath = "./source/cache/#{cache_name}.md"
 
-        if rebuild_cache?
+        if rebuild_cache
           output = `#{cmd}`
           md_output = "```sh\n$ #{cmd}\n\n#{output}\n```"
           # save to cache and return

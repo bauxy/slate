@@ -43,7 +43,7 @@ configure :build do
 end
 
 helpers do
-  def docstring(path, method, rebuild_cache=true)
+  def docstring(path, method)
     file = File.open(path)
     contents = file.read
 
@@ -75,15 +75,15 @@ helpers do
         cache_name = "#{b64_path}-#{method}-#{cmd_hash}"
         cache_filepath = "./cache/#{cache_name}.md"
 
-        if rebuild_cache
+        if ENV['USE_CACHE'] and File.exist? cache_filepath
+          # read cache
+          File.read(cache_filepath)
+        else
           output = `#{cmd}`
           md_output = "```sh\n$ #{cmd}\n\n#{output}\n```"
           # save to cache and return
           File.write(cache_filepath, md_output)
           md_output
-        else
-          # read cache
-          File.read(cache_filepath)
         end
       else
         "```sh\n$ #{cmd}\n\n<Output from the above command will go here on build>\n```"

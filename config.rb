@@ -87,7 +87,7 @@ helpers do
         end
       else
         "```sh\n$ #{cmd}\n\n<Output from the above command will go here on build>\n```"
-      end      
+      end
     end
   end
 end

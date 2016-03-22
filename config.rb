@@ -67,10 +67,10 @@ helpers do
     cleaned_docstring = lines.join("\n")
 
     # Expand shell commands
-    cleaned_docstring.gsub(/^ *\$ .+$/) do |match|
+    cleaned_docstring.gsub(/^ *\$ .+$/).each_with_index do |match, index|
       cmd = match.match(/\$ (.+)$/)[1]
       if build?
-        cmd_hash = Digest::SHA256.hexdigest(cmd)[0..20] 
+        cmd_hash = Digest::SHA256.hexdigest(cmd + index.to_s)[0..20]
         b64_path = Base64.encode64(path)
         cache_name = "#{b64_path}-#{method}-#{cmd_hash}"
         cache_filepath = "./source/cache/#{cache_name}.md"
@@ -87,7 +87,7 @@ helpers do
         end
       else
         "```sh\n$ #{cmd}\n\n<Output from the above command will go here on build>\n```"
-      end
+      end      
     end
   end
 end

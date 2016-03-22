@@ -73,7 +73,7 @@ helpers do
         cmd_hash = Digest::SHA256.hexdigest(cmd + index.to_s)[0..20]
         b64_path = Base64.encode64(path)
         cache_name = "#{b64_path}-#{method}-#{cmd_hash}"
-        cache_filepath = "./source/cache/#{cache_name}.md"
+        cache_filepath = "./cache/#{cache_name}.md"
 
         if rebuild_cache
           output = `#{cmd}`

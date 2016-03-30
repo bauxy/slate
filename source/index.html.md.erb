@@ -166,10 +166,14 @@ Content-Type: application/json
 `OPTIONS` method is available to all users at all endpoints, so is omitted from the table. All other omitted methods are unimplemented or forbidden.
 
 Table entries indicate whether or not access is permitted to the given user, as follows:
-- `none`: no access is permitted to the given user.
-- `read`: user may read from this endpoint; `GET`, `HEAD`.
-- `filter read`: this user is permitted access to the specified endpoint with the specified method, provided that the resource at that endpoint applies to the user.
-- `write`: user may write to this endpoint; `POST` for list endpoints, or `PUT` / `PATCH` / `DELETE` for detail endpoints. `write` on a detail endpoint implies filtering such that the resource at that endpoint applies to the user.
+
+`none` -> no access is permitted to the given user.
+
+`read` -> user may read from this endpoint; `GET`, `HEAD`.
+
+`filter read` -> this user is permitted access to the specified endpoint with the specified method, provided that the resource at that endpoint applies to the user.
+
+`write` -> user may write to this endpoint; `POST` for list endpoints, or `PUT` / `PATCH` / `DELETE` for detail endpoints. `write` on a detail endpoint implies filtering such that the resource at that endpoint applies to the user.
 
 Bauxy staff members have unrestricted access to all endpoints.
 

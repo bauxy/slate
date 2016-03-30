@@ -1,43 +1,74 @@
 # Checking Patient Eligibility
 
+```python
+response = requests.get(API_ROOT + 'planinfo/eyemed/?username=some.insured@bauxy.com&password=_fake_')
+printj(response.json())
+```
+
+```http
+GET /api/v1.5/planinfo/eyemed/?username=some.insured@bauxy.com&password=_fake_ HTTP/1.1
+Host: api-staging.bauxy.com
+Connection: keep-alive
+Accept-Encoding: gzip, deflate
+Accept: */*
+User-Agent: python-requests/2.9.1
+
+
+HTTP/1.1 200 OK
+x-xss-protection: 1; mode=block
+x-content-type-options: nosniff
+Content-Encoding: gzip
+Transfer-Encoding: chunked
+Vary: Accept-Encoding
+Vary: Cookie
+Server: nginx/1.9.2
+Connection: keep-alive
+Allow: GET, HEAD, OPTIONS
+Date: Thu, 24 Mar 2016 13:17:23 GMT
+X-Frame-Options: DENY
+Content-Type: application/json
+```
 
 ```json
 {
     "Contact Lens Exam": {
-        "Copay": "$0",
-        "Coverage": "$105.00",
+        "Copay": null,
+        "Coverage": "$160",
         "Eligible": true,
-        "EligibleAsOfDate": "2016-03-01",
-        "PlanRefreshDate": "2017-03-01"
+        "EligibleAsOfDate": "2015-12-01",
+        "PlanRefreshDate": "2017-03-24"
     },
     "Exam": {
-        "Copay": "$15.00",
-        "Coverage": "$45.00",
+        "Copay": null,
+        "Coverage": "$30",
         "Eligible": true,
-        "EligibleAsOfDate": "2016-03-01",
-        "PlanRefreshDate": "2017-03-01"
+        "EligibleAsOfDate": "2015-12-01",
+        "PlanRefreshDate": "2017-03-24"
     },
     "Frame": {
-        "Copay": "$25.00",
-        "Coverage": "$70.00",
+        "Copay": null,
+        "Coverage": "$100",
         "Eligible": true,
-        "EligibleAsOfDate": "2016-03-01",
-        "PlanRefreshDate": "2017-03-01"
+        "EligibleAsOfDate": "2015-12-01",
+        "PlanRefreshDate": "2017-03-24"
     },
     "MemberDependent": {
-        "email": "jeremy.bluvol@gmail.com",
-        "username": "Jeremy Bluvol"
+        "email": "some.insured@bauxy.com",
+        "username": "some.insured"
     },
     "Prescription Lenses": {
-        "Bifocal": " $50.00",
-        "Copay": "$25.00",
-        "Coverage:": "*** Depends on lenses",
+        "Bifocal": "$40",
+        "Copay": null,
+        "Coverage": "*** Depends on lenses",
         "Eligible": true,
-        "EligibleAsOfDate": "2016-03-01",
-        "PlanRefreshDate": "2017-03-01",
-        "Progressive": " $50.00",
-        "Single Vision": " $30.00",
-        "Trifocal": " $65.00"
+        "EligibleAsOfDate": "2015-12-01",
+        "PlanRefreshDate": "2017-03-24",
+        "Progressive": "$55",
+        "ScratchCoating": "$9",
+        "Single Vision": "$25",
+        "Tint": "$9",
+        "Trifocal": "$55",
+        "UVTreatment": "$9"
     }
 }
 ```
@@ -46,19 +77,35 @@
 
 `GET /api/v1.5/planinfo/vsp/`
 
-We can contact VSP or Eyemed on behalf of the user to fetch their eligibility information. This requires one of two parameter sets: either `{refresh, username, password}` or  `{refresh, firstname, lastname, memberID, birthday_day, birthday_month, birthday_year, ssn}`.
+We can contact VSP or Eyemed on behalf of the user to fetch their eligibility information. This requires one of two parameter sets:
 
-URL Parameter name | Value                                                                                                                                                           | Required
------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------
-firstname          | First name                                                                                                                                                      | False
-lastname           | Last name                                                                                                                                                       | False
-memberID           | memberID                                                                                                                                                        | False
-birthday_day       | [1-31]                                                                                                                                                          | False
-birthday_month     | [1-12]                                                                                                                                                          | False
-birthday_year      | 4-digit year                                                                                                                                                    | False
-ssn                | social security number                                                                                                                                          | False
-username           | insurer login                                                                                                                                                   | False
-password           | insurer password                                                                                                                                                | False
-refresh            | `True` or `False`. If `True`, it will force checking plan eligibility from the insurance provider's website. There is a limit of 1 ``refresh`` request per day. | False
+The simplest case is to just use `username` and `password` for the relevant insurance provider.
 
-Gives back a `JSON` string of user's plan eligibility, like an example on the right from `VSP`.
+If you know the insurance member's personal data but not their username and password, we can still handle this. In that case, we need `first_name`, `last_name`, `dob_year`, `dob_month`, `dob_day`, and one of `ssn` or `member_id`. Due to PII considerations, use of `ssn` is depreciated.
+
+In either case, we can also accept the optional parameters `force_register`, `raw`, and `refresh`.
+
+URL Parameter name | Value                       | Required
+------------------ | --------------------------- | --------
+username           | insurer login               | False
+password           | insurer password            | False
+first_name         | First name                  | False
+last_name          | Last name                   | False
+dob_year           | [1-31]                      | False
+dob_month          | [1-12]                      | False
+dob_day            | 4-digit year                | False
+member_id          | Insurance Company Member ID | False
+ssn                | social security number [1]  | False
+refresh            | boolean [2]                 | False
+force_register     | boolean [3]                 | False
+raw                | boolean [4]                 | False
+
+[1] Digits only
+
+[2] If set, it will force checking plan eligibility from the insurance provider's website. There is a limit of 1 `refresh` request per day.
+
+[3] If set, it will attempt to retrieve member eligibility using personal data even if the `username` and `password` keys are specified in the request.
+
+[4] If set, the returned data may be in a format specific to the particular insurance company instead of being normalized to Bauxy's format.
+
+Returns a `JSON` string of user's plan eligibility, like an example on the right from `VSP`.

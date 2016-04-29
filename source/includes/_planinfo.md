@@ -1,7 +1,7 @@
 # Checking Patient Eligibility
 
 ```python
-response = requests.get(API_ROOT + 'planinfo/eyemed/?username=some.insured@bauxy.com&password=_fake_')
+response = requests.get(API_ROOT + 'planinfo/eyemed/?username=some.insured@bauxy.com&password=_fake_', auth=user)
 printj(response.json())
 ```
 
@@ -77,13 +77,17 @@ Content-Type: application/json
 
 `GET /api/v1.5/planinfo/vsp/`
 
+<aside class="notice">
+This endpoint requires authentication. Don't forget to set the appropriate `sessionid` and `csrftoken` cookies!
+</aside>
+
 We can contact VSP or Eyemed on behalf of the user to fetch their eligibility information. This requires one of two parameter sets:
 
 The simplest case is to just use `username` and `password` for the relevant insurance provider.
 
 If you know the insurance member's personal data but not their username and password, we can still handle this. In that case, we need `first_name`, `last_name`, `dob_year`, `dob_month`, `dob_day`, and one of `ssn` or `member_id`. Due to PII considerations, use of `ssn` is depreciated.
 
-In either case, we can also accept the optional parameters `force_register`, `raw`, and `refresh`.
+In either case, we can also accept the optional parameter `refresh`.
 
 URL Parameter name | Value                       | Required
 ------------------ | --------------------------- | --------
@@ -100,6 +104,17 @@ refresh            | boolean [2]                 | False
 
 [1] Digits only
 
-[2] If set, it will force checking plan eligibility from the insurance provider's website. There is a limit of 1 `refresh` request per day.
+[2] If set, it will force checking plan eligibility from the insurance provider's website.
+There is a limit of 1 `refresh` request per day.
 
-Returns a `JSON` string of user's plan eligibility, like an example on the right from `VSP`.
+Returns a `JSON` string of user's plan eligibility, like an example on the right from `EyeMed`.
+
+<aside class="notice">
+Bauxy caches everything, with the exception of `password` and `ssn`. Once you've successfully
+retrieved eligibiltiy information from a given provider, further requests don't need the
+information passed in again. A simple authenticated request to the endpoint will return the
+eligbility information.<br />
+<br />
+This implies that if you've ever retrieved eligibility information using `username` and `password`,
+for example, you could refresh it using only `?refresh=true&password=whatever`.
+</aside>

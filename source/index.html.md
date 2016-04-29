@@ -190,8 +190,3 @@ endpoint                   | Unauthenticated | Authenticated
 `addresses/:id/`           | none            | filter read write
 `planinfo/`                | none            | filter read
 `planinfo/:id/`            | none            | filter read
-
-## Private API
-The private API is restricted to superusers, all of whom have unrestricted read and write access to all its endpoints.
-
-The private API prefix is `/api/internal/v1.5/`. As above, this prefix is omitted from this chart for brevity but required for API use.

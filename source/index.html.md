@@ -7,6 +7,7 @@ toc_footers:
   - "<a href='#'>Sign Up for a Provider Key</a>"
   - "<a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>"
 includes:
+  - authentication
   - users
   - insurance
   - patients

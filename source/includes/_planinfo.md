@@ -97,15 +97,9 @@ dob_day            | 4-digit year                | False
 member_id          | Insurance Company Member ID | False
 ssn                | social security number [1]  | False
 refresh            | boolean [2]                 | False
-force_register     | boolean [3]                 | False
-raw                | boolean [4]                 | False
 
 [1] Digits only
 
 [2] If set, it will force checking plan eligibility from the insurance provider's website. There is a limit of 1 `refresh` request per day.
-
-[3] If set, it will attempt to retrieve member eligibility using personal data even if the `username` and `password` keys are specified in the request.
-
-[4] If set, the returned data may be in a format specific to the particular insurance company instead of being normalized to Bauxy's format.
 
 Returns a `JSON` string of user's plan eligibility, like an example on the right from `VSP`.

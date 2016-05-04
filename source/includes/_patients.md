@@ -55,9 +55,7 @@ Content-Type: application/json
 
 ```python
 patient = {
-    'first_name' : 'Adam',
-    'last_name'  : 'Baker',
-    'email'      : 'ab@c.de'
+    'email': 'ab@c.de'
 }
 response = requests.post(API_ROOT + 'patients/', data=patient)
 printj(response.json())
@@ -73,7 +71,7 @@ User-Agent: python-requests/2.9.1
 Connection: keep-alive
 Content-Type: application/x-www-form-urlencoded
 
-first_name=Adam&last_name=Baker&email=ab%40c.de
+email=ab%40c.de
 HTTP/1.1 201 Created
 x-xss-protection: 1; mode=block
 x-content-type-options: nosniff
@@ -93,17 +91,23 @@ Content-Type: application/json
     "address": null,
     "dob": null,
     "email": "ab@c.de",
-    "first_name": "Adam",
+    "first_name": "",
     "gender": null,
     "id": 87,
     "is_member": null,
-    "last_name": "Baker",
+    "last_name": "",
     "phone_number": null,
     "relation_to_member": null,
     "relationship_type": "Self",
     "updated_at": "2016-03-15T13:37:35.805489Z",
     "url": "http://api-staging.bauxy.com/api/v1.5/patients/87/",
-    "user": null
+    "user":{
+        "id":22,
+        "email":"ab@c.de",
+        "is_staff":false,
+        "url":"http://api-staging.bauxy.com/api/v1.5/users/22/",
+        "username":"ab@c.de"
+    }
 }
 ```
 

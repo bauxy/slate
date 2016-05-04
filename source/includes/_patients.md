@@ -1,1 +1,1 @@
-<%= docstring("../backend/api/views.py", "BauxyInsuranceCompanyViewSet") %>
+<%= docstring("../backend/api/views.py", "BauxyPatientViewSet") %>

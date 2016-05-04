@@ -48,9 +48,9 @@ helpers do
     contents = file.read
 
     # Get Docstring
-    docstring_regex = /def #{method}\([^\)]*\):\s*"""([\s\S]*?)"""/
+    docstring_regex = /(?:class|def) #{method}\([^\)]*\):\s*"""([\s\S]*?)"""/
     match = contents.match(docstring_regex)
-    return '' unless match
+    raise ArgumentError, "Couldn't find docstring for '#{method}'" unless match
     docstring = match[1]
 
     # Clean Docstring

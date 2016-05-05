@@ -79,7 +79,7 @@ helpers do
           # read cache
           File.read(cache_filepath)
         else
-          output = `#{cmd}`
+          output = `#{cmd} 2>&1`
           md_output = "```sh\n$ #{cmd}\n\n#{output}\n```"
           # save to cache and return
           File.write(cache_filepath, md_output)

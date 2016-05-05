@@ -36,6 +36,8 @@ def hello_other_world(test, abc, asdk):
 
 
     $ echo "meow"
+
+    $ python -c 'import os; os.write(2, "error")'
     """
 
     a = 1

@@ -1,12 +1,10 @@
 ---
 title: Bauxy API Reference
-language_tabs:
-  - python: Python
-  - http: HTTP
 toc_footers:
   - "<a href='#'>Sign Up for a Provider Key</a>"
   - "<a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a>"
 includes:
+  - authentication
   - users
   - insurance
   - patients
@@ -20,29 +18,6 @@ search: true
 ---
 
 # Introduction
-> We'll be setting up a number of examples to follow, all of which follow similar patterns. For brevity, please assume that all code samples are prefixed as follows:
-
-## Zeroth Docstring
-
-<%= docstring("test.py", "hello_world") %>
-
-## First Docstring
-
-<%= docstring("test.py", "hello_other_world") %>
-
-```python
-import json
-import requests
-
-API_ROOT = 'http://api-staging.bauxy.com/api/v1.5/'
-
-def printj(json_object):
-    "Pretty-print a json object"
-    print json.dumps(json_object, sort_keys=True, indent=4, separators=(',', ': '))
-
-# This particular username and password doesn't work, for obvious reasons; use your own.
-user = ('username', 'password')
-```
 
 Welcome to the Bauxy API!
 
@@ -73,12 +48,6 @@ Naturally, users may only modify or delete resources which they own.
 
 ## Public API
 > List API endpoints
-
-```python
-response = requests.get(API_ROOT)
-actions = response.json()
-printj(actions)
-```
 
 ```http
 GET /api/v1.5/ HTTP/1.1
@@ -115,11 +84,6 @@ Content-Type: application/json
     "providers": "http://api-staging.bauxy.com/api/v1.5/providers/",
     "users": "http://api-staging.bauxy.com/api/v1.5/users/"
 }
-```
-
-```python
-response = requests.options(API_ROOT)
-printj(response.json())
 ```
 
 ```http
@@ -198,8 +162,3 @@ endpoint                   | Unauthenticated | Authenticated
 `addresses/:id/`           | none            | filter read write
 `planinfo/`                | none            | filter read
 `planinfo/:id/`            | none            | filter read
-
-## Private API
-The private API is restricted to superusers, all of whom have unrestricted read and write access to all its endpoints.
-
-The private API prefix is `/api/internal/v1.5/`. As above, this prefix is omitted from this chart for brevity but required for API use.

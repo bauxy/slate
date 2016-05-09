@@ -393,54 +393,16 @@ every user must fall into one of those two classes.
 <blockquote>
 <p>Get the insurance company with id 1</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -v https://api-staging.bauxy.com/api/v1.5/insurance_companies/1/
+<pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v https://api-staging.bauxy.com/api/v1.5/insurance_companies/1/
 
-<span class="k">*</span> Hostname was NOT found <span class="k">in </span>DNS cache
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<span class="k">*</span>   Trying 54.175.86.140...
-<span class="k">*</span> Connected to api-staging.bauxy.com <span class="o">(</span>54.175.86.140<span class="o">)</span> port 443 <span class="o">(</span><span class="c">#0)</span>
-<span class="k">*</span> successfully <span class="nb">set </span>certificate verify locations:
-<span class="k">*</span>   CAfile: none
-  CApath: /etc/ssl/certs
-<span class="k">*</span> SSLv3, TLS handshake, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server hello <span class="o">(</span>2<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, CERT <span class="o">(</span>11<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server key exchange <span class="o">(</span>12<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server finished <span class="o">(</span>14<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Client key exchange <span class="o">(</span>16<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSL connection using ECDHE-RSA-AES256-GCM-SHA384
-<span class="k">*</span> Server certificate:
-<span class="k">*</span>    subject: <span class="nv">OU</span><span class="o">=</span>Domain Control Validated; <span class="nv">CN</span><span class="o">=</span><span class="k">*</span>.bauxy.com
-<span class="k">*</span>    start date: 2016-04-21 00:52:39 GMT
-<span class="k">*</span>    expire date: 2017-04-21 00:16:38 GMT
-<span class="k">*</span>    subjectAltName: api-staging.bauxy.com matched
-<span class="k">*</span>    issuer: <span class="nv">C</span><span class="o">=</span>US; <span class="nv">ST</span><span class="o">=</span>Arizona; <span class="nv">L</span><span class="o">=</span>Scottsdale; <span class="nv">O</span><span class="o">=</span>GoDaddy.com, Inc.; <span class="nv">OU</span><span class="o">=</span>http://certs.godaddy.com/repository/; <span class="nv">CN</span><span class="o">=</span>Go Daddy Secure Certificate Authority - G2
-<span class="k">*</span>    SSL certificate verify ok.
 <span class="gp">&gt; </span>GET /api/v1.5/insurance_companies/1/ HTTP/1.1
 <span class="gp">&gt; </span>User-Agent: curl/7.35.0
 <span class="gp">&gt; </span>Host: api-staging.bauxy.com
 <span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
 <span class="gp">&gt; </span>
 &lt; HTTP/1.1 200 OK
-<span class="k">*</span> Server nginx/1.9.2 is not blacklisted
 &lt; Server: nginx/1.9.2
-&lt; Date: Fri, 06 May 2016 07:53:10 GMT
+&lt; Date: Mon, 09 May 2016 12:58:57 GMT
 &lt; Content-Type: application/json
 &lt; Transfer-Encoding: chunked
 &lt; Connection: keep-alive
@@ -452,12 +414,15 @@ every user must fall into one of those two classes.
 &lt; X-Frame-Options: DENY
 &lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
 &lt; 
-<span class="o">{</span> <span class="o">[</span>data not shown]
+<span class="o">{</span>
+    <span class="s2">"id"</span>: 1,
+    <span class="s2">"is_dental"</span>: <span class="nb">false</span>,
+    <span class="s2">"is_medical"</span>: <span class="nb">false</span>,
+    <span class="s2">"is_vision"</span>: <span class="nb">true</span>,
+    <span class="s2">"name"</span>: <span class="s2">"VSP"</span>,
+    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/1/"</span>
+<span class="o">}</span>
 
-100   144    0   144    0     0    497      0 --:--:-- --:--:-- --:--:--   496
-100   144    0   144    0     0    497      0 --:--:-- --:--:-- --:--:--   496
-<span class="k">*</span> Connection <span class="c">#0 to host api-staging.bauxy.com left intact</span>
-<span class="o">{</span><span class="s2">"id"</span>:1,<span class="s2">"url"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/1/"</span>,<span class="s2">"name"</span>:<span class="s2">"VSP"</span>,<span class="s2">"is_vision"</span>:true,<span class="s2">"is_medical"</span>:false,<span class="s2">"is_dental"</span>:false<span class="o">}</span>
 </code></pre>
 
 <p>Available commands:</p>
@@ -509,46 +474,8 @@ at <a href="mailto:info@bauxy.com">info@bauxy.com</a>!</p>
 <blockquote>
 <p>GET a patient</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -u username@example.com:example_PW -v https://api-staging.bauxy.com/api/v1.5/patients/148/
+<pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -u username@example.com:example_PW -v https://api-staging.bauxy.com/api/v1.5/patients/148/
 
-<span class="k">*</span> Hostname was NOT found <span class="k">in </span>DNS cache
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<span class="k">*</span>   Trying 54.174.245.23...
-<span class="k">*</span> Connected to api-staging.bauxy.com <span class="o">(</span>54.174.245.23<span class="o">)</span> port 443 <span class="o">(</span><span class="c">#0)</span>
-<span class="k">*</span> successfully <span class="nb">set </span>certificate verify locations:
-<span class="k">*</span>   CAfile: none
-  CApath: /etc/ssl/certs
-<span class="k">*</span> SSLv3, TLS handshake, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server hello <span class="o">(</span>2<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, CERT <span class="o">(</span>11<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server key exchange <span class="o">(</span>12<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server finished <span class="o">(</span>14<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Client key exchange <span class="o">(</span>16<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSL connection using ECDHE-RSA-AES256-GCM-SHA384
-<span class="k">*</span> Server certificate:
-<span class="k">*</span>    subject: <span class="nv">OU</span><span class="o">=</span>Domain Control Validated; <span class="nv">CN</span><span class="o">=</span><span class="k">*</span>.bauxy.com
-<span class="k">*</span>    start date: 2016-04-21 00:52:39 GMT
-<span class="k">*</span>    expire date: 2017-04-21 00:16:38 GMT
-<span class="k">*</span>    subjectAltName: api-staging.bauxy.com matched
-<span class="k">*</span>    issuer: <span class="nv">C</span><span class="o">=</span>US; <span class="nv">ST</span><span class="o">=</span>Arizona; <span class="nv">L</span><span class="o">=</span>Scottsdale; <span class="nv">O</span><span class="o">=</span>GoDaddy.com, Inc.; <span class="nv">OU</span><span class="o">=</span>http://certs.godaddy.com/repository/; <span class="nv">CN</span><span class="o">=</span>Go Daddy Secure Certificate Authority - G2
-<span class="k">*</span>    SSL certificate verify ok.
-<span class="k">*</span> Server auth using Basic with user <span class="s1">'username@example.com'</span>
 <span class="gp">&gt; </span>GET /api/v1.5/patients/148/ HTTP/1.1
 <span class="gp">&gt; </span>Authorization: Basic <span class="nv">dXNlcm5hbWVAZXhhbXBsZS5jb206ZXhhbXBsZV9QVw</span><span class="o">==</span>
 <span class="gp">&gt; </span>User-Agent: curl/7.35.0
@@ -556,9 +483,8 @@ at <a href="mailto:info@bauxy.com">info@bauxy.com</a>!</p>
 <span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
 <span class="gp">&gt; </span>
 &lt; HTTP/1.1 200 OK
-<span class="k">*</span> Server nginx/1.9.2 is not blacklisted
 &lt; Server: nginx/1.9.2
-&lt; Date: Fri, 06 May 2016 07:53:11 GMT
+&lt; Date: Mon, 09 May 2016 12:58:58 GMT
 &lt; Content-Type: application/json
 &lt; Transfer-Encoding: chunked
 &lt; Connection: keep-alive
@@ -570,55 +496,36 @@ at <a href="mailto:info@bauxy.com">info@bauxy.com</a>!</p>
 &lt; X-Frame-Options: DENY
 &lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
 &lt; 
-<span class="o">{</span> <span class="o">[</span>data not shown]
+<span class="o">{</span>
+    <span class="s2">"address"</span>: null,
+    <span class="s2">"dob"</span>: null,
+    <span class="s2">"email"</span>: <span class="s2">"username@example.com"</span>,
+    <span class="s2">"first_name"</span>: <span class="s2">""</span>,
+    <span class="s2">"gender"</span>: <span class="s2">""</span>,
+    <span class="s2">"id"</span>: 148,
+    <span class="s2">"is_member"</span>: null,
+    <span class="s2">"last_name"</span>: <span class="s2">""</span>,
+    <span class="s2">"phone_number"</span>: <span class="s2">""</span>,
+    <span class="s2">"relation_to_member"</span>: null,
+    <span class="s2">"relationship_type"</span>: <span class="s2">"Self"</span>,
+    <span class="s2">"updated_at"</span>: <span class="s2">"2016-05-04T13:07:21.737906Z"</span>,
+    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/148/"</span>,
+    <span class="s2">"user"</span>: <span class="o">{</span>
+        <span class="s2">"email"</span>: <span class="s2">"username@example.com"</span>,
+        <span class="s2">"id"</span>: 30,
+        <span class="s2">"is_staff"</span>: <span class="nb">false</span>,
+        <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/users/30/"</span>,
+        <span class="s2">"username"</span>: <span class="s2">"username@example.com"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 
-100   456    0   456    0     0   1051      0 --:--:-- --:--:-- --:--:--  1053
-<span class="k">*</span> Connection <span class="c">#0 to host api-staging.bauxy.com left intact</span>
-<span class="o">{</span><span class="s2">"id"</span>:148,<span class="s2">"url"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/148/"</span>,<span class="s2">"user"</span>:<span class="o">{</span><span class="s2">"id"</span>:30,<span class="s2">"url"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/users/30/"</span>,<span class="s2">"username"</span>:<span class="s2">"username@example.com"</span>,<span class="s2">"email"</span>:<span class="s2">"username@example.com"</span>,<span class="s2">"is_staff"</span>:false<span class="o">}</span>,<span class="s2">"first_name"</span>:<span class="s2">""</span>,<span class="s2">"last_name"</span>:<span class="s2">""</span>,<span class="s2">"email"</span>:<span class="s2">"username@example.com"</span>,<span class="s2">"phone_number"</span>:<span class="s2">""</span>,<span class="s2">"address"</span>:null,<span class="s2">"gender"</span>:<span class="s2">""</span>,<span class="s2">"is_member"</span>:null,<span class="s2">"relationship_type"</span>:<span class="s2">"Self"</span>,<span class="s2">"dob"</span>:null,<span class="s2">"updated_at"</span>:<span class="s2">"2016-05-04T13:07:21.737906Z"</span>,<span class="s2">"relation_to_member"</span>:null<span class="o">}</span>
 </code></pre>
 
 <blockquote>
 <p>POST a minimal patient</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -v -X POST -H <span class="s2">"Content-Type: application/json"</span> -d <span class="s2">"{</span><span class="se">\"</span><span class="s2">email</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">member+</span><span class="k">$(</span>date +%s<span class="k">)</span><span class="s2">@bauxy.com</span><span class="se">\"</span><span class="s2">}"</span> https://api-staging.bauxy.com/api/v1.5/patients/
+<pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v -X POST -H <span class="s2">"Content-Type: application/json"</span> -d <span class="s2">"{</span><span class="se">\"</span><span class="s2">email</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">member+</span><span class="k">$(</span>date +%s<span class="k">)</span><span class="s2">@bauxy.com</span><span class="se">\"</span><span class="s2">}"</span> https://api-staging.bauxy.com/api/v1.5/patients/
 
-<span class="k">*</span> Hostname was NOT found <span class="k">in </span>DNS cache
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<span class="k">*</span>   Trying 52.202.137.152...
-<span class="k">*</span> Connected to api-staging.bauxy.com <span class="o">(</span>52.202.137.152<span class="o">)</span> port 443 <span class="o">(</span><span class="c">#0)</span>
-<span class="k">*</span> successfully <span class="nb">set </span>certificate verify locations:
-<span class="k">*</span>   CAfile: none
-  CApath: /etc/ssl/certs
-<span class="k">*</span> SSLv3, TLS handshake, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server hello <span class="o">(</span>2<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, CERT <span class="o">(</span>11<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server key exchange <span class="o">(</span>12<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server finished <span class="o">(</span>14<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Client key exchange <span class="o">(</span>16<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSL connection using ECDHE-RSA-AES256-GCM-SHA384
-<span class="k">*</span> Server certificate:
-<span class="k">*</span>    subject: <span class="nv">OU</span><span class="o">=</span>Domain Control Validated; <span class="nv">CN</span><span class="o">=</span><span class="k">*</span>.bauxy.com
-<span class="k">*</span>    start date: 2016-04-21 00:52:39 GMT
-<span class="k">*</span>    expire date: 2017-04-21 00:16:38 GMT
-<span class="k">*</span>    subjectAltName: api-staging.bauxy.com matched
-<span class="k">*</span>    issuer: <span class="nv">C</span><span class="o">=</span>US; <span class="nv">ST</span><span class="o">=</span>Arizona; <span class="nv">L</span><span class="o">=</span>Scottsdale; <span class="nv">O</span><span class="o">=</span>GoDaddy.com, Inc.; <span class="nv">OU</span><span class="o">=</span>http://certs.godaddy.com/repository/; <span class="nv">CN</span><span class="o">=</span>Go Daddy Secure Certificate Authority - G2
-<span class="k">*</span>    SSL certificate verify ok.
 <span class="gp">&gt; </span>POST /api/v1.5/patients/ HTTP/1.1
 <span class="gp">&gt; </span>User-Agent: curl/7.35.0
 <span class="gp">&gt; </span>Host: api-staging.bauxy.com
@@ -626,30 +533,41 @@ at <a href="mailto:info@bauxy.com">info@bauxy.com</a>!</p>
 <span class="gp">&gt; </span>Content-Type: application/json
 <span class="gp">&gt; </span>Content-Length: 40
 <span class="gp">&gt; </span>
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> upload completely sent off: 40 out of 40 bytes
 &lt; HTTP/1.1 201 Created
-<span class="k">*</span> Server nginx/1.9.2 is not blacklisted
 &lt; Server: nginx/1.9.2
-&lt; Date: Fri, 06 May 2016 07:53:11 GMT
+&lt; Date: Mon, 09 May 2016 12:58:58 GMT
 &lt; Content-Type: application/json
 &lt; Transfer-Encoding: chunked
 &lt; Connection: keep-alive
 &lt; x-xss-protection: 1; <span class="nv">mode</span><span class="o">=</span>block
 &lt; x-content-type-options: nosniff
 &lt; Vary: Cookie
-&lt; Location: http://api-staging.bauxy.com/api/v1.5/patients/158/
+&lt; Location: http://api-staging.bauxy.com/api/v1.5/patients/160/
 &lt; Allow: GET, POST, HEAD, OPTIONS
 &lt; X-Frame-Options: DENY
-&lt; Set-Cookie: <span class="nv">csrftoken</span><span class="o">=</span>bBUKkfOoEYqctO0DT1ann9KJuWY9LOTu; <span class="nv">expires</span><span class="o">=</span>Fri, 05-May-2017 07:53:11 GMT; httponly; Max-Age<span class="o">=</span>31449600; <span class="nv">Path</span><span class="o">=</span>/; secure
-&lt; Set-Cookie: <span class="nv">sessionid</span><span class="o">=</span>fcazptq02p9yg1uqw0q5tjlqq2rfmxiq; <span class="nv">expires</span><span class="o">=</span>Fri, 06-May-2016 08:53:11 GMT; httponly; Max-Age<span class="o">=</span>3600; <span class="nv">Path</span><span class="o">=</span>/; secure
+&lt; Set-Cookie: <span class="nv">csrftoken</span><span class="o">=</span>eQ65WFRztPBwlPF9ZyHYuqXg6DUJMrB3; <span class="nv">expires</span><span class="o">=</span>Mon, 08-May-2017 12:58:58 GMT; httponly; Max-Age<span class="o">=</span>31449600; <span class="nv">Path</span><span class="o">=</span>/; secure
+&lt; Set-Cookie: <span class="nv">sessionid</span><span class="o">=</span>wh20u335xj87bphkx3wwcffyq5eqfgiz; <span class="nv">expires</span><span class="o">=</span>Mon, 09-May-2016 13:58:58 GMT; httponly; Max-Age<span class="o">=</span>3600; <span class="nv">Path</span><span class="o">=</span>/; secure
 &lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
 &lt; 
-<span class="o">{</span> <span class="o">[</span>data not shown]
+<span class="o">{</span>
+    <span class="s2">"address"</span>: null,
+    <span class="s2">"dob"</span>: null,
+    <span class="s2">"email"</span>: <span class="s2">"member+1462798729@bauxy.com"</span>,
+    <span class="s2">"first_name"</span>: <span class="s2">""</span>,
+    <span class="s2">"gender"</span>: <span class="s2">""</span>,
+    <span class="s2">"id"</span>: 160,
+    <span class="s2">"is_member"</span>: null,
+    <span class="s2">"last_name"</span>: <span class="s2">""</span>,
+    <span class="s2">"phone_number"</span>: <span class="s2">""</span>,
+    <span class="s2">"relation_to_member"</span>: null,
+    <span class="s2">"relationship_type"</span>: <span class="s2">"Self"</span>,
+    <span class="s2">"updated_at"</span>: <span class="s2">"2016-05-09T12:58:58.608312Z"</span>,
+    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/160/"</span>,
+    <span class="s2">"user"</span>: <span class="o">{</span>
+        <span class="s2">"username"</span>: <span class="s2">"member+1462798729@bauxy.com"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 
-100   398    0   358  100    40   1102    123 --:--:-- --:--:-- --:--:--  1104
-<span class="k">*</span> Connection <span class="c">#0 to host api-staging.bauxy.com left intact</span>
-<span class="o">{</span><span class="s2">"id"</span>:158,<span class="s2">"url"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/158/"</span>,<span class="s2">"user"</span>:<span class="o">{</span><span class="s2">"username"</span>:<span class="s2">"member+1462521185@bauxy.com"</span><span class="o">}</span>,<span class="s2">"first_name"</span>:<span class="s2">""</span>,<span class="s2">"last_name"</span>:<span class="s2">""</span>,<span class="s2">"email"</span>:<span class="s2">"member+1462521185@bauxy.com"</span>,<span class="s2">"phone_number"</span>:<span class="s2">""</span>,<span class="s2">"address"</span>:null,<span class="s2">"gender"</span>:<span class="s2">""</span>,<span class="s2">"is_member"</span>:null,<span class="s2">"relationship_type"</span>:<span class="s2">"Self"</span>,<span class="s2">"dob"</span>:null,<span class="s2">"updated_at"</span>:<span class="s2">"2016-05-06T07:53:11.649513Z"</span>,<span class="s2">"relation_to_member"</span>:null<span class="o">}</span>
 </code></pre>
 
 <blockquote>
@@ -728,47 +646,8 @@ sign up as patients if they like.
 </aside>
 
           <h1 id="checking-patient-eligibility">Checking Patient Eligibility</h1>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -v -u username@example.com:example_PW https://api-staging.bauxy.com/api/v1.5/planinfo/eyemed/
+<pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v -u username@example.com:example_PW https://api-staging.bauxy.com/api/v1.5/planinfo/eyemed/
 
-<span class="k">*</span> Hostname was NOT found <span class="k">in </span>DNS cache
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<span class="k">*</span>   Trying 54.175.137.152...
-<span class="k">*</span> Connected to api-staging.bauxy.com <span class="o">(</span>54.175.137.152<span class="o">)</span> port 443 <span class="o">(</span><span class="c">#0)</span>
-<span class="k">*</span> successfully <span class="nb">set </span>certificate verify locations:
-<span class="k">*</span>   CAfile: none
-  CApath: /etc/ssl/certs
-<span class="k">*</span> SSLv3, TLS handshake, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server hello <span class="o">(</span>2<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, CERT <span class="o">(</span>11<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server key exchange <span class="o">(</span>12<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server finished <span class="o">(</span>14<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Client key exchange <span class="o">(</span>16<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSL connection using ECDHE-RSA-AES256-GCM-SHA384
-<span class="k">*</span> Server certificate:
-<span class="k">*</span>    subject: <span class="nv">OU</span><span class="o">=</span>Domain Control Validated; <span class="nv">CN</span><span class="o">=</span><span class="k">*</span>.bauxy.com
-<span class="k">*</span>    start date: 2016-04-21 00:52:39 GMT
-<span class="k">*</span>    expire date: 2017-04-21 00:16:38 GMT
-<span class="k">*</span>    subjectAltName: api-staging.bauxy.com matched
-<span class="k">*</span>    issuer: <span class="nv">C</span><span class="o">=</span>US; <span class="nv">ST</span><span class="o">=</span>Arizona; <span class="nv">L</span><span class="o">=</span>Scottsdale; <span class="nv">O</span><span class="o">=</span>GoDaddy.com, Inc.; <span class="nv">OU</span><span class="o">=</span>http://certs.godaddy.com/repository/; <span class="nv">CN</span><span class="o">=</span>Go Daddy Secure Certificate Authority - G2
-<span class="k">*</span>    SSL certificate verify ok.
-<span class="k">*</span> Server auth using Basic with user <span class="s1">'username@example.com'</span>
 <span class="gp">&gt; </span>GET /api/v1.5/planinfo/eyemed/ HTTP/1.1
 <span class="gp">&gt; </span>Authorization: Basic <span class="nv">dXNlcm5hbWVAZXhhbXBsZS5jb206ZXhhbXBsZV9QVw</span><span class="o">==</span>
 <span class="gp">&gt; </span>User-Agent: curl/7.35.0
@@ -776,9 +655,8 @@ sign up as patients if they like.
 <span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
 <span class="gp">&gt; </span>
 &lt; HTTP/1.1 200 OK
-<span class="k">*</span> Server nginx/1.9.2 is not blacklisted
 &lt; Server: nginx/1.9.2
-&lt; Date: Fri, 06 May 2016 07:53:12 GMT
+&lt; Date: Mon, 09 May 2016 12:58:59 GMT
 &lt; Content-Type: application/json
 &lt; Transfer-Encoding: chunked
 &lt; Connection: keep-alive
@@ -790,11 +668,48 @@ sign up as patients if they like.
 &lt; X-Frame-Options: DENY
 &lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
 &lt; 
-<span class="o">{</span> <span class="o">[</span>data not shown]
+<span class="o">{</span>
+    <span class="s2">"Contact Lens Exam"</span>: <span class="o">{</span>
+        <span class="s2">"Copay"</span>: null,
+        <span class="s2">"Coverage"</span>: <span class="s2">"</span><span class="nv">$160</span><span class="s2">"</span>,
+        <span class="s2">"Eligible"</span>: <span class="nb">true</span>,
+        <span class="s2">"EligibleAsOfDate"</span>: <span class="s2">"2015-12-01"</span>,
+        <span class="s2">"PlanRefreshDate"</span>: <span class="s2">"2017-04-18"</span>
+    <span class="o">}</span>,
+    <span class="s2">"Exam"</span>: <span class="o">{</span>
+        <span class="s2">"Copay"</span>: null,
+        <span class="s2">"Coverage"</span>: <span class="s2">"</span><span class="nv">$30</span><span class="s2">"</span>,
+        <span class="s2">"Eligible"</span>: <span class="nb">true</span>,
+        <span class="s2">"EligibleAsOfDate"</span>: <span class="s2">"2015-12-01"</span>,
+        <span class="s2">"PlanRefreshDate"</span>: <span class="s2">"2017-04-18"</span>
+    <span class="o">}</span>,
+    <span class="s2">"Frame"</span>: <span class="o">{</span>
+        <span class="s2">"Copay"</span>: null,
+        <span class="s2">"Coverage"</span>: <span class="s2">"</span><span class="nv">$100</span><span class="s2">"</span>,
+        <span class="s2">"Eligible"</span>: <span class="nb">true</span>,
+        <span class="s2">"EligibleAsOfDate"</span>: <span class="s2">"2015-12-01"</span>,
+        <span class="s2">"PlanRefreshDate"</span>: <span class="s2">"2017-04-18"</span>
+    <span class="o">}</span>,
+    <span class="s2">"MemberDependent"</span>: <span class="o">{</span>
+        <span class="s2">"email"</span>: <span class="s2">"username@example.com"</span>,
+        <span class="s2">"username"</span>: <span class="s2">"example_eyemed"</span>
+    <span class="o">}</span>,
+    <span class="s2">"Prescription Lenses"</span>: <span class="o">{</span>
+        <span class="s2">"Bifocal"</span>: <span class="s2">"</span><span class="nv">$40</span><span class="s2">"</span>,
+        <span class="s2">"Copay"</span>: null,
+        <span class="s2">"Coverage"</span>: <span class="s2">"*** Depends on lenses"</span>,
+        <span class="s2">"Eligible"</span>: <span class="nb">true</span>,
+        <span class="s2">"EligibleAsOfDate"</span>: <span class="s2">"2015-12-01"</span>,
+        <span class="s2">"PlanRefreshDate"</span>: <span class="s2">"2017-04-18"</span>,
+        <span class="s2">"Progressive"</span>: <span class="s2">"</span><span class="nv">$55</span><span class="s2">"</span>,
+        <span class="s2">"ScratchCoating"</span>: <span class="s2">"</span><span class="nv">$9</span><span class="s2">"</span>,
+        <span class="s2">"Single Vision"</span>: <span class="s2">"</span><span class="nv">$25</span><span class="s2">"</span>,
+        <span class="s2">"Tint"</span>: <span class="s2">"</span><span class="nv">$9</span><span class="s2">"</span>,
+        <span class="s2">"Trifocal"</span>: <span class="s2">"</span><span class="nv">$55</span><span class="s2">"</span>,
+        <span class="s2">"UVTreatment"</span>: <span class="s2">"</span><span class="nv">$9</span><span class="s2">"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 
-100   729    0   729    0     0   1874      0 --:--:-- --:--:-- --:--:--  1874
-<span class="k">*</span> Connection <span class="c">#0 to host api-staging.bauxy.com left intact</span>
-<span class="o">{</span><span class="s2">"Contact Lens Exam"</span>:<span class="o">{</span><span class="s2">"Copay"</span>:null,<span class="s2">"Eligible"</span>:true,<span class="s2">"EligibleAsOfDate"</span>:<span class="s2">"2015-12-01"</span>,<span class="s2">"Coverage"</span>:<span class="s2">"</span><span class="nv">$160</span><span class="s2">"</span>,<span class="s2">"PlanRefreshDate"</span>:<span class="s2">"2017-04-18"</span><span class="o">}</span>,<span class="s2">"Frame"</span>:<span class="o">{</span><span class="s2">"Copay"</span>:null,<span class="s2">"Eligible"</span>:true,<span class="s2">"EligibleAsOfDate"</span>:<span class="s2">"2015-12-01"</span>,<span class="s2">"Coverage"</span>:<span class="s2">"</span><span class="nv">$100</span><span class="s2">"</span>,<span class="s2">"PlanRefreshDate"</span>:<span class="s2">"2017-04-18"</span><span class="o">}</span>,<span class="s2">"Prescription Lenses"</span>:<span class="o">{</span><span class="s2">"Single Vision"</span>:<span class="s2">"</span><span class="nv">$25</span><span class="s2">"</span>,<span class="s2">"ScratchCoating"</span>:<span class="s2">"</span><span class="nv">$9</span><span class="s2">"</span>,<span class="s2">"EligibleAsOfDate"</span>:<span class="s2">"2015-12-01"</span>,<span class="s2">"Bifocal"</span>:<span class="s2">"</span><span class="nv">$40</span><span class="s2">"</span>,<span class="s2">"Progressive"</span>:<span class="s2">"</span><span class="nv">$55</span><span class="s2">"</span>,<span class="s2">"Eligible"</span>:true,<span class="s2">"Copay"</span>:null,<span class="s2">"Trifocal"</span>:<span class="s2">"</span><span class="nv">$55</span><span class="s2">"</span>,<span class="s2">"Tint"</span>:<span class="s2">"</span><span class="nv">$9</span><span class="s2">"</span>,<span class="s2">"Coverage"</span>:<span class="s2">"*** Depends on lenses"</span>,<span class="s2">"PlanRefreshDate"</span>:<span class="s2">"2017-04-18"</span>,<span class="s2">"UVTreatment"</span>:<span class="s2">"</span><span class="nv">$9</span><span class="s2">"</span><span class="o">}</span>,<span class="s2">"MemberDependent"</span>:<span class="o">{</span><span class="s2">"username"</span>:<span class="s2">"example_eyemed"</span>,<span class="s2">"email"</span>:<span class="s2">"username@example.com"</span><span class="o">}</span>,<span class="s2">"Exam"</span>:<span class="o">{</span><span class="s2">"Copay"</span>:null,<span class="s2">"Eligible"</span>:true,<span class="s2">"EligibleAsOfDate"</span>:<span class="s2">"2015-12-01"</span>,<span class="s2">"Coverage"</span>:<span class="s2">"</span><span class="nv">$30</span><span class="s2">"</span>,<span class="s2">"PlanRefreshDate"</span>:<span class="s2">"2017-04-18"</span><span class="o">}}</span>
 </code></pre>
 
 <p><code class="prettyprint">GET /api/v1.5/planinfo/eyemed/</code></p>
@@ -895,54 +810,16 @@ for example, you could refresh it using only `?refresh=true&password=whatever`.
 <blockquote>
 <p>GET a provider:</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -v https://api-staging.bauxy.com/api/v1.5/providers/3/
+<pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v https://api-staging.bauxy.com/api/v1.5/providers/3/
 
-<span class="k">*</span> Hostname was NOT found <span class="k">in </span>DNS cache
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<span class="k">*</span>   Trying 54.175.86.140...
-<span class="k">*</span> Connected to api-staging.bauxy.com <span class="o">(</span>54.175.86.140<span class="o">)</span> port 443 <span class="o">(</span><span class="c">#0)</span>
-<span class="k">*</span> successfully <span class="nb">set </span>certificate verify locations:
-<span class="k">*</span>   CAfile: none
-  CApath: /etc/ssl/certs
-<span class="k">*</span> SSLv3, TLS handshake, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server hello <span class="o">(</span>2<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, CERT <span class="o">(</span>11<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server key exchange <span class="o">(</span>12<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server finished <span class="o">(</span>14<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Client key exchange <span class="o">(</span>16<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSL connection using ECDHE-RSA-AES256-GCM-SHA384
-<span class="k">*</span> Server certificate:
-<span class="k">*</span>    subject: <span class="nv">OU</span><span class="o">=</span>Domain Control Validated; <span class="nv">CN</span><span class="o">=</span><span class="k">*</span>.bauxy.com
-<span class="k">*</span>    start date: 2016-04-21 00:52:39 GMT
-<span class="k">*</span>    expire date: 2017-04-21 00:16:38 GMT
-<span class="k">*</span>    subjectAltName: api-staging.bauxy.com matched
-<span class="k">*</span>    issuer: <span class="nv">C</span><span class="o">=</span>US; <span class="nv">ST</span><span class="o">=</span>Arizona; <span class="nv">L</span><span class="o">=</span>Scottsdale; <span class="nv">O</span><span class="o">=</span>GoDaddy.com, Inc.; <span class="nv">OU</span><span class="o">=</span>http://certs.godaddy.com/repository/; <span class="nv">CN</span><span class="o">=</span>Go Daddy Secure Certificate Authority - G2
-<span class="k">*</span>    SSL certificate verify ok.
 <span class="gp">&gt; </span>GET /api/v1.5/providers/3/ HTTP/1.1
 <span class="gp">&gt; </span>User-Agent: curl/7.35.0
 <span class="gp">&gt; </span>Host: api-staging.bauxy.com
 <span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
 <span class="gp">&gt; </span>
 &lt; HTTP/1.1 200 OK
-<span class="k">*</span> Server nginx/1.9.2 is not blacklisted
 &lt; Server: nginx/1.9.2
-&lt; Date: Fri, 06 May 2016 07:53:12 GMT
+&lt; Date: Mon, 09 May 2016 12:58:59 GMT
 &lt; Content-Type: application/json
 &lt; Transfer-Encoding: chunked
 &lt; Connection: keep-alive
@@ -954,11 +831,29 @@ for example, you could refresh it using only `?refresh=true&password=whatever`.
 &lt; X-Frame-Options: DENY
 &lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
 &lt; 
-<span class="o">{</span> <span class="o">[</span>data not shown]
+<span class="o">{</span>
+    <span class="s2">"address"</span>: <span class="o">{</span>
+        <span class="s2">"city"</span>: <span class="s2">"San Francisco"</span>,
+        <span class="s2">"id"</span>: 2,
+        <span class="s2">"line1"</span>: <span class="s2">"995 Market St"</span>,
+        <span class="s2">"line2"</span>: <span class="s2">""</span>,
+        <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/addresses/2/"</span>,
+        <span class="s2">"zipcode"</span>: <span class="s2">"94103"</span>
+    <span class="o">}</span>,
+    <span class="s2">"email"</span>: <span class="s2">"gleb+jins@bauxy.com"</span>,
+    <span class="s2">"id"</span>: 3,
+    <span class="s2">"name"</span>: <span class="s2">"JINS"</span>,
+    <span class="s2">"phone_number"</span>: <span class="s2">"0987654321"</span>,
+    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/providers/3/"</span>,
+    <span class="s2">"user"</span>: <span class="o">{</span>
+        <span class="s2">"email"</span>: <span class="s2">"gleb@bauxy.com"</span>,
+        <span class="s2">"id"</span>: 1,
+        <span class="s2">"is_staff"</span>: <span class="nb">true</span>,
+        <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/users/1/"</span>,
+        <span class="s2">"username"</span>: <span class="s2">"bauxyadmin"</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 
-100   429    0   429    0     0   1422      0 --:--:-- --:--:-- --:--:--  1425
-<span class="k">*</span> Connection <span class="c">#0 to host api-staging.bauxy.com left intact</span>
-<span class="o">{</span><span class="s2">"id"</span>:3,<span class="s2">"url"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/providers/3/"</span>,<span class="s2">"user"</span>:<span class="o">{</span><span class="s2">"id"</span>:1,<span class="s2">"url"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/users/1/"</span>,<span class="s2">"username"</span>:<span class="s2">"bauxyadmin"</span>,<span class="s2">"email"</span>:<span class="s2">"gleb@bauxy.com"</span>,<span class="s2">"is_staff"</span>:true<span class="o">}</span>,<span class="s2">"name"</span>:<span class="s2">"JINS"</span>,<span class="s2">"email"</span>:<span class="s2">"gleb+jins@bauxy.com"</span>,<span class="s2">"phone_number"</span>:<span class="s2">"0987654321"</span>,<span class="s2">"address"</span>:<span class="o">{</span><span class="s2">"id"</span>:2,<span class="s2">"url"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/addresses/2/"</span>,<span class="s2">"line1"</span>:<span class="s2">"995 Market St"</span>,<span class="s2">"line2"</span>:<span class="s2">""</span>,<span class="s2">"city"</span>:<span class="s2">"San Francisco"</span>,<span class="s2">"zipcode"</span>:<span class="s2">"94103"</span><span class="o">}}</span>
 </code></pre>
 
 <p>Available commands:</p>
@@ -1011,46 +906,8 @@ for example, you could refresh it using only `?refresh=true&password=whatever`.
 <blockquote>
 <p>GET a bill</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -v -u username@example.com:example_PW https://api-staging.bauxy.com/api/v1.5/bills/40/
+<pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v -u username@example.com:example_PW https://api-staging.bauxy.com/api/v1.5/bills/40/
 
-<span class="k">*</span> Hostname was NOT found <span class="k">in </span>DNS cache
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<span class="k">*</span>   Trying 54.174.245.23...
-<span class="k">*</span> Connected to api-staging.bauxy.com <span class="o">(</span>54.174.245.23<span class="o">)</span> port 443 <span class="o">(</span><span class="c">#0)</span>
-<span class="k">*</span> successfully <span class="nb">set </span>certificate verify locations:
-<span class="k">*</span>   CAfile: none
-  CApath: /etc/ssl/certs
-<span class="k">*</span> SSLv3, TLS handshake, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server hello <span class="o">(</span>2<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, CERT <span class="o">(</span>11<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server key exchange <span class="o">(</span>12<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server finished <span class="o">(</span>14<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Client key exchange <span class="o">(</span>16<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSL connection using ECDHE-RSA-AES256-GCM-SHA384
-<span class="k">*</span> Server certificate:
-<span class="k">*</span>    subject: <span class="nv">OU</span><span class="o">=</span>Domain Control Validated; <span class="nv">CN</span><span class="o">=</span><span class="k">*</span>.bauxy.com
-<span class="k">*</span>    start date: 2016-04-21 00:52:39 GMT
-<span class="k">*</span>    expire date: 2017-04-21 00:16:38 GMT
-<span class="k">*</span>    subjectAltName: api-staging.bauxy.com matched
-<span class="k">*</span>    issuer: <span class="nv">C</span><span class="o">=</span>US; <span class="nv">ST</span><span class="o">=</span>Arizona; <span class="nv">L</span><span class="o">=</span>Scottsdale; <span class="nv">O</span><span class="o">=</span>GoDaddy.com, Inc.; <span class="nv">OU</span><span class="o">=</span>http://certs.godaddy.com/repository/; <span class="nv">CN</span><span class="o">=</span>Go Daddy Secure Certificate Authority - G2
-<span class="k">*</span>    SSL certificate verify ok.
-<span class="k">*</span> Server auth using Basic with user <span class="s1">'username@example.com'</span>
 <span class="gp">&gt; </span>GET /api/v1.5/bills/40/ HTTP/1.1
 <span class="gp">&gt; </span>Authorization: Basic <span class="nv">dXNlcm5hbWVAZXhhbXBsZS5jb206ZXhhbXBsZV9QVw</span><span class="o">==</span>
 <span class="gp">&gt; </span>User-Agent: curl/7.35.0
@@ -1058,9 +915,8 @@ for example, you could refresh it using only `?refresh=true&password=whatever`.
 <span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
 <span class="gp">&gt; </span>
 &lt; HTTP/1.1 200 OK
-<span class="k">*</span> Server nginx/1.9.2 is not blacklisted
 &lt; Server: nginx/1.9.2
-&lt; Date: Fri, 06 May 2016 07:53:12 GMT
+&lt; Date: Mon, 09 May 2016 12:59:00 GMT
 &lt; Content-Type: application/json
 &lt; Transfer-Encoding: chunked
 &lt; Connection: keep-alive
@@ -1072,57 +928,38 @@ for example, you could refresh it using only `?refresh=true&password=whatever`.
 &lt; X-Frame-Options: DENY
 &lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
 &lt; 
-<span class="o">{</span> <span class="o">[</span>data not shown]
+<span class="o">{</span>
+    <span class="s2">"final_cost"</span>: 869.148,
+    <span class="s2">"generated_bill_image"</span>: null,
+    <span class="s2">"id"</span>: 40,
+    <span class="s2">"insurance"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/2/"</span>,
+    <span class="s2">"is_bill_generated"</span>: <span class="nb">false</span>,
+    <span class="s2">"items"</span>: <span class="o">[</span>
+        <span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/29/"</span>,
+        <span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/30/"</span>,
+        <span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/32/"</span>,
+        <span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/35/"</span>
+    <span class="o">]</span>,
+    <span class="s2">"original_bill_image"</span>: null,
+    <span class="s2">"patient"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/148/"</span>,
+    <span class="s2">"payment_method"</span>: <span class="s2">""</span>,
+    <span class="s2">"provider"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/providers/5/"</span>,
+    <span class="s2">"purchase_date"</span>: <span class="s2">"2016-03-03T01:58:46Z"</span>,
+    <span class="s2">"shipping_cost"</span>: 26.6080819113,
+    <span class="s2">"total_cost"</span>: 965.72,
+    <span class="s2">"total_discount"</span>: 10.0,
+    <span class="s2">"total_discount_type"</span>: <span class="s2">"Percent"</span>,
+    <span class="s2">"transaction_no"</span>: <span class="s2">"ml497swvyn4ivf7spry1"</span>,
+    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/40/"</span>
+<span class="o">}</span>
 
-100   783    0   783    0     0   1922      0 --:--:-- --:--:-- --:--:--  1923
-<span class="k">*</span> Connection <span class="c">#0 to host api-staging.bauxy.com left intact</span>
-<span class="o">{</span><span class="s2">"id"</span>:40,<span class="s2">"url"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/40/"</span>,<span class="s2">"patient"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/148/"</span>,<span class="s2">"insurance"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/2/"</span>,<span class="s2">"provider"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/providers/5/"</span>,<span class="s2">"purchase_date"</span>:<span class="s2">"2016-03-03T01:58:46Z"</span>,<span class="s2">"transaction_no"</span>:<span class="s2">"ml497swvyn4ivf7spry1"</span>,<span class="s2">"total_cost"</span>:965.72,<span class="s2">"total_discount"</span>:10.0,<span class="s2">"total_discount_type"</span>:<span class="s2">"Percent"</span>,<span class="s2">"shipping_cost"</span>:26.6080819113,<span class="s2">"payment_method"</span>:<span class="s2">""</span>,<span class="s2">"final_cost"</span>:869.148,<span class="s2">"generated_bill_image"</span>:null,<span class="s2">"is_bill_generated"</span>:false,<span class="s2">"original_bill_image"</span>:null,<span class="s2">"items"</span>:[<span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/29/"</span>,<span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/30/"</span>,<span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/32/"</span>,<span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/35/"</span><span class="o">]}</span>
 </code></pre>
 
 <blockquote>
 <p>POST a bill</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -v -u username@example.com:example_PW -X POST -H <span class="s2">"Content-Type: application/json"</span> -d <span class="s1">'{"patient":"http://api-staging.bauxy.com/api/v1.5/patients/148/","insurance":"http://api-staging.bauxy.com/api/v1.5/insurance_companies/2/","provider":"http://api-staging.bauxy.com/api/v1.5/providers/5/"}'</span> https://api-staging.bauxy.com/api/v1.5/bills/
+<pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v -u username@example.com:example_PW -X POST -H <span class="s2">"Content-Type: application/json"</span> -d <span class="s1">'{"patient":"http://api-staging.bauxy.com/api/v1.5/patients/148/","insurance":"http://api-staging.bauxy.com/api/v1.5/insurance_companies/2/","provider":"http://api-staging.bauxy.com/api/v1.5/providers/5/"}'</span> https://api-staging.bauxy.com/api/v1.5/bills/
 
-<span class="k">*</span> Hostname was NOT found <span class="k">in </span>DNS cache
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<span class="k">*</span>   Trying 52.202.137.152...
-<span class="k">*</span> Connected to api-staging.bauxy.com <span class="o">(</span>52.202.137.152<span class="o">)</span> port 443 <span class="o">(</span><span class="c">#0)</span>
-<span class="k">*</span> successfully <span class="nb">set </span>certificate verify locations:
-<span class="k">*</span>   CAfile: none
-  CApath: /etc/ssl/certs
-<span class="k">*</span> SSLv3, TLS handshake, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<span class="k">*</span> SSLv3, TLS handshake, Server hello <span class="o">(</span>2<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, CERT <span class="o">(</span>11<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server key exchange <span class="o">(</span>12<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server finished <span class="o">(</span>14<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Client key exchange <span class="o">(</span>16<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSL connection using ECDHE-RSA-AES256-GCM-SHA384
-<span class="k">*</span> Server certificate:
-<span class="k">*</span>    subject: <span class="nv">OU</span><span class="o">=</span>Domain Control Validated; <span class="nv">CN</span><span class="o">=</span><span class="k">*</span>.bauxy.com
-<span class="k">*</span>    start date: 2016-04-21 00:52:39 GMT
-<span class="k">*</span>    expire date: 2017-04-21 00:16:38 GMT
-<span class="k">*</span>    subjectAltName: api-staging.bauxy.com matched
-<span class="k">*</span>    issuer: <span class="nv">C</span><span class="o">=</span>US; <span class="nv">ST</span><span class="o">=</span>Arizona; <span class="nv">L</span><span class="o">=</span>Scottsdale; <span class="nv">O</span><span class="o">=</span>GoDaddy.com, Inc.; <span class="nv">OU</span><span class="o">=</span>http://certs.godaddy.com/repository/; <span class="nv">CN</span><span class="o">=</span>Go Daddy Secure Certificate Authority - G2
-<span class="k">*</span>    SSL certificate verify ok.
-<span class="k">*</span> Server auth using Basic with user <span class="s1">'username@example.com'</span>
 <span class="gp">&gt; </span>POST /api/v1.5/bills/ HTTP/1.1
 <span class="gp">&gt; </span>Authorization: Basic <span class="nv">dXNlcm5hbWVAZXhhbXBsZS5jb206ZXhhbXBsZV9QVw</span><span class="o">==</span>
 <span class="gp">&gt; </span>User-Agent: curl/7.35.0
@@ -1131,28 +968,40 @@ for example, you could refresh it using only `?refresh=true&password=whatever`.
 <span class="gp">&gt; </span>Content-Type: application/json
 <span class="gp">&gt; </span>Content-Length: 204
 <span class="gp">&gt; </span>
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> upload completely sent off: 204 out of 204 bytes
 &lt; HTTP/1.1 201 Created
-<span class="k">*</span> Server nginx/1.9.2 is not blacklisted
 &lt; Server: nginx/1.9.2
-&lt; Date: Fri, 06 May 2016 07:53:13 GMT
+&lt; Date: Mon, 09 May 2016 12:59:00 GMT
 &lt; Content-Type: application/json
 &lt; Transfer-Encoding: chunked
 &lt; Connection: keep-alive
 &lt; x-xss-protection: 1; <span class="nv">mode</span><span class="o">=</span>block
 &lt; x-content-type-options: nosniff
 &lt; Vary: Cookie
-&lt; Location: http://api-staging.bauxy.com/api/v1.5/bills/56/
+&lt; Location: http://api-staging.bauxy.com/api/v1.5/bills/58/
 &lt; Allow: GET, POST, HEAD, OPTIONS
 &lt; X-Frame-Options: DENY
 &lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
 &lt; 
-<span class="o">{</span> <span class="o">[</span>data not shown]
+<span class="o">{</span>
+    <span class="s2">"final_cost"</span>: 0,
+    <span class="s2">"generated_bill_image"</span>: null,
+    <span class="s2">"id"</span>: 58,
+    <span class="s2">"insurance"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/2/"</span>,
+    <span class="s2">"is_bill_generated"</span>: <span class="nb">false</span>,
+    <span class="s2">"items"</span>: <span class="o">[]</span>,
+    <span class="s2">"original_bill_image"</span>: null,
+    <span class="s2">"patient"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/148/"</span>,
+    <span class="s2">"payment_method"</span>: <span class="s2">""</span>,
+    <span class="s2">"provider"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/providers/5/"</span>,
+    <span class="s2">"purchase_date"</span>: null,
+    <span class="s2">"shipping_cost"</span>: null,
+    <span class="s2">"total_cost"</span>: 0,
+    <span class="s2">"total_discount"</span>: null,
+    <span class="s2">"total_discount_type"</span>: <span class="s2">""</span>,
+    <span class="s2">"transaction_no"</span>: <span class="s2">""</span>,
+    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/58/"</span>
+<span class="o">}</span>
 
-100   723    0   519  100   204   1113    437 --:--:-- --:--:-- --:--:--  1111
-<span class="k">*</span> Connection <span class="c">#0 to host api-staging.bauxy.com left intact</span>
-<span class="o">{</span><span class="s2">"id"</span>:56,<span class="s2">"url"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/56/"</span>,<span class="s2">"patient"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/148/"</span>,<span class="s2">"insurance"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/2/"</span>,<span class="s2">"provider"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/providers/5/"</span>,<span class="s2">"purchase_date"</span>:null,<span class="s2">"transaction_no"</span>:<span class="s2">""</span>,<span class="s2">"total_cost"</span>:0,<span class="s2">"total_discount"</span>:null,<span class="s2">"total_discount_type"</span>:<span class="s2">""</span>,<span class="s2">"shipping_cost"</span>:null,<span class="s2">"payment_method"</span>:<span class="s2">""</span>,<span class="s2">"final_cost"</span>:0,<span class="s2">"generated_bill_image"</span>:null,<span class="s2">"is_bill_generated"</span>:false,<span class="s2">"original_bill_image"</span>:null,<span class="s2">"items"</span>:[]<span class="o">}</span>
 </code></pre>
 
 <p>Available commands:</p>
@@ -1249,54 +1098,16 @@ Best practice for users who wish to minimize cost is to provide enough data to c
 <blockquote>
 <p>GET an item</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -v https://api-staging.bauxy.com/api/v1.5/items/18/
+<pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v https://api-staging.bauxy.com/api/v1.5/items/18/
 
-<span class="k">*</span> Hostname was NOT found <span class="k">in </span>DNS cache
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<span class="k">*</span>   Trying 54.175.137.152...
-<span class="k">*</span> Connected to api-staging.bauxy.com <span class="o">(</span>54.175.137.152<span class="o">)</span> port 443 <span class="o">(</span><span class="c">#0)</span>
-<span class="k">*</span> successfully <span class="nb">set </span>certificate verify locations:
-<span class="k">*</span>   CAfile: none
-  CApath: /etc/ssl/certs
-<span class="k">*</span> SSLv3, TLS handshake, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server hello <span class="o">(</span>2<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, CERT <span class="o">(</span>11<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server key exchange <span class="o">(</span>12<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server finished <span class="o">(</span>14<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Client key exchange <span class="o">(</span>16<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSL connection using ECDHE-RSA-AES256-GCM-SHA384
-<span class="k">*</span> Server certificate:
-<span class="k">*</span>    subject: <span class="nv">OU</span><span class="o">=</span>Domain Control Validated; <span class="nv">CN</span><span class="o">=</span><span class="k">*</span>.bauxy.com
-<span class="k">*</span>    start date: 2016-04-21 00:52:39 GMT
-<span class="k">*</span>    expire date: 2017-04-21 00:16:38 GMT
-<span class="k">*</span>    subjectAltName: api-staging.bauxy.com matched
-<span class="k">*</span>    issuer: <span class="nv">C</span><span class="o">=</span>US; <span class="nv">ST</span><span class="o">=</span>Arizona; <span class="nv">L</span><span class="o">=</span>Scottsdale; <span class="nv">O</span><span class="o">=</span>GoDaddy.com, Inc.; <span class="nv">OU</span><span class="o">=</span>http://certs.godaddy.com/repository/; <span class="nv">CN</span><span class="o">=</span>Go Daddy Secure Certificate Authority - G2
-<span class="k">*</span>    SSL certificate verify ok.
 <span class="gp">&gt; </span>GET /api/v1.5/items/18/ HTTP/1.1
 <span class="gp">&gt; </span>User-Agent: curl/7.35.0
 <span class="gp">&gt; </span>Host: api-staging.bauxy.com
 <span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
 <span class="gp">&gt; </span>
 &lt; HTTP/1.1 200 OK
-<span class="k">*</span> Server nginx/1.9.2 is not blacklisted
 &lt; Server: nginx/1.9.2
-&lt; Date: Fri, 06 May 2016 07:53:13 GMT
+&lt; Date: Mon, 09 May 2016 12:59:01 GMT
 &lt; Content-Type: application/json
 &lt; Transfer-Encoding: chunked
 &lt; Connection: keep-alive
@@ -1308,11 +1119,19 @@ Best practice for users who wish to minimize cost is to provide enough data to c
 &lt; X-Frame-Options: DENY
 &lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
 &lt; 
-<span class="o">{</span> <span class="o">[</span>data not shown]
+<span class="o">{</span>
+    <span class="s2">"bill"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/38/"</span>,
+    <span class="s2">"cost"</span>: 166.8,
+    <span class="s2">"discount"</span>: null,
+    <span class="s2">"discount_type"</span>: <span class="s2">""</span>,
+    <span class="s2">"final_cost"</span>: 500.40000000000003,
+    <span class="s2">"id"</span>: 18,
+    <span class="s2">"item_type"</span>: <span class="s2">"frame"</span>,
+    <span class="s2">"name"</span>: <span class="s2">"Titanium Wire Frame"</span>,
+    <span class="s2">"quantity"</span>: 3,
+    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/18/"</span>
+<span class="o">}</span>
 
-100   264    0   264    0     0    848      0 --:--:-- --:--:-- --:--:--   848
-<span class="k">*</span> Connection <span class="c">#0 to host api-staging.bauxy.com left intact</span>
-<span class="o">{</span><span class="s2">"id"</span>:18,<span class="s2">"url"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/18/"</span>,<span class="s2">"bill"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/38/"</span>,<span class="s2">"item_type"</span>:<span class="s2">"frame"</span>,<span class="s2">"quantity"</span>:3,<span class="s2">"name"</span>:<span class="s2">"Titanium Wire Frame"</span>,<span class="s2">"cost"</span>:166.8,<span class="s2">"discount"</span>:null,<span class="s2">"discount_type"</span>:<span class="s2">""</span>,<span class="s2">"final_cost"</span>:500.40000000000003<span class="o">}</span>
 </code></pre>
 
 <p>Available commands:</p>
@@ -1372,55 +1191,16 @@ Best practice for users who wish to minimize cost is to provide enough data to c
 <blockquote>
 <p>GET an address</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="gp">$ </span>curl -v https://api-staging.bauxy.com/api/v1.5/addresses/2/
+<pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v https://api-staging.bauxy.com/api/v1.5/addresses/2/
 
-<span class="k">*</span> Hostname was NOT found <span class="k">in </span>DNS cache
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0<span class="k">*</span>   Trying 54.175.86.140...
-<span class="k">*</span> Connected to api-staging.bauxy.com <span class="o">(</span>54.175.86.140<span class="o">)</span> port 443 <span class="o">(</span><span class="c">#0)</span>
-<span class="k">*</span> successfully <span class="nb">set </span>certificate verify locations:
-<span class="k">*</span>   CAfile: none
-  CApath: /etc/ssl/certs
-<span class="k">*</span> SSLv3, TLS handshake, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server hello <span class="o">(</span>2<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, CERT <span class="o">(</span>11<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server key exchange <span class="o">(</span>12<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Server finished <span class="o">(</span>14<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Client key exchange <span class="o">(</span>16<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">}</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS change cipher, Client hello <span class="o">(</span>1<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSLv3, TLS handshake, Finished <span class="o">(</span>20<span class="o">)</span>:
-<span class="o">{</span> <span class="o">[</span>data not shown]
-<span class="k">*</span> SSL connection using ECDHE-RSA-AES256-GCM-SHA384
-<span class="k">*</span> Server certificate:
-<span class="k">*</span>    subject: <span class="nv">OU</span><span class="o">=</span>Domain Control Validated; <span class="nv">CN</span><span class="o">=</span><span class="k">*</span>.bauxy.com
-<span class="k">*</span>    start date: 2016-04-21 00:52:39 GMT
-<span class="k">*</span>    expire date: 2017-04-21 00:16:38 GMT
-<span class="k">*</span>    subjectAltName: api-staging.bauxy.com matched
-<span class="k">*</span>    issuer: <span class="nv">C</span><span class="o">=</span>US; <span class="nv">ST</span><span class="o">=</span>Arizona; <span class="nv">L</span><span class="o">=</span>Scottsdale; <span class="nv">O</span><span class="o">=</span>GoDaddy.com, Inc.; <span class="nv">OU</span><span class="o">=</span>http://certs.godaddy.com/repository/; <span class="nv">CN</span><span class="o">=</span>Go Daddy Secure Certificate Authority - G2
-<span class="k">*</span>    SSL certificate verify ok.
-
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0&gt; GET /api/v1.5/addresses/2/ HTTP/1.1
+<span class="gp">&gt; </span>GET /api/v1.5/addresses/2/ HTTP/1.1
 <span class="gp">&gt; </span>User-Agent: curl/7.35.0
 <span class="gp">&gt; </span>Host: api-staging.bauxy.com
 <span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
 <span class="gp">&gt; </span>
 &lt; HTTP/1.1 200 OK
-<span class="k">*</span> Server nginx/1.9.2 is not blacklisted
 &lt; Server: nginx/1.9.2
-&lt; Date: Fri, 06 May 2016 07:53:13 GMT
+&lt; Date: Mon, 09 May 2016 12:59:01 GMT
 &lt; Content-Type: application/json
 &lt; Transfer-Encoding: chunked
 &lt; Connection: keep-alive
@@ -1432,11 +1212,15 @@ Best practice for users who wish to minimize cost is to provide enough data to c
 &lt; X-Frame-Options: DENY
 &lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
 &lt; 
-<span class="o">{</span> <span class="o">[</span>data not shown]
+<span class="o">{</span>
+    <span class="s2">"city"</span>: <span class="s2">"San Francisco"</span>,
+    <span class="s2">"id"</span>: 2,
+    <span class="s2">"line1"</span>: <span class="s2">"995 Market St"</span>,
+    <span class="s2">"line2"</span>: <span class="s2">""</span>,
+    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/addresses/2/"</span>,
+    <span class="s2">"zipcode"</span>: <span class="s2">"94103"</span>
+<span class="o">}</span>
 
-100   143    0   143    0     0    437      0 --:--:-- --:--:-- --:--:--   437
-<span class="k">*</span> Connection <span class="c">#0 to host api-staging.bauxy.com left intact</span>
-<span class="o">{</span><span class="s2">"id"</span>:2,<span class="s2">"url"</span>:<span class="s2">"http://api-staging.bauxy.com/api/v1.5/addresses/2/"</span>,<span class="s2">"line1"</span>:<span class="s2">"995 Market St"</span>,<span class="s2">"line2"</span>:<span class="s2">""</span>,<span class="s2">"city"</span>:<span class="s2">"San Francisco"</span>,<span class="s2">"zipcode"</span>:<span class="s2">"94103"</span><span class="o">}</span>
 </code></pre>
 
 <p>Available commands:</p>

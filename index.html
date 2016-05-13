@@ -395,33 +395,7 @@ every user must fall into one of those two classes.
 </blockquote>
 <pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v https://api-staging.bauxy.com/api/v1.5/insurance_companies/1/
 
-<span class="gp">&gt; </span>GET /api/v1.5/insurance_companies/1/ HTTP/1.1
-<span class="gp">&gt; </span>User-Agent: curl/7.35.0
-<span class="gp">&gt; </span>Host: api-staging.bauxy.com
-<span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
-<span class="gp">&gt; </span>
-&lt; HTTP/1.1 200 OK
-&lt; Server: nginx/1.9.2
-&lt; Date: Fri, 13 May 2016 10:33:50 GMT
-&lt; Content-Type: application/json
-&lt; Transfer-Encoding: chunked
-&lt; Connection: keep-alive
-&lt; Vary: Accept-Encoding
-&lt; x-xss-protection: 1; <span class="nv">mode</span><span class="o">=</span>block
-&lt; x-content-type-options: nosniff
-&lt; Vary: Cookie
-&lt; Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
-&lt; X-Frame-Options: DENY
-&lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
-&lt; 
-<span class="o">{</span>
-    <span class="s2">"id"</span>: 1,
-    <span class="s2">"is_dental"</span>: <span class="nb">false</span>,
-    <span class="s2">"is_medical"</span>: <span class="nb">false</span>,
-    <span class="s2">"is_vision"</span>: <span class="nb">true</span>,
-    <span class="s2">"name"</span>: <span class="s2">"VSP"</span>,
-    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/1/"</span>
-<span class="o">}</span>
+sh: /Users/gleb/backend/prettify: No such file or directory
 
 </code></pre>
 
@@ -476,48 +450,7 @@ at <a href="mailto:info@bauxy.com">info@bauxy.com</a>!</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -u username@example.com:example_PW -v https://api-staging.bauxy.com/api/v1.5/patients/148/
 
-<span class="gp">&gt; </span>GET /api/v1.5/patients/148/ HTTP/1.1
-<span class="gp">&gt; </span>Authorization: Basic <span class="nv">dXNlcm5hbWVAZXhhbXBsZS5jb206ZXhhbXBsZV9QVw</span><span class="o">==</span>
-<span class="gp">&gt; </span>User-Agent: curl/7.35.0
-<span class="gp">&gt; </span>Host: api-staging.bauxy.com
-<span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
-<span class="gp">&gt; </span>
-&lt; HTTP/1.1 200 OK
-&lt; Server: nginx/1.9.2
-&lt; Date: Fri, 13 May 2016 10:33:50 GMT
-&lt; Content-Type: application/json
-&lt; Transfer-Encoding: chunked
-&lt; Connection: keep-alive
-&lt; Vary: Accept-Encoding
-&lt; x-xss-protection: 1; <span class="nv">mode</span><span class="o">=</span>block
-&lt; x-content-type-options: nosniff
-&lt; Vary: Cookie
-&lt; Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
-&lt; X-Frame-Options: DENY
-&lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
-&lt; 
-<span class="o">{</span>
-    <span class="s2">"address"</span>: null,
-    <span class="s2">"dob"</span>: null,
-    <span class="s2">"email"</span>: <span class="s2">"username@example.com"</span>,
-    <span class="s2">"first_name"</span>: <span class="s2">""</span>,
-    <span class="s2">"gender"</span>: <span class="s2">""</span>,
-    <span class="s2">"id"</span>: 148,
-    <span class="s2">"is_member"</span>: null,
-    <span class="s2">"last_name"</span>: <span class="s2">""</span>,
-    <span class="s2">"phone_number"</span>: <span class="s2">""</span>,
-    <span class="s2">"relation_to_member"</span>: null,
-    <span class="s2">"relationship_type"</span>: <span class="s2">"Self"</span>,
-    <span class="s2">"updated_at"</span>: <span class="s2">"2016-05-04T13:07:21.737906Z"</span>,
-    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/148/"</span>,
-    <span class="s2">"user"</span>: <span class="o">{</span>
-        <span class="s2">"email"</span>: <span class="s2">"username@example.com"</span>,
-        <span class="s2">"id"</span>: 30,
-        <span class="s2">"is_staff"</span>: <span class="nb">false</span>,
-        <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/users/30/"</span>,
-        <span class="s2">"username"</span>: <span class="s2">"username@example.com"</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+sh: /Users/gleb/backend/prettify: No such file or directory
 
 </code></pre>
 
@@ -526,47 +459,7 @@ at <a href="mailto:info@bauxy.com">info@bauxy.com</a>!</p>
 </blockquote>
 <pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v -X POST -H <span class="s2">"Content-Type: application/json"</span> -d <span class="s2">"{</span><span class="se">\"</span><span class="s2">email</span><span class="se">\"</span><span class="s2">: </span><span class="se">\"</span><span class="s2">member+</span><span class="k">$(</span>date +%s<span class="k">)</span><span class="s2">@bauxy.com</span><span class="se">\"</span><span class="s2">}"</span> https://api-staging.bauxy.com/api/v1.5/patients/
 
-<span class="gp">&gt; </span>POST /api/v1.5/patients/ HTTP/1.1
-<span class="gp">&gt; </span>User-Agent: curl/7.35.0
-<span class="gp">&gt; </span>Host: api-staging.bauxy.com
-<span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
-<span class="gp">&gt; </span>Content-Type: application/json
-<span class="gp">&gt; </span>Content-Length: 40
-<span class="gp">&gt; </span>
-&lt; HTTP/1.1 201 Created
-&lt; Server: nginx/1.9.2
-&lt; Date: Fri, 13 May 2016 10:33:51 GMT
-&lt; Content-Type: application/json
-&lt; Transfer-Encoding: chunked
-&lt; Connection: keep-alive
-&lt; x-xss-protection: 1; <span class="nv">mode</span><span class="o">=</span>block
-&lt; x-content-type-options: nosniff
-&lt; Vary: Cookie
-&lt; Location: http://api-staging.bauxy.com/api/v1.5/patients/164/
-&lt; Allow: GET, POST, HEAD, OPTIONS
-&lt; X-Frame-Options: DENY
-&lt; Set-Cookie: <span class="nv">csrftoken</span><span class="o">=</span>pgSMzpOJQ1NlIl7NJDJJKLYeCH6JTDNt; <span class="nv">expires</span><span class="o">=</span>Fri, 12-May-2017 10:33:51 GMT; httponly; Max-Age<span class="o">=</span>31449600; <span class="nv">Path</span><span class="o">=</span>/; secure
-&lt; Set-Cookie: <span class="nv">sessionid</span><span class="o">=</span>qce08gcxtztah3dcldc5tzq5d5kk5nw7; <span class="nv">expires</span><span class="o">=</span>Fri, 13-May-2016 11:33:51 GMT; httponly; Max-Age<span class="o">=</span>3600; <span class="nv">Path</span><span class="o">=</span>/; secure
-&lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
-&lt; 
-<span class="o">{</span>
-    <span class="s2">"address"</span>: null,
-    <span class="s2">"dob"</span>: null,
-    <span class="s2">"email"</span>: <span class="s2">"member+1463135618@bauxy.com"</span>,
-    <span class="s2">"first_name"</span>: <span class="s2">""</span>,
-    <span class="s2">"gender"</span>: <span class="s2">""</span>,
-    <span class="s2">"id"</span>: 164,
-    <span class="s2">"is_member"</span>: null,
-    <span class="s2">"last_name"</span>: <span class="s2">""</span>,
-    <span class="s2">"phone_number"</span>: <span class="s2">""</span>,
-    <span class="s2">"relation_to_member"</span>: null,
-    <span class="s2">"relationship_type"</span>: <span class="s2">"Self"</span>,
-    <span class="s2">"updated_at"</span>: <span class="s2">"2016-05-13T10:33:51.367001Z"</span>,
-    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/164/"</span>,
-    <span class="s2">"user"</span>: <span class="o">{</span>
-        <span class="s2">"username"</span>: <span class="s2">"member+1463135618@bauxy.com"</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+sh: /Users/gleb/backend/prettify: No such file or directory
 
 </code></pre>
 
@@ -648,67 +541,7 @@ sign up as patients if they like.
           <h1 id="checking-patient-eligibility">Checking Patient Eligibility</h1>
 <pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v -u username@example.com:example_PW https://api-staging.bauxy.com/api/v1.5/planinfo/eyemed/
 
-<span class="gp">&gt; </span>GET /api/v1.5/planinfo/eyemed/ HTTP/1.1
-<span class="gp">&gt; </span>Authorization: Basic <span class="nv">dXNlcm5hbWVAZXhhbXBsZS5jb206ZXhhbXBsZV9QVw</span><span class="o">==</span>
-<span class="gp">&gt; </span>User-Agent: curl/7.35.0
-<span class="gp">&gt; </span>Host: api-staging.bauxy.com
-<span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
-<span class="gp">&gt; </span>
-&lt; HTTP/1.1 200 OK
-&lt; Server: nginx/1.9.2
-&lt; Date: Fri, 13 May 2016 10:33:51 GMT
-&lt; Content-Type: application/json
-&lt; Transfer-Encoding: chunked
-&lt; Connection: keep-alive
-&lt; Vary: Accept-Encoding
-&lt; x-xss-protection: 1; <span class="nv">mode</span><span class="o">=</span>block
-&lt; x-content-type-options: nosniff
-&lt; Vary: Cookie
-&lt; Allow: GET, HEAD, OPTIONS
-&lt; X-Frame-Options: DENY
-&lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
-&lt; 
-<span class="o">{</span>
-    <span class="s2">"Contact Lens Exam"</span>: <span class="o">{</span>
-        <span class="s2">"Copay"</span>: null,
-        <span class="s2">"Coverage"</span>: <span class="s2">"</span><span class="nv">$160</span><span class="s2">"</span>,
-        <span class="s2">"Eligible"</span>: <span class="nb">true</span>,
-        <span class="s2">"EligibleAsOfDate"</span>: <span class="s2">"2015-12-01"</span>,
-        <span class="s2">"PlanRefreshDate"</span>: <span class="s2">"2017-04-18"</span>
-    <span class="o">}</span>,
-    <span class="s2">"Exam"</span>: <span class="o">{</span>
-        <span class="s2">"Copay"</span>: null,
-        <span class="s2">"Coverage"</span>: <span class="s2">"</span><span class="nv">$30</span><span class="s2">"</span>,
-        <span class="s2">"Eligible"</span>: <span class="nb">true</span>,
-        <span class="s2">"EligibleAsOfDate"</span>: <span class="s2">"2015-12-01"</span>,
-        <span class="s2">"PlanRefreshDate"</span>: <span class="s2">"2017-04-18"</span>
-    <span class="o">}</span>,
-    <span class="s2">"Frame"</span>: <span class="o">{</span>
-        <span class="s2">"Copay"</span>: null,
-        <span class="s2">"Coverage"</span>: <span class="s2">"</span><span class="nv">$100</span><span class="s2">"</span>,
-        <span class="s2">"Eligible"</span>: <span class="nb">true</span>,
-        <span class="s2">"EligibleAsOfDate"</span>: <span class="s2">"2015-12-01"</span>,
-        <span class="s2">"PlanRefreshDate"</span>: <span class="s2">"2017-04-18"</span>
-    <span class="o">}</span>,
-    <span class="s2">"MemberDependent"</span>: <span class="o">{</span>
-        <span class="s2">"email"</span>: <span class="s2">"username@example.com"</span>,
-        <span class="s2">"username"</span>: <span class="s2">"example_eyemed"</span>
-    <span class="o">}</span>,
-    <span class="s2">"Prescription Lenses"</span>: <span class="o">{</span>
-        <span class="s2">"Bifocal"</span>: <span class="s2">"</span><span class="nv">$40</span><span class="s2">"</span>,
-        <span class="s2">"Copay"</span>: null,
-        <span class="s2">"Coverage"</span>: <span class="s2">"*** Depends on lenses"</span>,
-        <span class="s2">"Eligible"</span>: <span class="nb">true</span>,
-        <span class="s2">"EligibleAsOfDate"</span>: <span class="s2">"2015-12-01"</span>,
-        <span class="s2">"PlanRefreshDate"</span>: <span class="s2">"2017-04-18"</span>,
-        <span class="s2">"Progressive"</span>: <span class="s2">"</span><span class="nv">$55</span><span class="s2">"</span>,
-        <span class="s2">"ScratchCoating"</span>: <span class="s2">"</span><span class="nv">$9</span><span class="s2">"</span>,
-        <span class="s2">"Single Vision"</span>: <span class="s2">"</span><span class="nv">$25</span><span class="s2">"</span>,
-        <span class="s2">"Tint"</span>: <span class="s2">"</span><span class="nv">$9</span><span class="s2">"</span>,
-        <span class="s2">"Trifocal"</span>: <span class="s2">"</span><span class="nv">$55</span><span class="s2">"</span>,
-        <span class="s2">"UVTreatment"</span>: <span class="s2">"</span><span class="nv">$9</span><span class="s2">"</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+sh: /Users/gleb/backend/prettify: No such file or directory
 
 </code></pre>
 
@@ -812,47 +645,7 @@ for example, you could refresh it using only `?refresh=true&password=whatever`.
 </blockquote>
 <pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v https://api-staging.bauxy.com/api/v1.5/providers/3/
 
-<span class="gp">&gt; </span>GET /api/v1.5/providers/3/ HTTP/1.1
-<span class="gp">&gt; </span>User-Agent: curl/7.35.0
-<span class="gp">&gt; </span>Host: api-staging.bauxy.com
-<span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
-<span class="gp">&gt; </span>
-&lt; HTTP/1.1 200 OK
-&lt; Server: nginx/1.9.2
-&lt; Date: Fri, 13 May 2016 10:33:52 GMT
-&lt; Content-Type: application/json
-&lt; Transfer-Encoding: chunked
-&lt; Connection: keep-alive
-&lt; Vary: Accept-Encoding
-&lt; x-xss-protection: 1; <span class="nv">mode</span><span class="o">=</span>block
-&lt; x-content-type-options: nosniff
-&lt; Vary: Cookie
-&lt; Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
-&lt; X-Frame-Options: DENY
-&lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
-&lt; 
-<span class="o">{</span>
-    <span class="s2">"address"</span>: <span class="o">{</span>
-        <span class="s2">"city"</span>: <span class="s2">"San Francisco"</span>,
-        <span class="s2">"id"</span>: 2,
-        <span class="s2">"line1"</span>: <span class="s2">"995 Market St"</span>,
-        <span class="s2">"line2"</span>: <span class="s2">""</span>,
-        <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/addresses/2/"</span>,
-        <span class="s2">"zipcode"</span>: <span class="s2">"94103"</span>
-    <span class="o">}</span>,
-    <span class="s2">"email"</span>: <span class="s2">"gleb+jins@bauxy.com"</span>,
-    <span class="s2">"id"</span>: 3,
-    <span class="s2">"name"</span>: <span class="s2">"JINS"</span>,
-    <span class="s2">"phone_number"</span>: <span class="s2">"0987654321"</span>,
-    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/providers/3/"</span>,
-    <span class="s2">"user"</span>: <span class="o">{</span>
-        <span class="s2">"email"</span>: <span class="s2">"gleb@bauxy.com"</span>,
-        <span class="s2">"id"</span>: 1,
-        <span class="s2">"is_staff"</span>: <span class="nb">true</span>,
-        <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/users/1/"</span>,
-        <span class="s2">"username"</span>: <span class="s2">"bauxyadmin"</span>
-    <span class="o">}</span>
-<span class="o">}</span>
+sh: /Users/gleb/backend/prettify: No such file or directory
 
 </code></pre>
 
@@ -908,50 +701,7 @@ for example, you could refresh it using only `?refresh=true&password=whatever`.
 </blockquote>
 <pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v -u username@example.com:example_PW https://api-staging.bauxy.com/api/v1.5/bills/40/
 
-<span class="gp">&gt; </span>GET /api/v1.5/bills/40/ HTTP/1.1
-<span class="gp">&gt; </span>Authorization: Basic <span class="nv">dXNlcm5hbWVAZXhhbXBsZS5jb206ZXhhbXBsZV9QVw</span><span class="o">==</span>
-<span class="gp">&gt; </span>User-Agent: curl/7.35.0
-<span class="gp">&gt; </span>Host: api-staging.bauxy.com
-<span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
-<span class="gp">&gt; </span>
-&lt; HTTP/1.1 200 OK
-&lt; Server: nginx/1.9.2
-&lt; Date: Fri, 13 May 2016 10:33:52 GMT
-&lt; Content-Type: application/json
-&lt; Transfer-Encoding: chunked
-&lt; Connection: keep-alive
-&lt; Vary: Accept-Encoding
-&lt; x-xss-protection: 1; <span class="nv">mode</span><span class="o">=</span>block
-&lt; x-content-type-options: nosniff
-&lt; Vary: Cookie
-&lt; Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
-&lt; X-Frame-Options: DENY
-&lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
-&lt; 
-<span class="o">{</span>
-    <span class="s2">"final_cost"</span>: 869.148,
-    <span class="s2">"generated_bill_image"</span>: null,
-    <span class="s2">"id"</span>: 40,
-    <span class="s2">"insurance"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/2/"</span>,
-    <span class="s2">"is_bill_generated"</span>: <span class="nb">false</span>,
-    <span class="s2">"items"</span>: <span class="o">[</span>
-        <span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/29/"</span>,
-        <span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/30/"</span>,
-        <span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/32/"</span>,
-        <span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/35/"</span>
-    <span class="o">]</span>,
-    <span class="s2">"original_bill_image"</span>: null,
-    <span class="s2">"patient"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/148/"</span>,
-    <span class="s2">"payment_method"</span>: <span class="s2">""</span>,
-    <span class="s2">"provider"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/providers/5/"</span>,
-    <span class="s2">"purchase_date"</span>: <span class="s2">"2016-03-03T01:58:46Z"</span>,
-    <span class="s2">"shipping_cost"</span>: 26.6080819113,
-    <span class="s2">"total_cost"</span>: 965.72,
-    <span class="s2">"total_discount"</span>: 10.0,
-    <span class="s2">"total_discount_type"</span>: <span class="s2">"Percent"</span>,
-    <span class="s2">"transaction_no"</span>: <span class="s2">"ml497swvyn4ivf7spry1"</span>,
-    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/40/"</span>
-<span class="o">}</span>
+sh: /Users/gleb/backend/prettify: No such file or directory
 
 </code></pre>
 
@@ -960,47 +710,7 @@ for example, you could refresh it using only `?refresh=true&password=whatever`.
 </blockquote>
 <pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v -u username@example.com:example_PW -X POST -H <span class="s2">"Content-Type: application/json"</span> -d <span class="s1">'{"patient":"http://api-staging.bauxy.com/api/v1.5/patients/148/","insurance":"http://api-staging.bauxy.com/api/v1.5/insurance_companies/2/","provider":"http://api-staging.bauxy.com/api/v1.5/providers/5/"}'</span> https://api-staging.bauxy.com/api/v1.5/bills/
 
-<span class="gp">&gt; </span>POST /api/v1.5/bills/ HTTP/1.1
-<span class="gp">&gt; </span>Authorization: Basic <span class="nv">dXNlcm5hbWVAZXhhbXBsZS5jb206ZXhhbXBsZV9QVw</span><span class="o">==</span>
-<span class="gp">&gt; </span>User-Agent: curl/7.35.0
-<span class="gp">&gt; </span>Host: api-staging.bauxy.com
-<span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
-<span class="gp">&gt; </span>Content-Type: application/json
-<span class="gp">&gt; </span>Content-Length: 204
-<span class="gp">&gt; </span>
-&lt; HTTP/1.1 201 Created
-&lt; Server: nginx/1.9.2
-&lt; Date: Fri, 13 May 2016 10:33:53 GMT
-&lt; Content-Type: application/json
-&lt; Transfer-Encoding: chunked
-&lt; Connection: keep-alive
-&lt; x-xss-protection: 1; <span class="nv">mode</span><span class="o">=</span>block
-&lt; x-content-type-options: nosniff
-&lt; Vary: Cookie
-&lt; Location: http://api-staging.bauxy.com/api/v1.5/bills/61/
-&lt; Allow: GET, POST, HEAD, OPTIONS
-&lt; X-Frame-Options: DENY
-&lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
-&lt; 
-<span class="o">{</span>
-    <span class="s2">"final_cost"</span>: 0,
-    <span class="s2">"generated_bill_image"</span>: null,
-    <span class="s2">"id"</span>: 61,
-    <span class="s2">"insurance"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/insurance_companies/2/"</span>,
-    <span class="s2">"is_bill_generated"</span>: <span class="nb">false</span>,
-    <span class="s2">"items"</span>: <span class="o">[]</span>,
-    <span class="s2">"original_bill_image"</span>: null,
-    <span class="s2">"patient"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/patients/148/"</span>,
-    <span class="s2">"payment_method"</span>: <span class="s2">""</span>,
-    <span class="s2">"provider"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/providers/5/"</span>,
-    <span class="s2">"purchase_date"</span>: null,
-    <span class="s2">"shipping_cost"</span>: null,
-    <span class="s2">"total_cost"</span>: 0,
-    <span class="s2">"total_discount"</span>: null,
-    <span class="s2">"total_discount_type"</span>: <span class="s2">""</span>,
-    <span class="s2">"transaction_no"</span>: <span class="s2">""</span>,
-    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/61/"</span>
-<span class="o">}</span>
+sh: /Users/gleb/backend/prettify: No such file or directory
 
 </code></pre>
 
@@ -1100,37 +810,7 @@ Best practice for users who wish to minimize cost is to provide enough data to c
 </blockquote>
 <pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v https://api-staging.bauxy.com/api/v1.5/items/18/
 
-<span class="gp">&gt; </span>GET /api/v1.5/items/18/ HTTP/1.1
-<span class="gp">&gt; </span>User-Agent: curl/7.35.0
-<span class="gp">&gt; </span>Host: api-staging.bauxy.com
-<span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
-<span class="gp">&gt; </span>
-&lt; HTTP/1.1 200 OK
-&lt; Server: nginx/1.9.2
-&lt; Date: Fri, 13 May 2016 10:33:53 GMT
-&lt; Content-Type: application/json
-&lt; Transfer-Encoding: chunked
-&lt; Connection: keep-alive
-&lt; Vary: Accept-Encoding
-&lt; x-xss-protection: 1; <span class="nv">mode</span><span class="o">=</span>block
-&lt; x-content-type-options: nosniff
-&lt; Vary: Cookie
-&lt; Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
-&lt; X-Frame-Options: DENY
-&lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
-&lt; 
-<span class="o">{</span>
-    <span class="s2">"bill"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/bills/38/"</span>,
-    <span class="s2">"cost"</span>: 166.8,
-    <span class="s2">"discount"</span>: null,
-    <span class="s2">"discount_type"</span>: <span class="s2">""</span>,
-    <span class="s2">"final_cost"</span>: 500.40000000000003,
-    <span class="s2">"id"</span>: 18,
-    <span class="s2">"item_type"</span>: <span class="s2">"frame"</span>,
-    <span class="s2">"name"</span>: <span class="s2">"Titanium Wire Frame"</span>,
-    <span class="s2">"quantity"</span>: 3,
-    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/items/18/"</span>
-<span class="o">}</span>
+sh: /Users/gleb/backend/prettify: No such file or directory
 
 </code></pre>
 
@@ -1193,32 +873,7 @@ Best practice for users who wish to minimize cost is to provide enough data to c
 </blockquote>
 <pre class="highlight shell"><code><span class="gp">$ </span>~/backend/prettify curl -v https://api-staging.bauxy.com/api/v1.5/addresses/2/
 
-<span class="gp">&gt; </span>User-Agent: curl/7.35.0
-<span class="gp">&gt; </span>Host: api-staging.bauxy.com
-<span class="gp">&gt; </span>Accept: <span class="k">*</span>/<span class="k">*</span>
-<span class="gp">&gt; </span>
-&lt; HTTP/1.1 200 OK
-&lt; Server: nginx/1.9.2
-&lt; Date: Fri, 13 May 2016 10:33:54 GMT
-&lt; Content-Type: application/json
-&lt; Transfer-Encoding: chunked
-&lt; Connection: keep-alive
-&lt; Vary: Accept-Encoding
-&lt; x-xss-protection: 1; <span class="nv">mode</span><span class="o">=</span>block
-&lt; x-content-type-options: nosniff
-&lt; Vary: Cookie
-&lt; Allow: GET, PUT, PATCH, DELETE, HEAD, OPTIONS
-&lt; X-Frame-Options: DENY
-&lt; Strict-Transport-Security: max-age<span class="o">=</span>31536000
-&lt; 
-<span class="o">{</span>
-    <span class="s2">"city"</span>: <span class="s2">"San Francisco"</span>,
-    <span class="s2">"id"</span>: 2,
-    <span class="s2">"line1"</span>: <span class="s2">"995 Market St"</span>,
-    <span class="s2">"line2"</span>: <span class="s2">""</span>,
-    <span class="s2">"url"</span>: <span class="s2">"http://api-staging.bauxy.com/api/v1.5/addresses/2/"</span>,
-    <span class="s2">"zipcode"</span>: <span class="s2">"94103"</span>
-<span class="o">}</span>
+sh: /Users/gleb/backend/prettify: No such file or directory
 
 </code></pre>
 

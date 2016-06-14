@@ -23,17 +23,18 @@ under the License.
 
 // BACKGROUND COLORS
 ////////////////////
-$nav-bg: #e0e0e0;
-$examples-bg: #393939;
-$code-bg: #292929;
+$nav-bg: transparent;
+$examples-bg: rgba(39, 13, 98, 0.6);
+$code-bg: $examples-bg;
 $code-annotation-bg: #1c1c1c;
 $nav-subitem-bg: #e0e0e0;
-$nav-active-bg: #e0e0e0;
-$lang-select-border: #000;
-$lang-select-bg: #222;
-$lang-select-active-bg: $examples-bg; // feel free to change this to blue or something
-$lang-select-pressed-bg: #111; // color of language tab bg when mouse is pressed
-$main-bg: #f3f3f3;
+$nav-active-bg: transparent;
+$lang-select-border: transparent;
+$lang-select-bg: transparent;
+$lang-select-active-bg: rgba(255,255,255,0.2); // feel free to change this to blue or something
+$lang-select-active-border: none;
+$lang-select-pressed-bg: rgba(0,0,0,0.2); // color of language tab bg when mouse is pressed
+$main-bg: transparent;
 $aside-notice-bg: rgba(#67b734,0.5);
 $aside-warning-bg: rgba(#e3761a,0.5);
 $aside-success-bg: #6ac174;
@@ -42,9 +43,9 @@ $search-notice-bg: #c97a7e;
 
 // TEXT COLORS
 ////////////////////
-$main-text: #333; // main content text color
-$nav-text: #777777;
-$nav-active-text: #363636;
+$main-text: #fff; // main content text color
+$nav-text: #fff;
+$nav-active-text: #fff;
 $lang-select-text: #fff; // color of unselected language tab text
 $lang-select-active-text: #fff; // color of selected language tab text
 $lang-select-pressed-text: #fff; // color of language tab text when mouse is pressed
@@ -52,15 +53,15 @@ $lang-select-pressed-text: #fff; // color of language tab text when mouse is pre
 
 // SIZES
 ////////////////////
-$nav-width: 230px; // width of the navbar
-$examples-width: 50%; // portion of the screen taken up by code examples
+$nav-width: 327px; // width of the navbar
+$examples-width: 48%; // portion of the screen taken up by code examples
 $logo-margin: 20px; // margin between nav items and logo, ignored if search is active
 $main-padding: 28px; // padding to left and right of content & examples
-$nav-padding: 15px; // padding to left and right of navbar
+$nav-padding: 0; // padding to left and right of navbar
 $nav-v-padding: 10px; // padding used vertically around search boxes and results
 $nav-indent: 10px; // extra padding for ToC subitems
 $code-annotation-padding: 13px; // padding inside code annotations
-$h1-margin-bottom: 21px; // padding under the largest header tags
+$h1-margin-bottom: 0; // padding under the largest header tags
 $tablet-width: 930px; // min width before reverting to tablet size
 $phone-width: $tablet-width - $nav-width; // min width before reverting to mobile size
 
@@ -74,8 +75,8 @@ $phone-width: $tablet-width - $nav-width; // min width before reverting to mobil
 }
 
 %header-font {
-  @extend %default-font;
-  font-weight: 300;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 400;
 }
 
 %code-font {
@@ -89,11 +90,11 @@ $phone-width: $tablet-width - $nav-width; // min width before reverting to mobil
 // OTHER
 ////////////////////
 $nav-active-shadow: #000;
-$nav-footer-border-color: #666;
+$nav-footer-border-color: rgba(255,255,255,0.3);
 $nav-embossed-border-top: #000;
 $nav-embossed-border-bottom: #939393;
-$main-embossed-text-shadow: 0px 1px 0px #fff;
-$search-box-border-color: #666;
+$main-embossed-text-shadow: none;
+$search-box-border-color: $nav-footer-border-color;
 
 
 ////////////////////////////////////////////////////////////////////////////////

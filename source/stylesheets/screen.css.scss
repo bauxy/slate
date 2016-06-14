@@ -517,6 +517,8 @@ a{
       padding: 7px 20px;
       vertical-align: bottom;
       font-size: 12px;
+      word-break: break-all;
+      hyphens: auto;
     }
 
     td {
@@ -739,6 +741,26 @@ a{
 
   %right-col + %left-col {
     margin-top: $main-padding;
+  }
+
+  .content{
+    blockquote,
+    pre {
+      background: $examples-bg;
+    }
+
+    table {
+      width: 100%;
+
+      th {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+
+      td {
+        padding: 10px 5px;
+      }
+    }
   }
 }
 

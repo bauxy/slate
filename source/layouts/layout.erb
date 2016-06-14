@@ -44,8 +44,17 @@ under the License.
         <%= image_tag('navbar.png') %>
       </span>
     </a>
+    <header class="header">
+        <a class="header__logo" href="/">
+            <span class="icon icon_logo-full"></span>
+        </a>
+        <a class="header__link hidden-xs" href="https://getpatch.com">Home</a>
+        <a class="header__link" href="./">API Docs</a>
+        <a class="header__link" href="https://getpatch.com/login">Log in</a>
+        <a class="header__link header__link_accent" href="https://getpatch.com/signup">Sign up</a>
+        <div class="header__backgrond"></div>
+    </header>
     <div class="tocify-wrapper">
-      <img style="padding: 20px; display: block; margin: auto; margin-top: 10px;" src="./images/logo.svg" />
       <% if language_tabs %>
         <div class="lang-selector">
           <% language_tabs.each do |lang| %>

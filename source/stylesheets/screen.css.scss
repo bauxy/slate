@@ -36,6 +36,16 @@ under the License.
   transform: translateZ(0);
 }
 
+@mixin svg-icon($icon) {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 17px;
+  width: 20px;
+  height: 24px;
+  background: url('../images/#{$icon}.svg') 50% 50% no-repeat;
+}
+
 html, body {
   color: $main-text;
   padding: 0;
@@ -73,7 +83,6 @@ a{
   box-sizing: border-box;
   overflow: hidden;
   z-index: 100;
-  border-bottom: 2px solid rgba(255,255,255,0.35);
   transform: translateZ(0);
 }
 
@@ -514,10 +523,9 @@ a{
     }
 
     th {
-      padding: 7px 20px;
+      padding: 7px 0 7px 20px;
       vertical-align: bottom;
       font-size: 12px;
-      word-break: break-all;
       hyphens: auto;
     }
 
@@ -597,11 +605,15 @@ a{
   }
 
   aside {
-    padding-top: 1em;
-    padding-bottom: 1em;
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+    padding-left: 4em;
     text-shadow: 0 1px 0 lighten($aside-notice-bg, 15%);
     margin-top: 1.5em;
     margin-bottom: 1.5em;
+    margin-left: $main-padding;
+    border-right: $main-padding solid transparent;
+    position: relative;
     background: $aside-notice-bg;
     line-height: 1.6;
 
@@ -622,16 +634,29 @@ a{
     font-size: 14px;
   }
 
+  aside:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+  }
+
   aside.notice:before {
-    @extend %icon-info-sign;
+    @include svg-icon('note-icn');
   }
 
   aside.warning:before {
-    @extend %icon-exclamation-sign;
+    @include svg-icon('warning-icn');
   }
 
   aside.success:before {
-    @extend %icon-ok-sign;
+    @include svg-icon('success-icn');
   }
 
   .search-highlight {

@@ -21,8 +21,6 @@ set :fonts_dir, 'fonts'
 # Activate the syntax highlighter
 activate :syntax
 
-activate :sprockets
-
 activate :livereload
 
 activate :autoprefixer do |config|
